@@ -12,29 +12,29 @@ public class DrawingSurface extends PApplet {
 	public static final int DRAWING_HEIGHT = 600;
 
 	private Rectangle screenRect;
-
-	private Mario mario;
-	private ArrayList<Shape> obstacles;
-
+	private Map map;
+	
+	private double camx, camy;
+	private long lastUpdate;
+	private Main w;
+	
+	private Player player;
+	
 	private ArrayList<Integer> keys;
 
-	public DrawingSurface() {
+	public DrawingSurface(Main w) {
 		super();
 		keys = new ArrayList<Integer>();
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
-		obstacles = new ArrayList<Shape>();
-		obstacles.add(new Rectangle(200,400,400,50));
-		obstacles.add(new Rectangle(0,250,100,50));
-		obstacles.add(new Rectangle(700,250,100,50));
-		obstacles.add(new Rectangle(375,300,50,100));
-		obstacles.add(new Rectangle(300,250,200,50));
-		spawnNewMario();
+		map = new Map();
+		player = new Player(loadImage("mario.png"), DRAWING_WIDTH/2-Player.PLAYER_WIDTH/2,50);
+		camx = player.x;
+		camy = player.y;
+		lastUpdate = System.nanoTime();
+		this.w = w;
 	}
 
 
-	public void spawnNewMario() {
-		mario = new Mario(loadImage("mario.png"), DRAWING_WIDTH/2-Mario.MARIO_WIDTH/2,50);
-	}
 
 	// The statements in the setup() function 
 	// execute once when the program begins
@@ -61,17 +61,35 @@ public class DrawingSurface extends PApplet {
 		float ratioY = (float)height/DRAWING_HEIGHT;
 
 		scale(ratioX, ratioY);
-
+		
+		
+		
+		//camera movement
+		camx = player.x - DRAWING_WIDTH/2 + player.width/2;
+		if (player.y - DRAWING_HEIGHT/2 + player.height/2> camy + 100) {
+			camy = player.y - DRAWING_HEIGHT/2 + player.height/2- 100;
+		} else if (player.y - DRAWING_HEIGHT/2 + player.height/2 > camy - 100) {
+			camy = camy;
+		} else {
+			camy = player.y - DRAWING_HEIGHT/2 + player.height/2 + 100;
+		}
+		
+		
+		
+		
+		player.draw(this, camx, camy);
+		
 		fill(100);
-		for (Shape s : obstacles) {
+
+		for (Shape s : map.getObstacles()) {
 			if (s instanceof Rectangle) {
 				Rectangle r = (Rectangle)s;
-				rect(r.x,r.y,r.width,r.height);
+				rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
 			}
 		}
 
 
-		mario.draw(this);
+		
 
 		popMatrix();
 
@@ -79,16 +97,19 @@ public class DrawingSurface extends PApplet {
 		// modifying stuff
 
 		if (isPressed(KeyEvent.VK_LEFT))
-			mario.walk(-1);
+			player.walk(-1);
 		if (isPressed(KeyEvent.VK_RIGHT))
-			mario.walk(1);
+			player.walk(1);
 		if (isPressed(KeyEvent.VK_UP))
-			mario.jump();
+			player.jump();
 
-		mario.act(obstacles);
-
-		if (!screenRect.intersects(mario))
-			spawnNewMario();
+		player.act(map.getObstacles(), System.nanoTime() - lastUpdate);
+		
+		if (!screenRect.intersects(player)) {
+			player.x =DRAWING_WIDTH/2-Player.PLAYER_WIDTH/2 ;
+			player.y = 50;
+		}
+		lastUpdate = System.nanoTime();
 
 	}
 

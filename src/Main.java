@@ -5,7 +5,7 @@ public class Main extends JFrame {
 
 	private JPanel cardPanel;
 	
-	private OptionPanel panel1;    
+	private MainMenu panel1;    
 	private DrawingSurface panel2;
 	
 	public Main(String title) {
@@ -17,8 +17,8 @@ public class Main extends JFrame {
 	    CardLayout cl = new CardLayout();
 	    cardPanel.setLayout(cl);
 	    
-		panel1 = new OptionPanel(this);    
-	    panel2 = new DrawingSurface();
+		panel1 = new MainMenu(this);    
+	    panel2 = new DrawingSurface(this);
 	    panel2.init();
 	    
 	    cardPanel.add(panel1,"1");
@@ -32,12 +32,23 @@ public class Main extends JFrame {
 
 	public static void main(String[] args)
 	{
-		Main w = new Main("AP Animation Demo");
+		Main w = new Main("Slash Dash");
 	}
   
-	public void changePanel() {
-		((CardLayout)cardPanel.getLayout()).next(cardPanel);
-		panel2.requestFocus();
+	public void changePanel(int panel) { // i'll deal with this later
+		switch(panel) {
+			case 0:
+				((CardLayout)cardPanel.getLayout()).next(cardPanel);
+				panel2.requestFocus();
+				break;
+			case 1:
+				((CardLayout)cardPanel.getLayout()).next(cardPanel);
+				panel1.requestFocus();
+				break;
+		}
+			
+		
+		
 	}
   
 }

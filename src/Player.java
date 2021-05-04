@@ -6,19 +6,21 @@ import java.util.*;
 
 import processing.core.PImage;
 
-public class Mario extends MovingImage {
+public class Player extends MovingImage {
 
-	public static final int MARIO_WIDTH = 40;
-	public static final int MARIO_HEIGHT = 60;
+	public static final int PLAYER_WIDTH = 40;
+	public static final int PLAYER_HEIGHT = 60;
 
 	private double xVelocity, yVelocity;
 	private boolean onASurface;
 	private double friction;
 	private double gravity;
 	private double jumpStrength;
+	private int health;
+	private double stamina;
 
-	public Mario(PImage img, int x, int y) {
-		super(img, x, y, MARIO_WIDTH, MARIO_HEIGHT);
+	public Player(PImage img, int x, int y) {
+		super(img, x, y,PLAYER_WIDTH, PLAYER_HEIGHT);
 		xVelocity = 0;
 		yVelocity = 0;
 		onASurface = false;
@@ -38,7 +40,7 @@ public class Mario extends MovingImage {
 			yVelocity -= jumpStrength;
 	}
 
-	public void act(ArrayList<Shape> obstacles) {
+	public void act(ArrayList<Shape> obstacles, long timeElapsed) {
 		double xCoord = getX();
 		double yCoord = getY();
 		double width = getWidth();
