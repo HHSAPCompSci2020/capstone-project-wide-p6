@@ -96,16 +96,18 @@ public class DrawingSurface extends PApplet {
 		
 		// modifying stuff
 
-		if (isPressed(KeyEvent.VK_LEFT))
+		if (isPressed(KeyEvent.VK_A))
 			player.walk(-1);
-		if (isPressed(KeyEvent.VK_RIGHT))
+		if (isPressed(KeyEvent.VK_D))
 			player.walk(1);
-		if (isPressed(KeyEvent.VK_UP))
+		if (isPressed(KeyEvent.VK_W))
 			player.jump();
+		if (isPressed(KeyEvent.VK_SPACE))
+			player.dash();
 
 		player.act(map.getObstacles(), System.nanoTime() - lastUpdate);
 		
-		if (!screenRect.intersects(player)) {
+		if (player.y >= 800) {
 			player.x =DRAWING_WIDTH/2-Player.PLAYER_WIDTH/2 ;
 			player.y = 50;
 		}
