@@ -4,6 +4,9 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
+import processing.core.PImage;
+
 import processing.core.PApplet;
 
 public class DrawingSurface extends PApplet {
@@ -27,7 +30,7 @@ public class DrawingSurface extends PApplet {
 		keys = new ArrayList<Integer>();
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
 		map = new Map();
-		player = new Player(loadImage("mario.png"), DRAWING_WIDTH/2-Player.PLAYER_WIDTH/2,50);
+		player = new Player(new ArrayList<PImage>(Arrays.asList(loadImage("mario.png"), loadImage("marioflip.png"))), DRAWING_WIDTH/2-Player.PLAYER_WIDTH/2,50);
 		camx = player.x;
 		camy = player.y;
 		lastUpdate = System.nanoTime();

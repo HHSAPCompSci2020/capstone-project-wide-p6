@@ -19,10 +19,13 @@ public class Player extends MovingImage {
 	private double jumpStrength;
 	private double delay;
 	private int health;
+	private boolean direction; // true = right, false = left
 	private double stamina;
 
-	public Player(PImage img, int x, int y) {
-		super(img, x, y,PLAYER_WIDTH, PLAYER_HEIGHT);
+	private ArrayList<PImage> images;
+	public Player(ArrayList<PImage> images, int x, int y) {
+		super(images.get(0), x, y,PLAYER_WIDTH, PLAYER_HEIGHT);
+		this.images = images;
 		xVelocity = 0;
 		yVelocity = 0;
 		onASurface = false;
@@ -32,10 +35,12 @@ public class Player extends MovingImage {
 		stamina = 100;
 		delay = 0;
 		gravIgnore = 0;
+		direction = true;
 	}
 
 	// METHODS
 	public void walk(int dir) {
+		direction = dir > 0;
 		if (xVelocity <= 10 && xVelocity >= -10)
 			xVelocity += dir;
 	}
@@ -46,7 +51,6 @@ public class Player extends MovingImage {
 				yVelocity = -jumpStrength;
 				delay = 200000000;
 			}else if (stamina >= 25) {
-				System.out.println(stamina);
 				yVelocity = -jumpStrength;
 				stamina -= 25;
 				delay = 200000000;
@@ -58,12 +62,17 @@ public class Player extends MovingImage {
 	public void dash() {
 		if (delay <= 0) {
 			if (onASurface) {
-				xVelocity = 25;
+				if (direction)
+					xVelocity = 30;
+				else 
+					xVelocity = -30;
 				delay = 250000000;
 				gravIgnore = 250000000;
 			}else if (stamina >= 25) {
-				System.out.println(stamina);
-				xVelocity = 25;
+				if (direction)
+					xVelocity = 30;
+				else 
+					xVelocity = -30;
 				stamina -= 25;
 				delay = 250000000;
 				gravIgnore = 250000000;
@@ -90,9 +99,9 @@ public class Player extends MovingImage {
 		} else {
 			yVelocity = 0.5;
 		}
-		double yCoord2 = yCoord + yVelocity;
+		double yCoord2 = yCoord + yVelocity*timeElapsed/17000000;
 
-		Rectangle2D.Double strechY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoord2),width,height+Math.abs(yVelocity));
+		Rectangle2D.Double strechY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoord2),width,height+Math.abs(yVelocity*timeElapsed/17000000));
 
 		onASurface = false;
 
@@ -132,9 +141,9 @@ public class Player extends MovingImage {
 
 		xVelocity *= friction;
 
-		double xCoord2 = xCoord + xVelocity;
+		double xCoord2 = xCoord + xVelocity*timeElapsed/17000000;
 
-		Rectangle2D.Double strechX = new Rectangle2D.Double(Math.min(xCoord,xCoord2),yCoord2,width+Math.abs(xVelocity),height);
+		Rectangle2D.Double strechX = new Rectangle2D.Double(Math.min(xCoord,xCoord2),yCoord2,width+Math.abs(xVelocity*timeElapsed/17000000),height);
 
 		if (xVelocity > 0) {
 			Shape rightSurface = null;
@@ -169,7 +178,13 @@ public class Player extends MovingImage {
 		moveToLocation(xCoord2,yCoord2);
 		
 		if (!onASurface) {
-			stamina -= (double)timeElapsed/100000000;
+			stamina -= (double)timeElapsed/200000000;
+		}
+		
+		if (direction) {
+			super.setImage(images.get(1));
+		} else {
+			super.setImage(images.get(0));
 		}
 
 	}

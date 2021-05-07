@@ -45,7 +45,9 @@ public class MovingImage extends Rectangle2D.Double {
 		g.image(image,(int)(x - camx),(int)(y - camy),(int)width,(int)height);
 	}
 	
-	
+	public void setImage(PImage img) {
+		image = img;
+	}
 }
 
 
