@@ -68,7 +68,7 @@ public class Player extends MovingImage {
 					xVelocity = -30;
 				delay = 250000000;
 				gravIgnore = 250000000;
-			}else*/ if (stamina >= 25) {
+			}else*/ if (!(onASurface) && stamina >= 25) {
 				if (direction)
 					xVelocity = 30;
 				else 
