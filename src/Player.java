@@ -61,14 +61,14 @@ public class Player extends MovingImage {
 	
 	public void dash() {
 		if (delay <= 0) {
-			if (onASurface) {
+			/*if (onASurface) {
 				if (direction)
 					xVelocity = 30;
 				else 
 					xVelocity = -30;
 				delay = 250000000;
 				gravIgnore = 250000000;
-			}else if (stamina >= 25) {
+			}else*/ if (stamina >= 25) {
 				if (direction)
 					xVelocity = 30;
 				else 
