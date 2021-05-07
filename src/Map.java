@@ -1,3 +1,7 @@
+/** Author: Ethan Wang
+ * The map class is meant to be a huge database of all the enemies and obstacles across the map
+ */
+
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.util.ArrayList;
@@ -5,7 +9,8 @@ import java.util.ArrayList;
 public class Map {
 
 	private ArrayList<Shape> obstacles;
-	
+	/** Map constructor. No parameters because the map will be the same every time. Sets up the entire map.
+	 */
 	public Map() {
 		obstacles = new ArrayList<Shape>();
 		obstacles.add(new Rectangle(200,400,400,50));
@@ -15,6 +20,10 @@ public class Map {
 		obstacles.add(new Rectangle(300,250,200,50));
 	}
 	
+	
+	/**
+	 * @return returns an arraylists of all obstacles on the map.
+	 */
 	public ArrayList<Shape> getObstacles(){
 		return obstacles;
 	}

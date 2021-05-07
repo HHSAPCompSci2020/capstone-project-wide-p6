@@ -1,3 +1,6 @@
+/** Author: Ethan Wang
+ * A class used to represent entities of all sorts. Currently does absolutely nothing.
+ */
 import processing.core.PImage;
 
 public class Entity extends MovingImage{

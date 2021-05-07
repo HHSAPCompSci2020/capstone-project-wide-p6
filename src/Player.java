@@ -1,4 +1,6 @@
-
+/**@Author Shelby, Ethan Wang
+ * A class representing the player character.
+ */
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -23,6 +25,12 @@ public class Player extends MovingImage {
 	private double stamina;
 
 	private ArrayList<PImage> images;
+	/** The constructor of the player class, slightly modified
+	 * 
+	 * @param images A list of images which the character will use as sort of "animations"
+	 * @param x The x coordinate to spawn the player at
+	 * @param y The y coordinate to spawn the player at
+	 */
 	public Player(ArrayList<PImage> images, int x, int y) {
 		super(images.get(0), x, y,PLAYER_WIDTH, PLAYER_HEIGHT);
 		this.images = images;
@@ -58,7 +66,9 @@ public class Player extends MovingImage {
 		}
 	}
 	
-	
+	/**
+	 * A method which causes the character to dash forwards, and cause the characters to mostly ignore gravity.
+	 */
 	public void dash() {
 		if (delay <= 0) {
 			/*if (onASurface) {
@@ -79,7 +89,12 @@ public class Player extends MovingImage {
 			}
 		}
 	}
-
+	
+	/**
+	 * Modified act method. Uses time elapsed so that even on slower computers the game should run relatively the same.
+	 * @param obstacles The arraylist of all the obstacles on the map used for collisions.
+	 * @param timeElapsed How much time has passed since the last time the draw method in DrawingSurface was run in nanoseconds
+	 */
 	public void act(ArrayList<Shape> obstacles, long timeElapsed) {
 		delay -= timeElapsed;
 		gravIgnore -= timeElapsed;

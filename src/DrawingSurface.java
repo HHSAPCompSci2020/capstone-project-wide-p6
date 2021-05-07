@@ -1,4 +1,6 @@
-
+/** Author: Shelby, Ethan Wang
+ * The class used for essentially all the graphics of the game.
+ */
 
 import java.awt.Rectangle;
 import java.awt.Shape;

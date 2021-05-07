@@ -3,11 +3,13 @@ import java.awt.geom.Rectangle2D;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-/*
+/**
  * Represents a moving image.
  *
  * by: Shelby
  * on: 5/3/13
+ * Edited by: Ethan Wang
+ * on: 5/6/21
  */
  
 public class MovingImage extends Rectangle2D.Double {
@@ -44,7 +46,10 @@ public class MovingImage extends Rectangle2D.Double {
 	public void draw(PApplet g, double camx, double camy) {
 		g.image(image,(int)(x - camx),(int)(y - camy),(int)width,(int)height);
 	}
-	
+	/**
+	 * A method to change the moving image's image.
+	 * @param img the image to set the moving image to.
+	 */
 	public void setImage(PImage img) {
 		image = img;
 	}

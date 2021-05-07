@@ -1,3 +1,7 @@
+/**Author: Shelby, Ethan Wang
+ * Main class used to run the project.
+ */
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -34,7 +38,7 @@ public class Main extends JFrame {
 	{
 		Main w = new Main("Slash Dash");
 	}
-  
+
 	public void changePanel(int panel) { // i'll deal with this later
 		switch(panel) {
 			case 0:
