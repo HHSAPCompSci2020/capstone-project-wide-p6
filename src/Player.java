@@ -18,11 +18,13 @@ public class Player extends MovingImage {
 	private double friction;
 	private double gravity;
 	private double gravIgnore;
+	private double invincible;
 	private double jumpStrength;
 	private double delay;
 	private int health;
 	private boolean direction; // true = right, false = left
 	private double stamina;
+	private boolean dive;
 
 	private ArrayList<PImage> images;
 	/** The constructor of the player class, slightly modified
@@ -44,6 +46,7 @@ public class Player extends MovingImage {
 		delay = 0;
 		gravIgnore = 0;
 		direction = true;
+		dive = false;
 	}
 
 	// METHODS
@@ -84,20 +87,34 @@ public class Player extends MovingImage {
 				else 
 					xVelocity = -30;
 				stamina -= 25;
+				invincible = 200000000;
 				delay = 250000000;
 				gravIgnore = 250000000;
 			}
 		}
 	}
 	
+	public void dive() {
+		if(!(onASurface) && (delay <= 0)) {
+			dive = true;
+		}
+	}
+	
+	
+	
 	/**
 	 * Modified act method. Uses time elapsed so that even on slower computers the game should run relatively the same.
 	 * @param obstacles The arraylist of all the obstacles on the map used for collisions.
 	 * @param timeElapsed How much time has passed since the last time the draw method in DrawingSurface was run in nanoseconds
 	 */
-	public void act(ArrayList<Shape> obstacles, long timeElapsed) {
+	public void act(Map map, long timeElapsed) {
+		ArrayList<Shape> obstacles = map.getObstacles();
 		delay -= timeElapsed;
 		gravIgnore -= timeElapsed;
+		invincible -= timeElapsed;
+		if(dive) {
+			delay = 100000000;
+		}
 		double xCoord = getX();
 		double yCoord = getY();
 		double width = getWidth();
@@ -114,6 +131,9 @@ public class Player extends MovingImage {
 		} else {
 			yVelocity = 0.5;
 		}
+		if (dive) {
+			yVelocity = 25;
+		}
 		double yCoord2 = yCoord + yVelocity*timeElapsed/17000000;
 
 		Rectangle2D.Double strechY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoord2),width,height+Math.abs(yVelocity*timeElapsed/17000000));
@@ -126,6 +146,7 @@ public class Player extends MovingImage {
 				if (s.intersects(strechY)) {
 					onASurface = true;
 					stamina = 100;
+					dive = false;
 					standingSurface = s;
 					yVelocity = 0;
 				}

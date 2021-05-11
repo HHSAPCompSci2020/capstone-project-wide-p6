@@ -92,7 +92,12 @@ public class DrawingSurface extends PApplet {
 				rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
 			}
 		}
-
+		for (Shape s : map.getHitboxes()) {
+			if (s instanceof Rectangle) {
+				Rectangle r = (Rectangle)s;
+				rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
+			}
+		}
 
 		
 
@@ -109,8 +114,14 @@ public class DrawingSurface extends PApplet {
 			player.jump();
 		if (isPressed(KeyEvent.VK_SPACE))
 			player.dash();
+		if (isPressed(KeyEvent.VK_S))
+			player.dive();
+		if (isPressed(KeyEvent.VK_Q))
+			map.addHitbox(new Rectangle((int)player.x, (int)(player.y-player.height/2), 50, 50));
+		if (isPressed(KeyEvent.VK_E))
+			map.addHitbox(player);
 
-		player.act(map.getObstacles(), System.nanoTime() - lastUpdate);
+		player.act(map, System.nanoTime() - lastUpdate);
 		
 		if (player.y >= 800) {
 			player.x =DRAWING_WIDTH/2-Player.PLAYER_WIDTH/2 ;
