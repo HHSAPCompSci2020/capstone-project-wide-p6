@@ -9,5 +9,12 @@ public class Entity extends MovingImage{
 		super(img, x, y, w, h);
 		// TODO Auto-generated constructor stub
 	}
+	//Get's surrounding movingImages. 
+	public void surroundingImage() {
+		
+	}
+	
+	
+	
 
 }
