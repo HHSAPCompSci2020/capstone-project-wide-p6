@@ -18,8 +18,14 @@ public class Enemy extends Entity{
 	}
 	
 	
-	//If player is within a certain distance it will turn toward it
+	
 	public void surroundingImage(ArrayList<MovingImage>a, int x, int y) {
+		
+	}
+	
+	//if player is nearby, return true
+	public boolean checkPlayer() {
+		return false;
 		
 	}
 	
