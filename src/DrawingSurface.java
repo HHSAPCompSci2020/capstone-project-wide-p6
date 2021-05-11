@@ -92,10 +92,12 @@ public class DrawingSurface extends PApplet {
 				rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
 			}
 		}
-		for (Shape s : map.getHitboxes()) {
-			if (s instanceof Rectangle) {
-				Rectangle r = (Rectangle)s;
-				rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
+		for (int i = 0; i < map.getHitboxes().size(); i++) {
+			ArrayList<Integer> list =  map.getHitboxes().get(i);
+			rect((int)(list.get(0) - camx),(int)(list.get(1) - camy),list.get(2),list.get(3));
+			list.set(5, list.get(5)-1);
+			if (list.get(5) == 0) {
+				map.getHitboxes().remove(list);
 			}
 		}
 
@@ -117,9 +119,9 @@ public class DrawingSurface extends PApplet {
 		if (isPressed(KeyEvent.VK_S))
 			player.dive();
 		if (isPressed(KeyEvent.VK_Q))
-			map.addHitbox(new Rectangle((int)player.x, (int)(player.y-player.height/2), 50, 50));
+			player.lightAttack(map);
 		if (isPressed(KeyEvent.VK_E))
-			map.addHitbox(player);
+			player.heavyAttack(map);
 
 		player.act(map, System.nanoTime() - lastUpdate);
 		

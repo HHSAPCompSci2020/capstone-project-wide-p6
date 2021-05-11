@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Map {
 
 	private ArrayList<Shape> obstacles;
-	private ArrayList<Shape> hitboxes; //only really applies to player, enemy projectiles go into enemies category.
+	private ArrayList<ArrayList<Integer>> hitboxes; //only really applies to player, enemy projectiles go into enemies category.
 	private ArrayList<Enemy> enemies;
 	private ArrayList<ArrayList<Integer>> enemyInfo;
 	
@@ -17,7 +17,7 @@ public class Map {
 	 */
 	public Map() {
 		obstacles = new ArrayList<Shape>();
-		hitboxes = new ArrayList<Shape>();
+		hitboxes = new ArrayList<ArrayList<Integer>>();
 		obstacles.add(new Rectangle(200,400,400,50));
 		obstacles.add(new Rectangle(0,250,100,50));
 		obstacles.add(new Rectangle(700,250,100,50));
@@ -32,10 +32,10 @@ public class Map {
 	public ArrayList<Shape> getObstacles(){
 		return obstacles;
 	}
-	public ArrayList<Shape> getHitboxes(){
+	public ArrayList<ArrayList<Integer>> getHitboxes(){
 		return hitboxes;
 	}
-	public void addHitbox(Shape hitbox){
+	public void addHitbox(ArrayList<Integer> hitbox){
 		hitboxes.add(hitbox);
 	}
 	public ArrayList<Enemy> getEnemies(){
