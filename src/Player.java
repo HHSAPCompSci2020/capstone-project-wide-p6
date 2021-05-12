@@ -12,7 +12,9 @@ public class Player extends MovingImage {
 
 	public static final int PLAYER_WIDTH = 40;
 	public static final int PLAYER_HEIGHT = 60;
-
+	public int lastCheck = 0;
+	
+	
 	private double xVelocity, yVelocity;
 	private boolean onASurface;
 	private double friction;
@@ -287,6 +289,12 @@ public class Player extends MovingImage {
 			super.setImage(images.get(1));
 		} else {
 			super.setImage(images.get(0));
+		}
+		
+		for(int i = 0; i < map.getCheckpoints().size(); i++) {
+			if (map.getCheckpoints().get(i).intersects(strechX) || map.getCheckpoints().get(i).intersects(strechY)) {
+				lastCheck = i;
+			}
 		}
 
 	}
