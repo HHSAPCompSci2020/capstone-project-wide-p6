@@ -40,7 +40,7 @@ public class Player extends MovingImage {
 		yVelocity = 0;
 		onASurface = false;
 		gravity = 0.7;
-		friction = .9;
+		friction = .87;
 		jumpStrength = 12;
 		stamina = 100;
 		delay = 0;
@@ -83,9 +83,9 @@ public class Player extends MovingImage {
 				gravIgnore = 250000000;
 			}else*/ if (!(onASurface) && stamina >= 25) {
 				if (direction)
-					xVelocity = 30;
+					xVelocity = 60;
 				else 
-					xVelocity = -30;
+					xVelocity = -60;
 				stamina -= 25;
 				invincible = 200000000;
 				delay = 250000000;
@@ -105,22 +105,21 @@ public class Player extends MovingImage {
 		if (delay <= 0) {
 			if (onASurface) {
 				xVelocity = 0;
-				delay = 100000000;
-				gravIgnore = 150000000;
+				delay = 200000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40, (int)y, 50, 75, 10, 5)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40 - PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, 1, -3)));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-40, (int)y, 50, 75, 10, 5)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-35 - PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, -1, -3)));
 				}
 			}else if (stamina >= 5) {
 				stamina -= 5;
 				xVelocity = 0;
-				delay = 100000000;
-				gravIgnore = 150000000;
+				delay = 200000000;
+				gravIgnore = 220000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40, (int)y, 50, 75, 10, 5)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, 1, -3)));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-40, (int)y, 50, 75, 10, 5)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-35- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, -1, -3)));
 				}
 			}
 		}
@@ -132,22 +131,21 @@ public class Player extends MovingImage {
 		}else if (delay <= 0) {
 			if (onASurface) {
 				xVelocity = 0;
-				delay = 200000000;
-				gravIgnore = 250000000;
+				delay = 300000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40, (int)y, 75, 100, 20, 5)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, 10, -15)));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-40, (int)y, 75, 100, 20, 5)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, -10, -15)));
 				}
 			}else if (stamina >= 5) {
 				stamina -= 15;
 				xVelocity = 0;
-				delay = 200000000;
-				gravIgnore = 250000000;
+				delay = 300000000;
+				gravIgnore = 325000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40, (int)y, 75, 100, 20, 5)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, 10, -15)));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-40, (int)y, 75, 100, 20, 5)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, -10, -15)));
 				}
 			}
 		}
@@ -165,10 +163,19 @@ public class Player extends MovingImage {
 		gravIgnore -= timeElapsed;
 		invincible -= timeElapsed;
 		if(dive == 1) {
-			map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 1)));
+			if (direction) {
+				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 1, 5, -10)));
+			} else {
+				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 1, -5, -10)));
+			}
+			
 			delay = 100000000;
 		} else if (dive == 2) {
-			map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 75, 75, 15, 1)));
+			if (direction) {
+				map.addHitbox(new ArrayList(Arrays.asList((int)x-5, (int)y+60, 60, 60, 25, 1, 10, -15)));
+			} else {
+				map.addHitbox(new ArrayList(Arrays.asList((int)x-5, (int)y+60, 60, 60, 25, 1, -10, -15)));
+			}
 			delay = 100000000;
 			invincible = 100000000;
 		}
@@ -189,9 +196,9 @@ public class Player extends MovingImage {
 			yVelocity = 0.5;
 		}
 		if (dive == 1) {
-			yVelocity = 25;
+			yVelocity = 15;
 		} else if (dive == 2) {
-			yVelocity = 35;
+			yVelocity = 30;
 		}
 		double yCoord2 = yCoord + yVelocity*timeElapsed/17000000;
 

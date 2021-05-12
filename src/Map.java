@@ -10,6 +10,7 @@ public class Map {
 
 	private ArrayList<Shape> obstacles;
 	private ArrayList<ArrayList<Integer>> hitboxes; //only really applies to player, enemy projectiles go into enemies category.
+	//hitboxes are formatted as: x, y, width, height, damage, frames on-screen, launch xvel, launch yvel
 	private ArrayList<Enemy> enemies;
 	private ArrayList<ArrayList<Integer>> enemyInfo;
 	
