@@ -13,7 +13,9 @@ public class Entity extends MovingImage{
 	public void surroundingImage() {
 		
 	}
-	
+	public void moveToLocation(double x, double y) {
+		
+	}
 	
 	
 
