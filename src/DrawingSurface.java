@@ -32,7 +32,7 @@ public class DrawingSurface extends PApplet {
 		keys = new ArrayList<Integer>();
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
 		map = new Map();
-		player = new Player(new ArrayList<PImage>(Arrays.asList(loadImage("mario.png"), loadImage("marioflip.png"))), DRAWING_WIDTH/2-Player.PLAYER_WIDTH/2,50);
+		player = new Player(new ArrayList<PImage>(Arrays.asList(loadImage("mario.png"), loadImage("marioflip.png"))), (int)(map.getCheckpoints().get(0).getCenterX() -Player.PLAYER_WIDTH/2) ,(int)(map.getCheckpoints().get(0).getCenterY() -Player.PLAYER_HEIGHT/2));
 		camx = player.x;
 		camy = player.y;
 		lastUpdate = System.nanoTime();
@@ -82,7 +82,7 @@ public class DrawingSurface extends PApplet {
 		
 		
 		
-		player.draw(this, camx, camy);
+		
 		
 		fill(100);
 
@@ -92,15 +92,32 @@ public class DrawingSurface extends PApplet {
 				rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
 			}
 		}
-		for (Shape s : map.getHitboxes()) {
+		
+		
+		for (Rectangle s : map.getCheckpoints()) {
 			if (s instanceof Rectangle) {
 				Rectangle r = (Rectangle)s;
+				if (player.lastCheck == map.getCheckpoints().indexOf(s)) {
+					fill(250);
+				} else {
+					fill(50);
+				}
 				rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
 			}
 		}
-
 		
+		fill(100);
+		for (int i = 0; i < map.getHitboxes().size(); i++) {
+			ArrayList<Integer> list =  map.getHitboxes().get(i);
+			rect((int)(list.get(0) - camx),(int)(list.get(1) - camy),list.get(2),list.get(3));
+			list.set(5, list.get(5)-1);
+			if (list.get(5) == 0) {
+				map.getHitboxes().remove(list);
+			}
+		}
 
+		player.draw(this, camx, camy);
+		
 		popMatrix();
 
 		
@@ -117,15 +134,15 @@ public class DrawingSurface extends PApplet {
 		if (isPressed(KeyEvent.VK_S))
 			player.dive();
 		if (isPressed(KeyEvent.VK_Q))
-			map.addHitbox(new Rectangle((int)player.x, (int)(player.y-player.height/2), 50, 50));
+			player.lightAttack(map);
 		if (isPressed(KeyEvent.VK_E))
-			map.addHitbox(player);
+			player.heavyAttack(map);
 
 		player.act(map, System.nanoTime() - lastUpdate);
 		
 		if (player.y >= 800) {
-			player.x =DRAWING_WIDTH/2-Player.PLAYER_WIDTH/2 ;
-			player.y = 50;
+			player.x = map.getCheckpoints().get(player.lastCheck).getCenterX() -Player.PLAYER_WIDTH/2 ;
+			player.y = map.getCheckpoints().get(player.lastCheck).getCenterY() -Player.PLAYER_HEIGHT/2;
 		}
 		lastUpdate = System.nanoTime();
 

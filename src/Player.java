@@ -12,7 +12,9 @@ public class Player extends MovingImage {
 
 	public static final int PLAYER_WIDTH = 40;
 	public static final int PLAYER_HEIGHT = 60;
-
+	public int lastCheck = 0;
+	
+	
 	private double xVelocity, yVelocity;
 	private boolean onASurface;
 	private double friction;
@@ -24,7 +26,7 @@ public class Player extends MovingImage {
 	private int health;
 	private boolean direction; // true = right, false = left
 	private double stamina;
-	private boolean dive;
+	private int dive;
 
 	private ArrayList<PImage> images;
 	/** The constructor of the player class, slightly modified
@@ -40,13 +42,13 @@ public class Player extends MovingImage {
 		yVelocity = 0;
 		onASurface = false;
 		gravity = 0.7;
-		friction = .9;
+		friction = .87;
 		jumpStrength = 12;
 		stamina = 100;
 		delay = 0;
 		gravIgnore = 0;
 		direction = true;
-		dive = false;
+		dive = 0;
 	}
 
 	// METHODS
@@ -83,9 +85,9 @@ public class Player extends MovingImage {
 				gravIgnore = 250000000;
 			}else*/ if (!(onASurface) && stamina >= 25) {
 				if (direction)
-					xVelocity = 30;
+					xVelocity = 60;
 				else 
-					xVelocity = -30;
+					xVelocity = -60;
 				stamina -= 25;
 				invincible = 200000000;
 				delay = 250000000;
@@ -95,11 +97,61 @@ public class Player extends MovingImage {
 	}
 	
 	public void dive() {
+		
 		if(!(onASurface) && (delay <= 0)) {
-			dive = true;
+			dive = 1;
 		}
 	}
 	
+	public void lightAttack(Map map) {
+		if (delay <= 0) {
+			if (onASurface) {
+				xVelocity = 0;
+				delay = 200000000;
+				if (direction) {
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40 - PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, 1, -3)));
+				} else {
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-35 - PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, -1, -3)));
+				}
+			}else if (stamina >= 5) {
+				stamina -= 5;
+				xVelocity = 0;
+				delay = 200000000;
+				gravIgnore = 220000000;
+				if (direction) {
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, 1, -3)));
+				} else {
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-35- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, -1, -3)));
+				}
+			}
+		}
+	}
+	
+	public void heavyAttack(Map map) {
+		if (dive == 1) {
+			dive = 2;
+		}else if (delay <= 0) {
+			if (onASurface) {
+				xVelocity = 0;
+				delay = 300000000;
+				if (direction) {
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, 10, -15)));
+				} else {
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, -10, -15)));
+				}
+			}else if (stamina >= 5) {
+				stamina -= 15;
+				xVelocity = 0;
+				delay = 300000000;
+				gravIgnore = 325000000;
+				if (direction) {
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, 10, -15)));
+				} else {
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, -10, -15)));
+				}
+			}
+		}
+	}
 	
 	
 	/**
@@ -112,8 +164,22 @@ public class Player extends MovingImage {
 		delay -= timeElapsed;
 		gravIgnore -= timeElapsed;
 		invincible -= timeElapsed;
-		if(dive) {
+		if(dive == 1) {
+			if (direction) {
+				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 1, 5, -10)));
+			} else {
+				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 1, -5, -10)));
+			}
+			
 			delay = 100000000;
+		} else if (dive == 2) {
+			if (direction) {
+				map.addHitbox(new ArrayList(Arrays.asList((int)x-5, (int)y+60, 60, 60, 25, 1, 10, -15)));
+			} else {
+				map.addHitbox(new ArrayList(Arrays.asList((int)x-5, (int)y+60, 60, 60, 25, 1, -10, -15)));
+			}
+			delay = 100000000;
+			invincible = 100000000;
 		}
 		double xCoord = getX();
 		double yCoord = getY();
@@ -131,8 +197,10 @@ public class Player extends MovingImage {
 		} else {
 			yVelocity = 0.5;
 		}
-		if (dive) {
-			yVelocity = 25;
+		if (dive == 1) {
+			yVelocity = 15;
+		} else if (dive == 2) {
+			yVelocity = 30;
 		}
 		double yCoord2 = yCoord + yVelocity*timeElapsed/17000000;
 
@@ -146,7 +214,7 @@ public class Player extends MovingImage {
 				if (s.intersects(strechY)) {
 					onASurface = true;
 					stamina = 100;
-					dive = false;
+					dive = 0;
 					standingSurface = s;
 					yVelocity = 0;
 				}
@@ -221,6 +289,12 @@ public class Player extends MovingImage {
 			super.setImage(images.get(1));
 		} else {
 			super.setImage(images.get(0));
+		}
+		
+		for(int i = 0; i < map.getCheckpoints().size(); i++) {
+			if (map.getCheckpoints().get(i).intersects(strechX) || map.getCheckpoints().get(i).intersects(strechY)) {
+				lastCheck = i;
+			}
 		}
 
 	}
