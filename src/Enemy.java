@@ -6,6 +6,10 @@ import java.awt.geom.Rectangle2D;
 
 import processing.core.PImage;
 
+/*the enemy class represents a movingImage that will attack the player
+ * 
+ */
+
 public class Enemy extends MovingImage{
 
 	private ArrayList<MovingImage> enemy;
@@ -41,6 +45,13 @@ public class Enemy extends MovingImage{
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	/*
+	 * 
+	 * Moves the enemy
+	 * 
+	 * @param dir initial direction of movement
+	 */
 	//moves on tope of platform until the edge then reverses direction. If player is nearby will move toward player
 	public void move(int dir) {
 		if (dir>=0 )
@@ -50,6 +61,14 @@ public class Enemy extends MovingImage{
 
 	}
 	
+	
+	
+	/*
+	 * 
+	 * @param map map of the region that the enemy is in
+	 * @param timeElasped counts the amount of time pased
+	 * @param P checks if a player is nearby
+	 */
 	public void act(Map map, long timeElapsed, Player p) {
 		ArrayList<Shape> obstacles = map.getObstacles();
 		

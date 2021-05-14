@@ -4,7 +4,9 @@
 
 import javax.swing.*;
 import java.awt.*;
-
+/*
+ * the Main class represents the class that will run the game.
+ */
 public class Main extends JFrame {
 
 	private JPanel cardPanel;
