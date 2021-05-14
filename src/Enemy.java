@@ -197,7 +197,8 @@ public class Enemy extends MovingImage{
 		if(hp <=0) {
 			map.getEnemies().remove(this);
 		}
-		if (strechX.intersects(new Rectangle ((int)p.x + 10, (int)p.y + 10, (int)p.height - 20, (int)p.width - 20))|| strechY.intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.height, (int)p.width))) {
+		if ((new Rectangle((int)(x), (int)(y), (int)super.width, (int)super.height)).intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.PLAYER_WIDTH, (int)p.PLAYER_HEIGHT))) {
+			
 			if(onASurface) {
 				if(stagger <= 0) {
 					p.hit(damage);

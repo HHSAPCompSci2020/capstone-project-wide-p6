@@ -12,37 +12,42 @@ import processing.core.PApplet;
 public class PauseMenu extends JPanel implements KeyListener {
 	
 	Main w;
-	PApplet p;
 	public PauseMenu(Main w) {
 		super();
+		
 		this.w = w;
-		p = new PApplet();
+		setSize(w.getWidth(), w.getHeight());
 		JLabel text = new JLabel("Press P to unpause");
         add(text);
-		setOpaque(false);
+        JLabel text2 = new JLabel("Press P to unpause");
+        add(text2);
+        JSlider slider = new JSlider();
+        add(slider);
+		setOpaque(true);
 		addKeyListener(this);
 	}
 	
 	public void paintComponent(Graphics g) {
-		setBackground(Color.BLACK);
-        g.setColor(new Color(0, 0, 0, 100));
+		g.setColor(new Color(150, 150, 150, 50));
         Rectangle r = g.getClipBounds();
         g.fillRect(r.x, r.y, r.width, r.height);
         g.drawString("Press P to unpause", 100, 100);
-        super.paintComponent( w.getGraphics());
+        super.paintComponent(g);
     }
 
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getKeyCode() == KeyEvent.VK_P) {
+			w.changePanel(1);
+		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode() == e.VK_P) {
+		if(e.getKeyCode() == KeyEvent.VK_P) {
 			w.changePanel(1);
 		}
 		
@@ -51,5 +56,8 @@ public class PauseMenu extends JPanel implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getKeyCode() == KeyEvent.VK_P) {
+			w.changePanel(1);
+		}
 		
 	}}

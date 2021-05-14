@@ -29,7 +29,7 @@ public class Main extends JFrame {
 	    
 	    cardPanel.add(panel1,"1");
 	    cardPanel.add(panel2,"2");
-	    cardPanel.add(panel3,"3");
+	    this.setGlassPane(panel3);
 	    
 	    add(cardPanel);
 	
@@ -42,24 +42,21 @@ public class Main extends JFrame {
 		Main w = new Main("Slash Dash");
 	}
 
-	public void changePanel(int panel) { // i'll deal with this later
+	public void changePanel(int panel) {
 		switch(panel) {
 			case 0:
 				((CardLayout)cardPanel.getLayout()).first(cardPanel);
 				panel1.requestFocus();
 				break;
 			case 1:
-				((CardLayout)cardPanel.getLayout()).first(cardPanel);
-				((CardLayout)cardPanel.getLayout()).next(cardPanel);
+				panel3.setVisible(false);
+				((CardLayout)cardPanel.getLayout()).show(panel2.getParent(), "2");
 				panel2.requestFocus();
 				panel2.unpause();
 				break;
 			case 2:
-				((CardLayout)cardPanel.getLayout()).first(cardPanel);
-				((CardLayout)cardPanel.getLayout()).next(cardPanel);
-				((CardLayout)cardPanel.getLayout()).next(cardPanel);
-				panel2.setVisible(true);
 				panel3.requestFocus();
+				panel3.setVisible(true);
 				panel3.repaint();
 				break;
 		}

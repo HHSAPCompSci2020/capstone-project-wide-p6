@@ -117,11 +117,15 @@ public class DrawingSurface extends PApplet {
 		
 		for (int i = 0; i < map.getEnemies().size(); i++) {
 			Enemy e = map.getEnemies().get(i);
+			rect((int)(e.x -camx), (int)(e.y - camy), (int)e.getWidth(), (int)e.getHeight());
 			e.draw(this, camx, camy);
+			
 			e.act(map, System.nanoTime() - lastUpdate, player);
 		}
 
+		rect((int)(player.x -camx), (int)(player.y - camy), (int)player.getWidth(), (int)player.getHeight());
 		player.draw(this, camx, camy);
+		
 		text("" + player.hp, 50, 50);
 		text("" + (int)player.stamina, 50, 100);
 		
