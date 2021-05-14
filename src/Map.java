@@ -46,18 +46,34 @@ public class Map {
 	public ArrayList<Shape> getObstacles(){
 		return obstacles;
 	}
+	/**
+	 * @return returns an arraylists of all checkpoints on the map.
+	 */
 	public ArrayList<Rectangle> getCheckpoints(){
 		return checkpoints;
 	}
+	/**
+	 * @return returns an arraylists of all hitboxes on the map.
+	 */
 	public ArrayList<ArrayList<Integer>> getHitboxes(){
 		return hitboxes;
 	}
+	/**
+	 * adds a hitbox
+	 *@param hitbox a list of all the hitboxes in the game
+	 */
 	public void addHitbox(ArrayList<Integer> hitbox){
 		hitboxes.add(hitbox);
 	}
+	/**
+	 * @return returns an arraylists of all enemies on the map.
+	 */
 	public ArrayList<Enemy> getEnemies(){
 		return enemies;
 	}
+	/**
+	 * @return returns an arraylists of all enemy info on the map.
+	 */
 	public ArrayList<ArrayList<Integer>> getEnemyInfo(){
 		return enemyInfo;
 	}

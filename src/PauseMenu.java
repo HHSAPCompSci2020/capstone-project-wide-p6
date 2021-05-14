@@ -26,7 +26,10 @@ public class PauseMenu extends JPanel implements KeyListener {
 		setOpaque(true);
 		addKeyListener(this);
 	}
-	
+	/*
+	 * paints the picture
+	 * @param g where the pic will be drawn 
+	 */
 	public void paintComponent(Graphics g) {
 		g.setColor(new Color(150, 150, 150, 50));
         Rectangle r = g.getClipBounds();

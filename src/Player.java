@@ -54,12 +54,24 @@ public class Player extends MovingImage {
 	}
 
 	// METHODS
+	/*
+	 * 
+	 * Moves the player
+	 * 
+	 * @param dir initial direction of movement
+	 */
 	public void walk(int dir) {
 		direction = dir > 0;
 		if (xVelocity <= 10 && xVelocity >= -10)
 			xVelocity += dir;
 	}
 
+	/*
+	 * 
+	 * Moves the player upward
+	 * 
+	 * 
+	 */
 	public void jump() {
 		if (delay <= 0) {
 			if (onASurface) {
@@ -98,13 +110,19 @@ public class Player extends MovingImage {
 			}
 		}
 	}
-	
+	/**
+	 * A method which causes the character to dive downward
+	 */
 	public void dive() {
 		
 		if(!(onASurface) && (delay <= 0)) {
 			dive = 1;
 		}
 	}
+	/**
+	 * A method which causes the character to use a low knockback fast attack
+	 * @param map the map which the player sees
+	 */
 	
 	public void lightAttack(Map map) {
 		if (delay <= 0) {
@@ -130,6 +148,10 @@ public class Player extends MovingImage {
 		}
 	}
 	
+	/**
+	 * A method which causes the character to use a high knockback slow attack
+	 * @param map the map which the player sees
+	 */
 	public void heavyAttack(Map map) {
 		if (dive == 1) {
 			dive = 2;
@@ -156,6 +178,11 @@ public class Player extends MovingImage {
 		}
 	}
 	
+	/**
+	 * A method which indicates when the character takes damage
+	 * @param damage how much damage the character takes
+	 */
+	
 	public void hit(int damage) {
 		if (invincible <= 0) {
 			invincible = 500000000;
@@ -163,6 +190,9 @@ public class Player extends MovingImage {
 			stamina = 0;
 		}
 	}
+	/*
+	 * @return the dive amount
+	 */
 	
 	public int getDive() {
 		return dive;
@@ -172,7 +202,9 @@ public class Player extends MovingImage {
 		stamina = 100;
 		yVelocity = -jumpStrength;
 	}
-	
+	/*
+	 * @return the dash amount
+	 */
 	public double getDash() {
 		return dash;
 	}

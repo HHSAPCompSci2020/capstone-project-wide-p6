@@ -18,6 +18,11 @@ public class MainMenu extends JPanel implements ActionListener {
 		add(button);
 	}
 	
+	
+	/* Changes the screen to the game
+	 * @param e when action is preformed it will be inputed into here
+	 */
+	
 	public void actionPerformed(ActionEvent e) {
 		w.changePanel(1);
 	}

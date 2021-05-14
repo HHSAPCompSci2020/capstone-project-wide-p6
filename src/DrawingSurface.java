@@ -161,7 +161,9 @@ public class DrawingSurface extends PApplet {
 
 	}
 
-
+	/*
+	 * key is pressed
+	 */
 	public void keyPressed() {
 		keys.add(keyCode);
 		if (key == 'p') {
@@ -170,17 +172,25 @@ public class DrawingSurface extends PApplet {
 	    	w.changePanel(2);
 		}
 	}
-	
+	/*
+	 * unpause the screen
+	 */
 	public void unpause() {
 		loop();
 		lastUpdate = System.nanoTime();
 	}
+	/*
+	 * key is realeased
+	 */
 
 	public void keyReleased() {
 		while(keys.contains(keyCode))
 			keys.remove(new Integer(keyCode));
 	}
 
+	/*
+	 * button is pressed
+	 */
 	public boolean isPressed(Integer code) {
 		return keys.contains(code);
 	}
