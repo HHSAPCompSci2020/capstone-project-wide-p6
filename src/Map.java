@@ -5,6 +5,10 @@
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Map {
 
@@ -20,6 +24,8 @@ public class Map {
 	public Map() {
 		checkpoints = new ArrayList<Rectangle>();
 		obstacles = new ArrayList<Shape>();
+		enemies = new ArrayList<Enemy>();
+		enemyInfo = new ArrayList<ArrayList<Integer>>();
 		hitboxes = new ArrayList<ArrayList<Integer>>();
 		obstacles.add(new Rectangle(200,400,400,50));
 		obstacles.add(new Rectangle(0,250,100,50));
@@ -29,6 +35,8 @@ public class Map {
 		
 		checkpoints.add(new Rectangle(0,200,50,50));
 		checkpoints.add(new Rectangle(700,200,50,50));
+		
+		enemies.add(new Enemy((new PApplet()).loadImage("goomba.png"),500, 350, 50, 50));
 	}
 	
 	

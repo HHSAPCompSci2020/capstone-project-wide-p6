@@ -19,7 +19,7 @@ public class MainMenu extends JPanel implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		w.changePanel(0);
+		w.changePanel(1);
 	}
 	
 }

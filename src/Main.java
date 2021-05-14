@@ -11,6 +11,7 @@ public class Main extends JFrame {
 	
 	private MainMenu panel1;    
 	private DrawingSurface panel2;
+	private PauseMenu panel3;
 	
 	public Main(String title) {
 		super(title);
@@ -23,10 +24,12 @@ public class Main extends JFrame {
 	    
 		panel1 = new MainMenu(this);    
 	    panel2 = new DrawingSurface(this);
+	    panel3 = new PauseMenu(this);
 	    panel2.init();
 	    
 	    cardPanel.add(panel1,"1");
 	    cardPanel.add(panel2,"2");
+	    cardPanel.add(panel3,"3");
 	    
 	    add(cardPanel);
 	
@@ -42,12 +45,22 @@ public class Main extends JFrame {
 	public void changePanel(int panel) { // i'll deal with this later
 		switch(panel) {
 			case 0:
-				((CardLayout)cardPanel.getLayout()).next(cardPanel);
-				panel2.requestFocus();
+				((CardLayout)cardPanel.getLayout()).first(cardPanel);
+				panel1.requestFocus();
 				break;
 			case 1:
+				((CardLayout)cardPanel.getLayout()).first(cardPanel);
 				((CardLayout)cardPanel.getLayout()).next(cardPanel);
-				panel1.requestFocus();
+				panel2.requestFocus();
+				panel2.unpause();
+				break;
+			case 2:
+				((CardLayout)cardPanel.getLayout()).first(cardPanel);
+				((CardLayout)cardPanel.getLayout()).next(cardPanel);
+				((CardLayout)cardPanel.getLayout()).next(cardPanel);
+				panel2.setVisible(true);
+				panel3.requestFocus();
+				panel3.repaint();
 				break;
 		}
 			

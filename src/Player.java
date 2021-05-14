@@ -13,7 +13,8 @@ public class Player extends MovingImage {
 	public static final int PLAYER_WIDTH = 40;
 	public static final int PLAYER_HEIGHT = 60;
 	public int lastCheck = 0;
-	
+	public int hp;
+	public double stamina;
 	
 	private double xVelocity, yVelocity;
 	private boolean onASurface;
@@ -23,10 +24,9 @@ public class Player extends MovingImage {
 	private double invincible;
 	private double jumpStrength;
 	private double delay;
-	private int health;
 	private boolean direction; // true = right, false = left
-	private double stamina;
 	private int dive;
+	private double dash;
 
 	private ArrayList<PImage> images;
 	/** The constructor of the player class, slightly modified
@@ -49,6 +49,8 @@ public class Player extends MovingImage {
 		gravIgnore = 0;
 		direction = true;
 		dive = 0;
+		dash = 0;
+		hp = 100;
 	}
 
 	// METHODS
@@ -85,12 +87,12 @@ public class Player extends MovingImage {
 				gravIgnore = 250000000;
 			}else*/ if (!(onASurface) && stamina >= 25) {
 				if (direction)
-					xVelocity = 60;
+					dash = 100000000;
 				else 
-					xVelocity = -60;
+					dash = 100000000;
 				stamina -= 25;
 				invincible = 200000000;
-				delay = 250000000;
+				delay = 200000000;
 				gravIgnore = 250000000;
 			}
 		}
@@ -153,6 +155,13 @@ public class Player extends MovingImage {
 		}
 	}
 	
+	public void hit(int damage) {
+		if (invincible <= 0) {
+			invincible = 500000000;
+			hp -= damage;
+		}
+	}
+	
 	
 	/**
 	 * Modified act method. Uses time elapsed so that even on slower computers the game should run relatively the same.
@@ -162,6 +171,7 @@ public class Player extends MovingImage {
 	public void act(Map map, long timeElapsed) {
 		ArrayList<Shape> obstacles = map.getObstacles();
 		delay -= timeElapsed;
+		dash -= timeElapsed;
 		gravIgnore -= timeElapsed;
 		invincible -= timeElapsed;
 		if(dive == 1) {
@@ -181,6 +191,7 @@ public class Player extends MovingImage {
 			delay = 100000000;
 			invincible = 100000000;
 		}
+		
 		double xCoord = getX();
 		double yCoord = getY();
 		double width = getWidth();
@@ -192,8 +203,6 @@ public class Player extends MovingImage {
 			if (yVelocity > 6) {
 				yVelocity = 6;
 			}
-		} else if (false){
-			yVelocity = 10;
 		} else {
 			yVelocity = 0.5;
 		}
@@ -245,6 +254,18 @@ public class Player extends MovingImage {
 
 		xVelocity *= friction;
 
+		if(dash > 0) {
+			
+			if (direction) {
+				
+				xVelocity = 40;
+			} else {
+				
+				xVelocity = -40;
+			}
+			map.addHitbox(new ArrayList(Arrays.asList((int)(x - PLAYER_WIDTH/2 +  xVelocity*timeElapsed/14000000), (int)y, 75, 50, 10, 1, 0, -10)));
+		} 
+		
 		double xCoord2 = xCoord + xVelocity*timeElapsed/17000000;
 
 		Rectangle2D.Double strechX = new Rectangle2D.Double(Math.min(xCoord,xCoord2),yCoord2,width+Math.abs(xVelocity*timeElapsed/17000000),height);
@@ -293,6 +314,7 @@ public class Player extends MovingImage {
 		
 		for(int i = 0; i < map.getCheckpoints().size(); i++) {
 			if (map.getCheckpoints().get(i).intersects(strechX) || map.getCheckpoints().get(i).intersects(strechY)) {
+				hp = 100;
 				lastCheck = i;
 			}
 		}

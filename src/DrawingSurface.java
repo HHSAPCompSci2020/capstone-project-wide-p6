@@ -36,6 +36,7 @@ public class DrawingSurface extends PApplet {
 		camx = player.x;
 		camy = player.y;
 		lastUpdate = System.nanoTime();
+		noLoop();
 		this.w = w;
 	}
 
@@ -54,7 +55,6 @@ public class DrawingSurface extends PApplet {
 	public void draw() {
 		
 		// drawing stuff
-		
 		background(0,255,255);   
 
 		pushMatrix();
@@ -66,7 +66,6 @@ public class DrawingSurface extends PApplet {
 		float ratioY = (float)height/DRAWING_HEIGHT;
 
 		scale(ratioX, ratioY);
-		
 		
 		
 		//camera movement
@@ -115,8 +114,16 @@ public class DrawingSurface extends PApplet {
 				map.getHitboxes().remove(list);
 			}
 		}
+		
+		for (int i = 0; i < map.getEnemies().size(); i++) {
+			Enemy e = map.getEnemies().get(i);
+			e.draw(this, camx, camy);
+			e.act(map, System.nanoTime() - lastUpdate, player);
+		}
 
 		player.draw(this, camx, camy);
+		text("" + player.hp, 50, 50);
+		text("" + (int)player.stamina, 50, 100);
 		
 		popMatrix();
 
@@ -137,12 +144,14 @@ public class DrawingSurface extends PApplet {
 			player.lightAttack(map);
 		if (isPressed(KeyEvent.VK_E))
 			player.heavyAttack(map);
+		
 
 		player.act(map, System.nanoTime() - lastUpdate);
 		
-		if (player.y >= 800) {
+		if (player.y >= 800 || player.hp <= 0) {
 			player.x = map.getCheckpoints().get(player.lastCheck).getCenterX() -Player.PLAYER_WIDTH/2 ;
 			player.y = map.getCheckpoints().get(player.lastCheck).getCenterY() -Player.PLAYER_HEIGHT/2;
+			player.hp = 100;
 		}
 		lastUpdate = System.nanoTime();
 
@@ -151,6 +160,16 @@ public class DrawingSurface extends PApplet {
 
 	public void keyPressed() {
 		keys.add(keyCode);
+		if (key == 'p') {
+			noLoop();
+	    	keys.clear();
+	    	w.changePanel(2);
+		}
+	}
+	
+	public void unpause() {
+		loop();
+		lastUpdate = System.nanoTime();
 	}
 
 	public void keyReleased() {
