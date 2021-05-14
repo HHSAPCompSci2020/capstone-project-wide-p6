@@ -73,6 +73,7 @@ public class Player extends MovingImage {
 		}
 	}
 	
+	
 	/**
 	 * A method which causes the character to dash forwards, and cause the characters to mostly ignore gravity.
 	 */
@@ -121,9 +122,9 @@ public class Player extends MovingImage {
 				delay = 200000000;
 				gravIgnore = 220000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, 1, -3)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, 1, -2)));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-35- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, -1, -3)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-35- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, -1, -2)));
 				}
 			}
 		}
@@ -137,19 +138,19 @@ public class Player extends MovingImage {
 				xVelocity = 0;
 				delay = 300000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, 10, -15)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, 10, -10)));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, -10, -15)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, -10, -10)));
 				}
-			}else if (stamina >= 5) {
+			}else if (stamina >= 15) {
 				stamina -= 15;
 				xVelocity = 0;
 				delay = 300000000;
 				gravIgnore = 325000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, 10, -15)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, 15, -5)));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, -10, -15)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, -15, -5)));
 				}
 			}
 		}
@@ -159,7 +160,21 @@ public class Player extends MovingImage {
 		if (invincible <= 0) {
 			invincible = 500000000;
 			hp -= damage;
+			stamina = 0;
 		}
+	}
+	
+	public int getDive() {
+		return dive;
+	}
+	public void diveHop() {
+		dive = 0;
+		stamina = 100;
+		yVelocity = -jumpStrength;
+	}
+	
+	public double getDash() {
+		return dash;
 	}
 	
 	
@@ -176,17 +191,17 @@ public class Player extends MovingImage {
 		invincible -= timeElapsed;
 		if(dive == 1) {
 			if (direction) {
-				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 1, 5, -10)));
+				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 2, 10, -10)));
 			} else {
-				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 1, -5, -10)));
+				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 2, -10, -10)));
 			}
 			
 			delay = 100000000;
 		} else if (dive == 2) {
 			if (direction) {
-				map.addHitbox(new ArrayList(Arrays.asList((int)x-5, (int)y+60, 60, 60, 25, 1, 10, -15)));
+				map.addHitbox(new ArrayList(Arrays.asList((int)x-5, (int)y+60, 60, 60, 25, 2, 20, -15)));
 			} else {
-				map.addHitbox(new ArrayList(Arrays.asList((int)x-5, (int)y+60, 60, 60, 25, 1, -10, -15)));
+				map.addHitbox(new ArrayList(Arrays.asList((int)x-5, (int)y+60, 60, 60, 25, 2, -20, -15)));
 			}
 			delay = 100000000;
 			invincible = 100000000;
@@ -263,7 +278,7 @@ public class Player extends MovingImage {
 				
 				xVelocity = -40;
 			}
-			map.addHitbox(new ArrayList(Arrays.asList((int)(x - PLAYER_WIDTH/2 +  xVelocity*timeElapsed/14000000), (int)y, 75, 50, 10, 1, 0, -10)));
+			map.addHitbox(new ArrayList(Arrays.asList((int)(x - PLAYER_WIDTH/2 +  xVelocity*timeElapsed/14000000), (int)y, 75, 50, 10, 3, 1, -10)));
 		} 
 		
 		double xCoord2 = xCoord + xVelocity*timeElapsed/17000000;

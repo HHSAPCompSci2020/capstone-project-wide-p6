@@ -27,7 +27,7 @@ public class Map {
 		enemies = new ArrayList<Enemy>();
 		enemyInfo = new ArrayList<ArrayList<Integer>>();
 		hitboxes = new ArrayList<ArrayList<Integer>>();
-		obstacles.add(new Rectangle(200,400,400,50));
+		obstacles.add(new Rectangle(200,400,10000,50));
 		obstacles.add(new Rectangle(0,250,100,50));
 		obstacles.add(new Rectangle(700,250,100,50));
 		obstacles.add(new Rectangle(375,300,50,100));

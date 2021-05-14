@@ -19,6 +19,7 @@ public class Enemy extends MovingImage{
 	private double speed;
 	private double senseRadius = 25;
 	private double health;
+	private double antiMulti;
 	private ArrayList<Integer> lastHitBy;
 	private ArrayList<PImage> images;
 
@@ -31,11 +32,12 @@ public class Enemy extends MovingImage{
 		yVelocity = 0;
 		onASurface = false;
 		gravity = 0.7;
-		hp = 100;
+		hp = 10000;
 		damage = 10;
 		speed = 2;
 		lastHitBy = new ArrayList<Integer>();
 		stagger = 0;
+		antiMulti = 5;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -52,7 +54,7 @@ public class Enemy extends MovingImage{
 		ArrayList<Shape> obstacles = map.getObstacles();
 		
 		stagger -= timeElapsed;
-		
+		antiMulti -= 1;
 		
 		double xCoord = getX();
 		double yCoord = getY();
@@ -75,7 +77,17 @@ public class Enemy extends MovingImage{
 		
 		//-------------------Physics---------------------
 		
-		
+		if (stagger >= 0) {
+			yVelocity += gravity*timeElapsed/30000000;
+			if (yVelocity > 5) {
+				yVelocity = 5;
+			}
+		} else {
+			yVelocity += gravity*timeElapsed/20000000; // GRAVITY
+			if (yVelocity > 10) {
+				yVelocity = 10;
+			}
+		}
 
 		double yCoord2 = yCoord + yVelocity*timeElapsed/17000000;
 
@@ -83,10 +95,6 @@ public class Enemy extends MovingImage{
 		
 		onASurface = false;
 		
-		yVelocity += gravity*timeElapsed/20000000; // GRAVITY
-		if (yVelocity > 10) {
-			yVelocity = 10;
-		}
 		
 		if (yVelocity > 0) {
 			Shape standingSurface = null;
@@ -120,8 +128,8 @@ public class Enemy extends MovingImage{
 
 		// ***********X AXIS***********
 
-
-		xVelocity *= 0.9;
+		
+		xVelocity *= 0.95;
 
 		
 		double xCoord2 = xCoord + xVelocity*timeElapsed/17000000;
@@ -166,13 +174,21 @@ public class Enemy extends MovingImage{
 		// -------------------- collision checking ---------------------
 		for(int i = 0; i < map.getHitboxes().size(); i++) {
 			ArrayList<Integer> list =  map.getHitboxes().get(i);
-			if ((new Rectangle((int)list.get(0),(int)list.get(1),list.get(2),list.get(3))).intersects(strechX) || (new Rectangle((int)list.get(0),(int)list.get(1),list.get(2),list.get(3))).intersects(strechY)) {
-				if (!(lastHitBy.equals(list))) {
+			if ((new Rectangle((int)list.get(0)-7,(int)list.get(1)-7,list.get(2) + 15,list.get(3) + 15)).intersects(strechX) || (new Rectangle((int)list.get(0)-7,(int)list.get(1)-7,list.get(2) + 15,list.get(3) + 15)).intersects(strechY)) {
+				if (!(lastHitBy.equals(list)) && (antiMulti <= 0)) {
+					antiMulti = 5;
 					hp -= list.get(4);
 					xVelocity = list.get(6);
 					yVelocity = list.get(7);
-					stagger = 100000000 * (list.get(6) + list.get(7));
+					stagger = 60000000 * (Math.sqrt(list.get(6)*list.get(6) + list.get(7)*list.get(7)));
 					lastHitBy = list;
+					
+					if(p.getDive() == 1) {
+						p.diveHop();
+					}
+					if(p.getDash() >= 0) {
+						p.stamina += 50;
+					}
 				}
 			}
 		}
@@ -181,8 +197,18 @@ public class Enemy extends MovingImage{
 		if(hp <=0) {
 			map.getEnemies().remove(this);
 		}
-		if (strechX.intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.height, (int)p.width))|| strechY.intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.height, (int)p.width)) && (stagger <= 0)) {
-			p.hit(damage);
+		if (strechX.intersects(new Rectangle ((int)p.x + 10, (int)p.y + 10, (int)p.height - 20, (int)p.width - 20))|| strechY.intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.height, (int)p.width))) {
+			if(onASurface) {
+				if(stagger <= 0) {
+					p.hit(damage);
+				}
+			} else {
+				if(stagger <= -50000000) {
+					p.hit(damage);
+				}
+			}
+			
+			
 		}
 		
 		
