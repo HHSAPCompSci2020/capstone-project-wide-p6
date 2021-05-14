@@ -122,9 +122,9 @@ public class Player extends MovingImage {
 				delay = 200000000;
 				gravIgnore = 220000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, 1, -2)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, 2, -2)));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-35- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, -1, -2)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-35- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, -2, -2)));
 				}
 			}
 		}
@@ -138,9 +138,9 @@ public class Player extends MovingImage {
 				xVelocity = 0;
 				delay = 300000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, 10, -10)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, 10, -13)));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, -10, -10)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, -10, -13)));
 				}
 			}else if (stamina >= 15) {
 				stamina -= 15;
@@ -148,9 +148,9 @@ public class Player extends MovingImage {
 				delay = 300000000;
 				gravIgnore = 325000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, 15, -5)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, 15, -7)));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, -15, -5)));
+					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, -15, -7)));
 				}
 			}
 		}
@@ -170,6 +170,7 @@ public class Player extends MovingImage {
 	public void diveHop() {
 		dive = 0;
 		stamina = 100;
+		delay = 300000000;
 		yVelocity = -jumpStrength;
 	}
 	
@@ -191,9 +192,9 @@ public class Player extends MovingImage {
 		invincible -= timeElapsed;
 		if(dive == 1) {
 			if (direction) {
-				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 2, 10, -10)));
+				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 2, 7, -10)));
 			} else {
-				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 2, -10, -10)));
+				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 2, -7, -10)));
 			}
 			
 			delay = 100000000;

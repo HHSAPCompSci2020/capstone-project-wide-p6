@@ -1,6 +1,4 @@
-/** @Author Shelby
- *  The exact same as the OptionsPanel class but renamed. I will edit this later to be more of a main menu.
- */
+
 
 import java.awt.*;
 import javax.swing.*;

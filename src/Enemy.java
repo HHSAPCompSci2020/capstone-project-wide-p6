@@ -41,15 +41,6 @@ public class Enemy extends MovingImage{
 		// TODO Auto-generated constructor stub
 	}
 
-	//moves on tope of platform until the edge then reverses direction. If player is nearby will move toward player
-	public void move(int dir) {
-		if (dir>=0 )
-			xVelocity = 10;
-		else if (dir<=0)
-		xVelocity = -10;
-
-	}
-	
 	public void act(Map map, long timeElapsed, Player p) {
 		ArrayList<Shape> obstacles = map.getObstacles();
 		
@@ -64,7 +55,7 @@ public class Enemy extends MovingImage{
 		// *********** Movement ***********
 		
 		
-		if(stagger <= 0) {
+		if(stagger <= 0 && onASurface) {
 			if (p.x >= x) {
 				xVelocity = speed;
 			} else {
