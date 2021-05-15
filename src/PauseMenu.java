@@ -1,6 +1,4 @@
-/** @Author Shelby
- *  The exact same as the OptionsPanel class but renamed. I will edit this later to be more of a main menu.
- */
+
 
 import java.awt.*;
 import javax.swing.*;
@@ -31,11 +29,12 @@ public class PauseMenu extends JPanel implements KeyListener {
 	 * @param g where the pic will be drawn 
 	 */
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		g.setColor(new Color(150, 150, 150, 50));
         Rectangle r = g.getClipBounds();
         g.fillRect(r.x, r.y, r.width, r.height);
         g.drawString("Press P to unpause", 100, 100);
-        super.paintComponent(g);
+       
     }
 
 
