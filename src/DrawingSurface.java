@@ -107,27 +107,38 @@ public class DrawingSurface extends PApplet {
 		
 		fill(100);
 		for (int i = 0; i < map.getHitboxes().size(); i++) {
-			ArrayList<Integer> list =  map.getHitboxes().get(i);
-			rect((int)(list.get(0) - camx),(int)(list.get(1) - camy),list.get(2),list.get(3));
-			list.set(5, list.get(5)-1);
-			if (list.get(5) == 0) {
+			Hitbox list =  map.getHitboxes().get(i);
+			list.draw(this, camx, camy);
+			list.dur -= 1;
+			if (list.dur == 0) {
 				map.getHitboxes().remove(list);
 			}
+			list.setImage(list.dur);
 		}
 		
-		for (int i = 0; i < map.getEnemies().size(); i++) {
-			Enemy e = map.getEnemies().get(i);
-			rect((int)(e.x -camx), (int)(e.y - camy), (int)e.getWidth(), (int)e.getHeight());
-			e.draw(this, camx, camy);
-			
-			e.act(map, System.nanoTime() - lastUpdate, player);
+		for (int i = 0; i < map.getEnemies().length; i++) {
+			Enemy e = map.getEnemies()[i];
+			if (e == null) {
+				ArrayList<Integer>list = map.getEnemyInfo().get(i);
+				list.set(6, (int) (list.get(6) - (System.nanoTime() - lastUpdate)/100000));
+				if (list.get(6) <= 0) {
+					map.spawnEnemy(0, list.get(1), list.get(2), list.get(3), list.get(4), i);
+					list.set(6,list.get(5));
+				}
+			} else {
+				e.draw(this, camx, camy);
+				e.act(map, System.nanoTime() - lastUpdate, player);
+			}
 		}
 
-		rect((int)(player.x -camx), (int)(player.y - camy), (int)player.getWidth(), (int)player.getHeight());
 		player.draw(this, camx, camy);
 		
+		if (player.hp > 100){
+			player.hp = 100;
+		}
 		text("" + player.hp, 50, 50);
 		text("" + (int)player.stamina, 50, 100);
+		text("" + (int)player.combo, 50, 150);
 		
 		popMatrix();
 

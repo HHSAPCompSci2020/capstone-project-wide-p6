@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.*;
 
+import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Player extends MovingImage {
@@ -15,6 +16,7 @@ public class Player extends MovingImage {
 	public int lastCheck = 0;
 	public int hp;
 	public double stamina;
+	public int combo;
 	
 	private double xVelocity, yVelocity;
 	private boolean onASurface;
@@ -51,6 +53,7 @@ public class Player extends MovingImage {
 		dive = 0;
 		dash = 0;
 		hp = 100;
+		combo = 0;
 	}
 
 	// METHODS
@@ -128,11 +131,13 @@ public class Player extends MovingImage {
 		if (delay <= 0) {
 			if (onASurface) {
 				xVelocity = 0;
-				delay = 200000000;
+				delay = 300000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40 - PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, 1, -3)));
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+							(int)(x+40- PLAYER_WIDTH/2), (int)y -5, 75, 75, 5, 5, 1, -1));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-35 - PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, -1, -3)));
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+							(int)(x-35- PLAYER_WIDTH/2), (int)y -5, 75, 75, 5, 5, -1, -1));
 				}
 			}else if (stamina >= 5) {
 				stamina -= 5;
@@ -140,9 +145,11 @@ public class Player extends MovingImage {
 				delay = 200000000;
 				gravIgnore = 220000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, 2, -2)));
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+							(int)(x+40- PLAYER_WIDTH/2), (int)y -5, 75, 75, 10, 5, 2, -2));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-35- PLAYER_WIDTH/2, (int)y-5, 75, 75, 10, 5, -2, -2)));
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+							(int)(x-35- PLAYER_WIDTH/2), (int)y -5, 75, 75, 10, 5, -2, -2));
 				}
 			}
 		}
@@ -158,11 +165,13 @@ public class Player extends MovingImage {
 		}else if (delay <= 0) {
 			if (onASurface) {
 				xVelocity = 0;
-				delay = 300000000;
+				delay = 500000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, 10, -13)));
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+							(int)(x+40- PLAYER_WIDTH/2), (int)y -25, 100, 100, 10, 5, 10, -13));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 15, 5, -10, -13)));
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+							(int)(x-55- PLAYER_WIDTH/2), (int)y -25, 100, 100, 10, 5, -10, -13));
 				}
 			}else if (stamina >= 15) {
 				stamina -= 15;
@@ -170,9 +179,11 @@ public class Player extends MovingImage {
 				delay = 300000000;
 				gravIgnore = 325000000;
 				if (direction) {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x+40- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, 15, -7)));
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+							(int)(x+40- PLAYER_WIDTH/2), (int)y -25, 100, 100, 20, 5, 15, -7));
 				} else {
-					map.addHitbox(new ArrayList(Arrays.asList((int)x-55- PLAYER_WIDTH/2, (int)y-25, 100, 100, 20, 5, -15, -7)));
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+							(int)(x-55- PLAYER_WIDTH/2), (int)y -25, 100, 100, 20, 5, -15, -7));
 				}
 			}
 		}
@@ -197,9 +208,13 @@ public class Player extends MovingImage {
 	public int getDive() {
 		return dive;
 	}
+	
 	public void diveHop() {
 		dive = 0;
-		stamina = 100;
+		if (stamina < 100) {
+			stamina = 100;
+		}
+		
 		delay = 300000000;
 		yVelocity = -jumpStrength;
 	}
@@ -224,17 +239,21 @@ public class Player extends MovingImage {
 		invincible -= timeElapsed;
 		if(dive == 1) {
 			if (direction) {
-				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 2, 7, -10)));
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+						(int)(x), (int)y + 50, 50, 50, 10, 2, 7, -10));
 			} else {
-				map.addHitbox(new ArrayList(Arrays.asList((int)x, (int)y+50, 50, 50, 10, 2, -7, -10)));
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+						(int)(x), (int)y + 50, 50, 50, 10, 2, -7, -10));
 			}
 			
 			delay = 100000000;
 		} else if (dive == 2) {
 			if (direction) {
-				map.addHitbox(new ArrayList(Arrays.asList((int)x-5, (int)y+60, 60, 60, 25, 2, 20, -15)));
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+						(int)(x - 5), (int)y + 60, 60, 60, 25, 2, 20, -15));
 			} else {
-				map.addHitbox(new ArrayList(Arrays.asList((int)x-5, (int)y+60, 60, 60, 25, 2, -20, -15)));
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+						(int)(x - 5), (int)y + 60, 60, 60, 25, 2, -20, -15));
 			}
 			delay = 100000000;
 			invincible = 100000000;
@@ -272,6 +291,7 @@ public class Player extends MovingImage {
 					onASurface = true;
 					stamina = 100;
 					dive = 0;
+					combo = 0;
 					standingSurface = s;
 					yVelocity = 0;
 				}
@@ -307,11 +327,13 @@ public class Player extends MovingImage {
 			if (direction) {
 				
 				xVelocity = 40;
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),(int)(x - PLAYER_WIDTH/2 +  xVelocity*timeElapsed/14000000), (int)y, 75, 50, 10, 2, 10, -10));
 			} else {
 				
 				xVelocity = -40;
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),(int)(x - PLAYER_WIDTH/2 +  xVelocity*timeElapsed/14000000), (int)y, 75, 50, 10, 2, -10, -10));
 			}
-			map.addHitbox(new ArrayList(Arrays.asList((int)(x - PLAYER_WIDTH/2 +  xVelocity*timeElapsed/14000000), (int)y, 75, 50, 10, 3, 1, -10)));
+			
 		} 
 		
 		double xCoord2 = xCoord + xVelocity*timeElapsed/17000000;
