@@ -2,17 +2,22 @@
  * The class used for essentially all the graphics of the game.
  */
 
+import java.awt.Event;
 import java.awt.Rectangle;
 import java.awt.Shape;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import processing.core.PImage;
 
 import processing.core.PApplet;
 
-public class DrawingSurface extends PApplet {
+public class DrawingSurface extends PApplet implements MouseListener{
 
+	/**
+	 * 
+	 */
 	public static final int DRAWING_WIDTH = 800;
 	public static final int DRAWING_HEIGHT = 600;
 
@@ -92,6 +97,16 @@ public class DrawingSurface extends PApplet {
 			}
 		}
 		
+		for (int i = 0 ; i < map.getProjectiles().size(); i++) {
+			Projectile p = map.getProjectiles().get(i);
+			p.act(map, System.nanoTime() - lastUpdate, player);
+			if (p.die(map)) {
+				map.getProjectiles().remove(p);
+				i--;
+			}
+			p.draw(this, camx, camy);
+		}
+		
 		
 		for (Rectangle s : map.getCheckpoints()) {
 			if (s instanceof Rectangle) {
@@ -120,9 +135,9 @@ public class DrawingSurface extends PApplet {
 			Enemy e = map.getEnemies()[i];
 			if (e == null) {
 				ArrayList<Integer>list = map.getEnemyInfo().get(i);
-				list.set(6, (int) (list.get(6) - (System.nanoTime() - lastUpdate)/100000));
-				if (list.get(6) <= 0) {
-					map.spawnEnemy(0, list.get(1), list.get(2), list.get(3), list.get(4), i);
+				list.set(6, (int) (list.get(6) - (System.nanoTime() - lastUpdate)/1000000));
+				if (list.get(6) <= 0 && (Math.sqrt((list.get(1)-player.x)*(list.get(1)-player.x) + (list.get(2)-player.y)*(list.get(2)-player.y)) >= 500)) {
+					map.spawnEnemy(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), i);
 					list.set(6,list.get(5));
 				}
 			} else {
@@ -178,9 +193,7 @@ public class DrawingSurface extends PApplet {
 	public void keyPressed() {
 		keys.add(keyCode);
 		if (key == 'p') {
-			noLoop();
-	    	keys.clear();
-	    	w.changePanel(2);
+			pause();
 		}
 	}
 	/*
@@ -189,6 +202,40 @@ public class DrawingSurface extends PApplet {
 	public void unpause() {
 		loop();
 		lastUpdate = System.nanoTime();
+	}
+	
+	public void pause() {
+		boolean onCheck = false;
+		for(int i = 0; i < map.getCheckpoints().size(); i++) {
+			if (map.getCheckpoints().get(i).intersects(new Rectangle2D.Double((int)player.x, (int)player.y , player.PLAYER_WIDTH, player.PLAYER_HEIGHT))) {
+				onCheck = true;
+			}
+		}
+		if (onCheck) {
+			double scale = 0.1;
+			for (Shape s : map.getObstacles()) {
+				if (s instanceof Rectangle) {
+					Rectangle r = (Rectangle)s;
+					rect((int)(r.x*scale),(int)(r.y * scale),(int)(r.width * scale),(int)(r.height* scale));
+				}
+			}
+			
+			
+			for (Rectangle s : map.getCheckpoints()) {
+				if (s instanceof Rectangle) {
+					Rectangle r = (Rectangle)s;
+					if (player.lastCheck == map.getCheckpoints().indexOf(s)) {
+						fill(250);
+					} else {
+						fill(50);
+					}
+					rect((int)(r.x*scale),(int)(r.y * scale),(int)(r.width * scale),(int)(r.height* scale));
+				}
+			}
+		}
+		noLoop();
+    	keys.clear();
+    	w.changePanel(2);
 	}
 	/*
 	 * key is realeased
@@ -206,7 +253,22 @@ public class DrawingSurface extends PApplet {
 		return keys.contains(code);
 	}
 
+	public void checkPointTP(double x, double y) {
+		
+	}
 	
-
+	public void mouseClicked(MouseEvent e) {
+		for(int i = 0; i < map.getCheckpoints().size(); i++) {
+			if (new Rectangle((int)map.getCheckpoints().get(i).getX()/10 - 5, (int)map.getCheckpoints().get(i).getY()/10 - 5, (int)map.getCheckpoints().get(i).getWidth()/10 + 10, (int)map.getCheckpoints().get(i).getHeight()/10 + 10).contains(e.getX(), e.getY())) {
+				player.x = map.getCheckpoints().get(i).getX();
+				player.y = map.getCheckpoints().get(i).getY();
+				w.changePanel(1);
+				draw();
+		    	
+			}
+		}
+		System.out.println("clicked " +e.getX() + ", " + e.getY() );
+		
+	}
 }
 

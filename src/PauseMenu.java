@@ -3,13 +3,13 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
 import processing.core.PApplet;
 
-public class PauseMenu extends JPanel implements KeyListener {
+public class PauseMenu extends JPanel implements KeyListener{
 	
 	Main w;
+
 	public PauseMenu(Main w) {
 		super();
 		
@@ -62,4 +62,5 @@ public class PauseMenu extends JPanel implements KeyListener {
 			w.changePanel(1);
 		}
 		
-	}}
+	}
+}

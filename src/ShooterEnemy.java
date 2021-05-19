@@ -6,42 +6,46 @@ import java.awt.geom.Rectangle2D;
 
 import processing.core.PImage;
 
-public class BasicEnemy extends Enemy{
+public class ShooterEnemy extends Enemy{
 
 	private double xVelocity, yVelocity;
 	private boolean onASurface;
 	private double gravity;
 	private double hp;
 	private double stagger;
+	private int shootDelay;
 	private int damage;
 	private double speed;
-	private double senseRadius = 300;
+	private double senseRadius = 500;
 	private double antiMulti;
 	private int index;
 	private ArrayList<PImage> images;
 
-	public BasicEnemy(ArrayList<PImage> img, int x, int y, int w, int h, int index) {
+	public ShooterEnemy(ArrayList<PImage> img, int x, int y, int w, int h, int index) {
 		
 		super(img, x, y, w, h, index);
 		xVelocity = 0;
 		yVelocity = 0;
 		onASurface = false;
 		gravity = 0.7;
-		hp = 200;
+		hp = 150;
 		damage = 10;
 		speed = 2;
 		stagger = 0;
 		antiMulti = 5;
 		images = img;
+		shootDelay = 2000000;
 		this.index = index;
 		// TODO Auto-generated constructor stub
 	}
 
 	public void act(Map map, long timeElapsed, Player p) {
 		ArrayList<Shape> obstacles = map.getObstacles();
-		
 		stagger -= timeElapsed;
+		shootDelay -= timeElapsed/1000;
 		antiMulti -= 1;
+		
+		
 		
 		double xCoord = getX();
 		double yCoord = getY();
@@ -51,14 +55,21 @@ public class BasicEnemy extends Enemy{
 		// *********** Movement ***********
 		
 		if(Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y)) < senseRadius) {
-		
-			if(stagger <= 0 && onASurface) {
-				if (p.x >= x) {
-					xVelocity = speed;
-				} else {
-					xVelocity = -speed;
-				}
 			
+			if(stagger <= 0 && onASurface) {
+				if (shootDelay <= 0) {
+					map.shoot(0, (int)x, (int)y, 10, 10, (p.x - x)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, (p.y - y)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, 400, 10);
+					shootDelay = 1000000;
+				}
+				if ((Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y)) > 300)) {
+					if (p.x >= x) {
+						xVelocity = speed;
+					} else {
+						xVelocity = -speed;
+					}
+				}
+			} else {
+				shootDelay = 1000000;
 			}
 		}
 
@@ -160,9 +171,13 @@ public class BasicEnemy extends Enemy{
 		
 		
 		// -------------------- collision checking ---------------------
+		
+		
+		
+		
 		for(int i = 0; i < map.getHitboxes().size(); i++) {
 			Hitbox list =  map.getHitboxes().get(i);
-			if ((new Rectangle((int)list.x - 7,(int)list.y - 7,list.w + 15,list.h + 15)).intersects(strechX) || (new Rectangle((int)list.x-7,(int)list.y-7,list.w + 15,list.h + 15)).intersects(strechY)) {
+			if ((new Rectangle((int)list.kx - 7,(int)list.y - 7,list.w + 15,list.h + 15)).intersects(strechX) || (new Rectangle((int)list.x-7,(int)list.y-7,list.w + 15,list.h + 15)).intersects(strechY)) {
 				if ((antiMulti <= 0)) {
 					antiMulti = 6;
 					
@@ -197,27 +212,12 @@ public class BasicEnemy extends Enemy{
 		if(hp <=0) {
 			map.getEnemies()[index] = null;
 		}
+		
 		ArrayList<Integer> stuff = map.getEnemyInfo().get(index);
 		if (Math.sqrt((stuff.get(1) - x)* (stuff.get(1) - x) + (stuff.get(2) -y) * (stuff.get(2) - y)) >= 3000) {
 			map.getEnemies()[index] = null;
 		}
-		if ((new Rectangle((int)(x), (int)(y), (int)super.width, (int)super.height)).intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.PLAYER_WIDTH, (int)p.PLAYER_HEIGHT))) {
-			
-			if(onASurface) {
-				if(stagger <= 0) {
-					p.hit(damage);
-				}
-			} else {
-				if(stagger <= -50000000) {
-					p.hit(damage);
-				}
-			}
-			
-			
-		}
 		
-		
-
 	}
 	
 	
