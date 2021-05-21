@@ -26,10 +26,10 @@ public class BasicEnemy extends Enemy{
 		xVelocity = 0;
 		yVelocity = 0;
 		onASurface = false;
-		gravity = 0.7;
+		gravity = 0.5;
 		hp = 200;
 		damage = 10;
-		speed = 2;
+		speed = 1.5;
 		stagger = 0;
 		antiMulti = 5;
 		images = img;
@@ -67,13 +67,13 @@ public class BasicEnemy extends Enemy{
 		
 		if (stagger >= 0) {
 			yVelocity += gravity*timeElapsed/30000000;
-			if (yVelocity > 5) {
-				yVelocity = 5;
+			if (yVelocity > 3) {
+				yVelocity = 3;
 			}
 		} else {
 			yVelocity += gravity*timeElapsed/20000000; // GRAVITY
-			if (yVelocity > 10) {
-				yVelocity = 10;
+			if (yVelocity > 7) {
+				yVelocity = 7;
 			}
 		}
 
