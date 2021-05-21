@@ -26,6 +26,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 	
 	private double camx, camy;
 	private long lastUpdate;
+	private long currTime;
 	private Main w;
 	
 	private Player player;
@@ -99,7 +100,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		
 		for (int i = 0 ; i < map.getProjectiles().size(); i++) {
 			Projectile p = map.getProjectiles().get(i);
-			p.act(map, System.nanoTime() - lastUpdate, player);
+			p.act(map, currTime, player);
 			if (p.die(map)) {
 				map.getProjectiles().remove(p);
 				i--;
@@ -135,14 +136,14 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			Enemy e = map.getEnemies()[i];
 			if (e == null) {
 				ArrayList<Integer>list = map.getEnemyInfo().get(i);
-				list.set(6, (int) (list.get(6) - (System.nanoTime() - lastUpdate)/1000000));
+				list.set(6, (int) (list.get(6) - (currTime)/1000000));
 				if (list.get(6) <= 0 && (Math.sqrt((list.get(1)-player.x)*(list.get(1)-player.x) + (list.get(2)-player.y)*(list.get(2)-player.y)) >= 500)) {
 					map.spawnEnemy(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), i);
 					list.set(6,list.get(5));
 				}
 			} else {
 				e.draw(this, camx, camy);
-				e.act(map, System.nanoTime() - lastUpdate, player);
+				e.act(map, currTime, player);
 			}
 		}
 
@@ -176,13 +177,14 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			player.heavyAttack(map);
 		
 
-		player.act(map, System.nanoTime() - lastUpdate);
+		player.act(map, currTime);
 		
 		if (player.y >= 800 || player.hp <= 0) {
 			player.x = map.getCheckpoints().get(player.lastCheck).getCenterX() -Player.PLAYER_WIDTH/2 ;
 			player.y = map.getCheckpoints().get(player.lastCheck).getCenterY() -Player.PLAYER_HEIGHT/2;
 			player.hp = 100;
 		}
+		currTime =  System.nanoTime()  - lastUpdate;
 		lastUpdate = System.nanoTime();
 
 	}

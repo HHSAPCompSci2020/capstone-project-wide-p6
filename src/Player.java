@@ -239,20 +239,20 @@ public class Player extends MovingImage {
 		invincible -= timeElapsed;
 		if(dive == 1) {
 			if (direction) {
-				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
 						(int)(x), (int)y + 50, 50, 50, 10, 2, 7, -10));
 			} else {
-				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
 						(int)(x), (int)y + 50, 50, 50, 10, 2, -7, -10));
 			}
 			
 			delay = 100000000;
 		} else if (dive == 2) {
 			if (direction) {
-				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
 						(int)(x - 5), (int)y + 60, 60, 60, 25, 2, 20, -15));
 			} else {
-				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("hitboxtemp.png"), (new PApplet()).loadImage("hitboxtemp.png"))),
 						(int)(x - 5), (int)y + 60, 60, 60, 25, 2, -20, -15));
 			}
 			delay = 100000000;
