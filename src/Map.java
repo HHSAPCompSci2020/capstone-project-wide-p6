@@ -40,6 +40,7 @@ public class Map {
 		
 		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 450, 350, 50, 50, 45000, 45000))); // enemy type, x, y, width, height, respawn time, respawn time left in thousandths of a second
 		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 750, 200, 50, 50, 45000, 45000)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 400, 150, 50, 50, 45000, 45000)));
 		
 		
 		
@@ -58,6 +59,9 @@ public class Map {
 		}
 		if (type == 1) {
 			enemies[index] = (new ShooterEnemy(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("marioflip.png"))), x, y, w, h, index));
+		}
+		if (type == 2) {
+			enemies[index] = (new FlyingShooter(new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("marioflip.png"))), x, y, w, h, index));
 		}
 	}
 	/**
