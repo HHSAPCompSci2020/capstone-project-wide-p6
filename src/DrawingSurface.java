@@ -175,6 +175,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			player.lightAttack(map);
 		if (isPressed(KeyEvent.VK_E))
 			player.heavyAttack(map);
+	
 		
 
 		player.act(map, currTime);
