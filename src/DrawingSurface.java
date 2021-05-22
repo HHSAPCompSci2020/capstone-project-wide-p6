@@ -180,7 +180,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 
 		player.act(map, currTime);
 		
-		if (player.y >= 800 || player.hp <= 0) {
+		if (player.hp <= 0) {
 			player.x = map.getCheckpoints().get(player.lastCheck).getCenterX() -Player.PLAYER_WIDTH/2 ;
 			player.y = map.getCheckpoints().get(player.lastCheck).getCenterY() -Player.PLAYER_HEIGHT/2;
 			player.hp = 100;
