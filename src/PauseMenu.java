@@ -17,10 +17,7 @@ public class PauseMenu extends JPanel implements KeyListener{
 		setSize(w.getWidth(), w.getHeight());
 		JLabel text = new JLabel("Press P to unpause");
         add(text);
-        JLabel text2 = new JLabel("Press P to unpause");
-        add(text2);
-        JSlider slider = new JSlider();
-        add(slider);
+
 		setOpaque(true);
 		addKeyListener(this);
 	}

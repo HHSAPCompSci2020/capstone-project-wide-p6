@@ -83,6 +83,7 @@ public class Player extends MovingImage {
 		if (delay <= 0) {
 			if (onASurface) {
 				yVelocity = -jumpStrength;
+				stamina -= 25;
 				delay = 200000000;
 			}else if (stamina >= 25) {
 				yVelocity = -jumpStrength;
