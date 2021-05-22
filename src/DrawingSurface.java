@@ -184,6 +184,12 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			player.x = map.getCheckpoints().get(player.lastCheck).getCenterX() -Player.PLAYER_WIDTH/2 ;
 			player.y = map.getCheckpoints().get(player.lastCheck).getCenterY() -Player.PLAYER_HEIGHT/2;
 			player.hp = 100;
+			
+			for (int i = 0; i < map.getEnemies().length; i++) {
+				ArrayList<Integer>list = map.getEnemyInfo().get(i);
+				map.spawnEnemy(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), i);
+				list.set(6,list.get(5));
+			}
 		}
 		currTime =  System.nanoTime()  - lastUpdate;
 		lastUpdate = System.nanoTime();
@@ -255,16 +261,17 @@ public class DrawingSurface extends PApplet implements MouseListener{
 	public boolean isPressed(Integer code) {
 		return keys.contains(code);
 	}
-
-	public void checkPointTP(double x, double y) {
-		
-	}
 	
 	public void mouseClicked(MouseEvent e) {
 		for(int i = 0; i < map.getCheckpoints().size(); i++) {
 			if (new Rectangle((int)map.getCheckpoints().get(i).getX()/10 - 5, (int)map.getCheckpoints().get(i).getY()/10 - 5, (int)map.getCheckpoints().get(i).getWidth()/10 + 10, (int)map.getCheckpoints().get(i).getHeight()/10 + 10).contains(e.getX(), e.getY())) {
 				player.x = map.getCheckpoints().get(i).getX();
 				player.y = map.getCheckpoints().get(i).getY();
+				for (int j = 0; j < map.getEnemies().length; j++) {
+					ArrayList<Integer>list = map.getEnemyInfo().get(j);
+					map.spawnEnemy(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), j);
+					list.set(6,list.get(5));
+				}
 				w.changePanel(1);
 				draw();
 		    	

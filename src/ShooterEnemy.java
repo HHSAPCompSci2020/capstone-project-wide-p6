@@ -73,13 +73,15 @@ public class ShooterEnemy extends Enemy{
 			}
 		}
 
+
 		
 		//-------------------Physics---------------------
 		
 		if (stagger >= 0) {
-			yVelocity += gravity*timeElapsed/30000000;
-			if (yVelocity > 3) {
-				yVelocity = 3;
+			yVelocity += gravity*timeElapsed/20000000;
+			if (yVelocity > 1) {
+				yVelocity = 1;
+				
 			}
 		} else {
 			yVelocity += gravity*timeElapsed/20000000; // GRAVITY
@@ -122,9 +124,6 @@ public class ShooterEnemy extends Enemy{
 			}
 		}
 
-		if (Math.abs(yVelocity) < .5)
-			yVelocity = 0;
-
 		// ***********X AXIS***********
 
 		
@@ -164,6 +163,8 @@ public class ShooterEnemy extends Enemy{
 
 		if (Math.abs(xVelocity) < .5)
 			xVelocity = 0;
+		
+		
 
 		moveToLocation(xCoord2,yCoord2);
 		

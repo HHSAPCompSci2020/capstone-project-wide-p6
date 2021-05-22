@@ -66,9 +66,9 @@ public class BasicEnemy extends Enemy{
 		//-------------------Physics---------------------
 		
 		if (stagger >= 0) {
-			yVelocity += gravity*timeElapsed/30000000;
-			if (yVelocity > 3) {
-				yVelocity = 3;
+			yVelocity += gravity*timeElapsed/20000000;
+			if (yVelocity > 1) {
+				yVelocity = 1;
 			}
 		} else {
 			yVelocity += gravity*timeElapsed/20000000; // GRAVITY
@@ -111,8 +111,6 @@ public class BasicEnemy extends Enemy{
 			}
 		}
 
-		if (Math.abs(yVelocity) < .5)
-			yVelocity = 0;
 
 		// ***********X AXIS***********
 
