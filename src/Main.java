@@ -7,6 +7,9 @@ import java.awt.*;
 /*
  * the Main class represents the class that will run the game.
  */
+import java.awt.event.KeyEvent;
+
+	
 public class Main extends JFrame {
 
 	private JPanel cardPanel;
@@ -14,6 +17,14 @@ public class Main extends JFrame {
 	private MainMenu panel1;    
 	private DrawingSurface panel2;
 	private PauseMenu panel3;
+	
+	public int jump = KeyEvent.VK_W;
+	public int left = KeyEvent.VK_A;
+	public int right = KeyEvent.VK_D;
+	public int dive = KeyEvent.VK_S;
+	public int light = KeyEvent.VK_Q;
+	public int heavy = KeyEvent.VK_E;
+	public int dash = KeyEvent.VK_SPACE;
 	
 	public Main(String title) {
 		super(title);

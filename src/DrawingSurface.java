@@ -2,7 +2,6 @@
  * The class used for essentially all the graphics of the game.
  */
 
-import java.awt.Event;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.*;
@@ -161,19 +160,19 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		
 		// modifying stuff
 
-		if (isPressed(KeyEvent.VK_A))
+		if (isPressed(w.left))
 			player.walk(-1);
-		if (isPressed(KeyEvent.VK_D))
+		if (isPressed(w.right))
 			player.walk(1);
-		if (isPressed(KeyEvent.VK_W))
+		if (isPressed(w.jump))
 			player.jump();
-		if (isPressed(KeyEvent.VK_SPACE))
+		if (isPressed(w.dash))
 			player.dash();
-		if (isPressed(KeyEvent.VK_S))
+		if (isPressed(w.dive))
 			player.dive();
-		if (isPressed(KeyEvent.VK_Q))
+		if (isPressed(w.light))
 			player.lightAttack(map);
-		if (isPressed(KeyEvent.VK_E))
+		if (isPressed(w.heavy))
 			player.heavyAttack(map);
 	
 		
@@ -202,6 +201,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 	public void keyPressed() {
 		keys.add(keyCode);
 		if (key == 'p') {
+			pause();
 			pause();
 		}
 	}
@@ -277,7 +277,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		    	
 			}
 		}
-		System.out.println("clicked " +e.getX() + ", " + e.getY() );
+		
 		
 	}
 }
