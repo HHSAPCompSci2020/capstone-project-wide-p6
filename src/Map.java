@@ -85,6 +85,10 @@ public class Map {
 		obstacles.add(new Rectangle(4100,400,50,50));
 		obstacles.add(new Rectangle(4800,400,50,50));
 		obstacles.add(new Rectangle(4950,150,100,1400));
+		obstacles.add(new Rectangle(4950,150,100,1400));
+		obstacles.add(new Rectangle(4950,150,100,1400));
+		obstacles.add(new Rectangle(4700,3050,50,50));
+		obstacles.add(new Rectangle(4950,3050,50,50));
 
 
 
@@ -93,13 +97,16 @@ public class Map {
 		checkpoints.add(new Rectangle(650,1550,50,50));
 		checkpoints.add(new Rectangle(350,300,50,50));
 		checkpoints.add(new Rectangle(3500,100,50,50));
-		checkpoints.add(new Rectangle(4950,100,50,50));
+		checkpoints.add(new Rectangle(4900,100,50,50));
+		checkpoints.add(new Rectangle(4150,2250,50,50));
+		checkpoints.add(new Rectangle(3700,1950,50,50));
+
 
 
 
 //		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 450, 350, 50, 50, 45000, 45000))); // enemy type, x, y, width, height, respawn time, respawn time left in thousandths of a second
 //		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 750, 200, 50, 50, 45000, 45000)));
-//		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 400, 150, 50, 50, 45000, 45000)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 4850, 3050, 50, 50, 0, 0)));
 		
 		
 		
