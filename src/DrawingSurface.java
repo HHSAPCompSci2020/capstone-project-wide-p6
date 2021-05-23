@@ -90,7 +90,9 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			if (s instanceof Rectangle) {
 				fill(100);
 				Rectangle r = (Rectangle)s;
-				rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
+				if(Math.sqrt((player.x - r.x)*(player.x - r.x) + (player.y - r.y)*(player.y - r.y)) < Math.sqrt((r.width)*(r.width) + (r.height)*(r.height)) +  Math.sqrt((w.getWidth())*(w.getWidth()) + (w.getHeight())*(w.getHeight())) + 1000) {
+					rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
+				}
 			}
 		}
 		
@@ -113,7 +115,9 @@ public class DrawingSurface extends PApplet implements MouseListener{
 				} else {
 					fill(50);
 				}
-				rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
+				if(Math.sqrt((player.x - r.x)*(player.x - r.x) + (player.y - r.y)*(player.y - r.y)) < Math.sqrt((r.width)*(r.width) + (r.height)*(r.height)) +  Math.sqrt((w.getWidth())*(w.getWidth()) + (w.getHeight())*(w.getHeight())) + 1000) {
+					rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
+				}
 			}
 		}
 		
@@ -138,8 +142,10 @@ public class DrawingSurface extends PApplet implements MouseListener{
 					list.set(6,list.get(5));
 				}
 			} else {
-				e.draw(this, camx, camy);
-				e.act(map, currTime, player);
+				if(Math.sqrt((player.x - e.x)*(player.x - e.x) + (player.y - e.y)*(player.y - e.y)) < Math.sqrt((w.getWidth())*(w.getWidth()) + (w.getHeight())*(w.getHeight()) + 500)) {
+					e.draw(this, camx, camy);
+					e.act(map, currTime, player);
+				}
 			}
 		}
 
@@ -211,11 +217,12 @@ public class DrawingSurface extends PApplet implements MouseListener{
 	}
 	
 	public void pause() {
-		
+		fill(237);
+		rect(-1, -1, w.getWidth()+1, w.getHeight()+1);
 		double scale = (double)1.0/11;
 		for (Shape s : map.getObstacles()) {
 			if (s instanceof Rectangle) {
-				fill(100);
+				fill(150);
 				Rectangle r = (Rectangle)s;
 				rect((int)(r.x*scale),(int)(r.y * scale),(int)(r.width * scale),(int)(r.height* scale));
 			}
@@ -226,7 +233,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			if (s instanceof Rectangle) {
 				Rectangle r = (Rectangle)s;
 				if (player.lastCheck == map.getCheckpoints().indexOf(s)) {
-					fill(250);
+					fill(255);
 				} else {
 					fill(50);
 				}
@@ -235,6 +242,8 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		}
 		fill(0, 255, 0);
 		rect((int)(player.x*scale),(int)(player.y * scale),(int)(player.width * scale),(int)(player.height* scale));
+		
+		
 		noLoop();
     	keys.clear();
     	w.changePanel(2);

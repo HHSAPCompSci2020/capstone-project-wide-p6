@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 import processing.core.PImage;
@@ -203,6 +204,20 @@ public class FlyingShooter extends Enemy{
 			}
 		}
 		
+		if ((new Ellipse2D.Double((int)(x), (int)(y), (int)super.width, (int)super.height)).intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.PLAYER_WIDTH, (int)p.PLAYER_HEIGHT))) {
+			
+			if(onASurface) {
+				if(stagger <= 0) {
+					p.hit(damage);
+				}
+			} else {
+				if(stagger <= -50000000) {
+					p.hit(damage);
+				}
+			}
+			
+			
+		}
 		
 		if(hp <=0) {
 			map.getEnemies()[index] = null;
