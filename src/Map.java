@@ -93,6 +93,8 @@ public class Map {
 		checkpoints.add(new Rectangle(650,1550,50,50));
 		checkpoints.add(new Rectangle(350,300,50,50));
 		checkpoints.add(new Rectangle(3500,100,50,50));
+		checkpoints.add(new Rectangle(4950,100,50,50));
+
 
 
 //		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 450, 350, 50, 50, 45000, 45000))); // enemy type, x, y, width, height, respawn time, respawn time left in thousandths of a second
