@@ -62,7 +62,7 @@ public class MovingImage extends Rectangle2D.Double {
 	 * @param camy where the camera will move
 	 */
 	public void draw(PApplet g, double camx, double camy) {
-		g.image(image,(int)(x - camx),(int)(y - camy),(int)width,(int)height);
+		g.image(image,(int)(x - camx)/2,(int)(y - camy)/2,(int)width/2,(int)height/2);
 	}
 	/**
 	 * A method to change the moving image's image.

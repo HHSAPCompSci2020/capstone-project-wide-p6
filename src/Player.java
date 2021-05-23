@@ -203,7 +203,7 @@ public class Player extends MovingImage {
 		if (invincible <= 0) {
 			invincible = 500000000;
 			hp -= damage;
-			stamina = 0;
+			//stamina = 0;
 		}
 	}
 	/*

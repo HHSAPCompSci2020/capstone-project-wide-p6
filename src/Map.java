@@ -145,7 +145,6 @@ public class Map {
 		obstacles.add(new Rectangle(5100,4600,100,100));
 
 		
-		
 		obstacles.add(new Rectangle(0,7000,1600, 100));
 		obstacles.add(new Rectangle(1600,7000,100,1100));
 		obstacles.add(new Rectangle(100,8100,1600,100));
