@@ -14,6 +14,7 @@ public class Map {
 
 	private ArrayList<Shape> obstacles;
 	private ArrayList<Rectangle> checkpoints;
+	private ArrayList<Rectangle> lava;
 	private ArrayList<Hitbox> hitboxes; //only really applies to player, enemy projectiles go into enemies category.
 	//hitboxes are formatted as: x, y, width, height, damage, frames on-screen, launch xvel, launch yvel
 	private Enemy[] enemies;
@@ -34,7 +35,7 @@ public class Map {
 		projectiles = new ArrayList<Projectile>();
 		enemyInfo = new ArrayList<ArrayList<Integer>>();
 		hitboxes = new ArrayList<Hitbox>();
-		
+		lava = new ArrayList<Rectangle>();
 		
 		
 		
@@ -153,9 +154,12 @@ public class Map {
 		checkpoints.add(new Rectangle(3600,3400,50,50));
 		checkpoints.add(new Rectangle(5150,5300,50,50));
 		checkpoints.add(new Rectangle(4000,5400,50,50));
-		checkpoints.add(new Rectangle(4350,6000,50,50));
 
 
+		lava.add(new Rectangle(50,6001,4350,50));
+		lava.add(new Rectangle(300,2750,400,50));
+		lava.add(new Rectangle(1100,1150,150,50));
+		lava.add(new Rectangle(5050,300,350,300));
 
 
 
@@ -231,6 +235,10 @@ public class Map {
 	
 	public ArrayList<Projectile> getProjectiles(){
 		return projectiles;
+	}
+	
+	public ArrayList<Rectangle> getLava(){
+		return lava;
 	}
 	
 }

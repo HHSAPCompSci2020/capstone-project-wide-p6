@@ -31,12 +31,19 @@ public class DrawingSurface extends PApplet implements MouseListener{
 	private Player player;
 	
 	private ArrayList<Integer> keys;
+	private Boolean[] checksPassed;
 
 	public DrawingSurface(Main w) {
 		super();
 		keys = new ArrayList<Integer>();
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
 		map = new Map();
+		checksPassed = new Boolean[map.getCheckpoints().size()];
+		
+		for (int i = 0; i < checksPassed.length; i++) {
+			checksPassed[i] = false;
+		}
+		checksPassed[0] = true;
 		player = new Player(new ArrayList<PImage>(Arrays.asList(loadImage("mario.png"), loadImage("marioflip.png"))), (int)(map.getCheckpoints().get(0).getCenterX() -Player.PLAYER_WIDTH/2) ,(int)(map.getCheckpoints().get(0).getCenterY() -Player.PLAYER_HEIGHT/2));
 		camx = player.x;
 		camy = player.y;
@@ -98,6 +105,15 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			}
 		}
 		
+		for (Rectangle r : map.getLava()) {
+			noStroke();
+			fill(250, 0, 0);
+			if(Math.sqrt((player.x - r.x)*(player.x - r.x) + (player.y - r.y)*(player.y - r.y)) < Math.sqrt((r.width)*(r.width) + (r.height)*(r.height)) +  Math.sqrt((w.getWidth())*(w.getWidth()) + (w.getHeight())*(w.getHeight())) + 1000) {
+				rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
+			}
+			stroke(0);
+		}
+		
 		for (int i = 0 ; i < map.getProjectiles().size(); i++) {
 			Projectile p = map.getProjectiles().get(i);
 			p.act(map, currTime, player);
@@ -113,6 +129,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			if (s instanceof Rectangle) {
 				Rectangle r = (Rectangle)s;
 				if (player.lastCheck == map.getCheckpoints().indexOf(s)) {
+					checksPassed[map.getCheckpoints().indexOf(s)] = true;
 					fill(250);
 				} else {
 					fill(50);
@@ -230,6 +247,11 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			}
 		}
 		
+		for (Rectangle r : map.getLava()) {
+			noStroke();
+			fill(250, 0, 0);
+			rect((int)(r.x*scale),(int)(r.y*scale),(int)(r.width*scale),(int)(r.height*scale));
+		}
 		
 		for (Rectangle s : map.getCheckpoints()) {
 			if (s instanceof Rectangle) {
@@ -275,17 +297,18 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		}
 		if (onCheck) {
 			for(int i = 0; i < map.getCheckpoints().size(); i++) {
-				if (new Rectangle((int)map.getCheckpoints().get(i).getX()/11 - 5, (int)map.getCheckpoints().get(i).getY()/11 - 5, (int)map.getCheckpoints().get(i).getWidth()/11 + 10, (int)map.getCheckpoints().get(i).getHeight()/11 + 10).contains(e.getX(), e.getY())) {
-					player.x = map.getCheckpoints().get(i).getX();
-					player.y = map.getCheckpoints().get(i).getY();
-					for (int j = 0; j < map.getEnemies().length; j++) {
-						ArrayList<Integer>list = map.getEnemyInfo().get(j);
-						map.spawnEnemy(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), j);
-						list.set(6,list.get(5));
+				if (checksPassed[i]) {
+					if (new Rectangle((int)map.getCheckpoints().get(i).getX()/11 - 5, (int)map.getCheckpoints().get(i).getY()/11 - 5, (int)map.getCheckpoints().get(i).getWidth()/11 + 10, (int)map.getCheckpoints().get(i).getHeight()/11 + 10).contains(e.getX(), e.getY())) {
+						player.x = map.getCheckpoints().get(i).getX();
+						player.y = map.getCheckpoints().get(i).getY();
+						for (int j = 0; j < map.getEnemies().length; j++) {
+							ArrayList<Integer>list = map.getEnemyInfo().get(j);
+							map.spawnEnemy(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), j);
+							list.set(6,list.get(5));
+						}
+						w.changePanel(1);
+						draw();
 					}
-					w.changePanel(1);
-					draw();
-			    	
 				}
 			}
 		}

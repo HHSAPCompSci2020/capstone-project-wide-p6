@@ -393,6 +393,11 @@ public class Player extends MovingImage {
 				lastCheck = i;
 			}
 		}
+		for(int i = 0; i < map.getLava().size(); i++) {
+			if (map.getLava().get(i).intersects(strechX) || map.getLava().get(i).intersects(strechY)) {
+				hit(15);
+			}
+		}
 
 	}
 
