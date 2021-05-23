@@ -7,7 +7,7 @@ import java.awt.geom.Rectangle2D;
 
 import processing.core.PImage;
 
-public class BallBoss extends Enemy{
+public class BallBoss extends MovingImage{
 
 	private double xVelocity, yVelocity;
 	private boolean onASurface;
@@ -25,9 +25,9 @@ public class BallBoss extends Enemy{
 	private ArrayList<Drone> drones;
 	private Drone[] mains ;
 	
-	public BallBoss(ArrayList<PImage> img, int x, int y, int w, int h, int index) {
+	public BallBoss(ArrayList<PImage> img, int x, int y, int w, int h) {
 		
-		super(img, x, y, w, h, index);
+		super(img.get(0), x, y, w, h);
 		xVelocity = 0;
 		yVelocity = 0;
 		gravity = 0.5;

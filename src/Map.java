@@ -293,7 +293,7 @@ public class Map {
 
 	public void shoot(int type, int x, int y, int w, int h, double vx, double vy, double dist, int dam) {
 		if (type == 0) { 
-			projectiles.add(new Projectile((new PApplet()).loadImage("hitboxtemp.png"), x, y, w, h, vx, vy, dist, dam));
+			projectiles.add(new Projectile((new PApplet()).loadImage("imgs/hitboxtemp.png"), x, y, w, h, vx, vy, dist, dam));
 		}
 	}
 	
