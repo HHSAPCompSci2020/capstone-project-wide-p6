@@ -55,6 +55,22 @@ public class PauseMenu extends JPanel implements KeyListener,ActionListener{
 			w.left = e.getKeyCode();
 			leftt.setText(KeyEvent.getKeyText(e.getKeyCode()));;
 			action = "";
+		} else if (action.equals("setRight")){
+			w.right = e.getKeyCode();
+			rightt.setText(KeyEvent.getKeyText(e.getKeyCode()));;
+			action = "";
+		} else if (action.equals("setDive")){
+			w.dive = e.getKeyCode();
+			divet.setText(KeyEvent.getKeyText(e.getKeyCode()));;
+			action = "";
+		} else if (action.equals("setLight")){
+			w.light = e.getKeyCode();
+			lightt.setText(KeyEvent.getKeyText(e.getKeyCode()));;
+			action = "";
+		} else if (action.equals("setHeavy")){
+			w.heavy = e.getKeyCode();
+			heavyt.setText(KeyEvent.getKeyText(e.getKeyCode()));;
+			action = "";
 		} 
 		
 	}
