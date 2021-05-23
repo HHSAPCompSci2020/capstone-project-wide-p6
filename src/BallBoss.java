@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 import processing.core.PImage;
@@ -18,9 +19,11 @@ public class BallBoss extends Enemy{
 	private int index;
 	private int phase = 1;
 	private int shootDelay = 2000000;
+	private int attackDelay = 2000000;
 	private ArrayList<PImage> images;
 
 	//private ArrayList<Drone> drones;
+	//private Drone[] mains ;
 	
 	public BallBoss(ArrayList<PImage> img, int x, int y, int w, int h, int index) {
 		
@@ -28,7 +31,7 @@ public class BallBoss extends Enemy{
 		xVelocity = 0;
 		yVelocity = 0;
 		gravity = 0.5;
-		hp = 1500;
+		hp = 1000;
 		speed = 1.5;
 		antiMulti = 5;
 		images = img;
@@ -59,89 +62,6 @@ public class BallBoss extends Enemy{
 			
 			//-------------------Physics---------------------
 			
-			yVelocity *= 0.95;
-			
-			double yCoord2 = yCoord + yVelocity*timeElapsed/17000000;
-	
-			Rectangle2D.Double strechY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoord2),width,height+Math.abs(yVelocity*timeElapsed/17000000));
-			
-			onASurface = false;
-			
-			
-			if (yVelocity > 0) {
-				Shape standingSurface = null;
-				for (Shape s : obstacles) {
-					if (s.intersects(strechY)) {
-						onASurface = true;
-						standingSurface = s;
-						yVelocity = 0;
-					}
-				}
-				if (standingSurface != null) {
-					Rectangle r = standingSurface.getBounds();
-					yCoord2 = r.getY()-height;
-				}
-			} else if (yVelocity < 0) {
-				Shape headSurface = null;
-				for (Shape s : obstacles) {
-					if (s.intersects(strechY)) {
-						headSurface = s;
-						yVelocity = 0;
-					}
-				}
-				if (headSurface != null) {
-					Rectangle r = headSurface.getBounds();
-					yCoord2 = r.getY()+r.getHeight();
-				}
-			}
-	
-			if (Math.abs(yVelocity) < .5)
-				yVelocity = 0;
-	
-			// ***********X AXIS***********
-	
-			
-			xVelocity *= 0.95;
-	
-			
-			double xCoord2 = xCoord + xVelocity*timeElapsed/17000000;
-	
-			Rectangle2D.Double strechX = new Rectangle2D.Double(Math.min(xCoord,xCoord2),yCoord2,width+Math.abs(xVelocity*timeElapsed/17000000),height);
-	
-			if (xVelocity > 0) {
-				Shape rightSurface = null;
-				for (Shape s : obstacles) {
-					if (s.intersects(strechX)) {
-						rightSurface = s;
-						xVelocity = 0;
-					}
-				}
-				if (rightSurface != null) {
-					Rectangle r = rightSurface.getBounds();
-					xCoord2 = r.getX()-width;
-				}
-			} else if (xVelocity < 0) {
-				Shape leftSurface = null;
-				for (Shape s : obstacles) {
-					if (s.intersects(strechX)) {
-						leftSurface = s;
-						xVelocity = 0;
-					}
-				}
-				if (leftSurface != null) {
-					Rectangle r = leftSurface.getBounds();
-					xCoord2 = r.getX()+r.getWidth();
-				}
-			}
-	
-	
-			if (Math.abs(xVelocity) < .5)
-				xVelocity = 0;
-			if (Math.abs(yVelocity) < .5)
-				yVelocity = 0;
-			moveToLocation(xCoord2,yCoord2);
-			
-			
 			
 			
 			// -------------------- collision checking ---------------------
@@ -151,7 +71,7 @@ public class BallBoss extends Enemy{
 			
 			for(int i = 0; i < map.getHitboxes().size(); i++) {
 				Hitbox list =  map.getHitboxes().get(i);
-				if ((new Rectangle((int)list.kx - 7,(int)list.y - 7,list.w + 15,list.h + 15)).intersects(strechX) || (new Rectangle((int)list.x-7,(int)list.y-7,list.w + 15,list.h + 15)).intersects(strechY)) {
+				if (new Ellipse2D.Double(x, y, width, height).intersects((int)list.x - 7,(int)list.y - 7,list.w + 15,list.h + 15)) {
 					if ((antiMulti <= 0)) {
 						antiMulti = 6;
 						
@@ -179,16 +99,14 @@ public class BallBoss extends Enemy{
 			
 			
 			if(hp <=0) {
-				map.getEnemies()[index] = null;
+				phase = 1;
 			}
 			
-			ArrayList<Integer> stuff = map.getEnemyInfo().get(index);
-			if (Math.sqrt((stuff.get(1) - x)* (stuff.get(1) - x) + (stuff.get(2) -y) * (stuff.get(2) - y)) >= 3000) {
-				map.getEnemies()[index] = null;
-			}
 		
-		}else if (phase <= 17){
+		} else if (phase <= 16){
 			hp = 1500;
+			super.setImage(images.get((int)phase/4));
+			phase++;
 		} else {
 			
 		}

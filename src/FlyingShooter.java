@@ -171,7 +171,7 @@ public class FlyingShooter extends Enemy{
 		
 		for(int i = 0; i < map.getHitboxes().size(); i++) {
 			Hitbox list =  map.getHitboxes().get(i);
-			if ((new Rectangle((int)list.kx - 7,(int)list.y - 7,list.w + 15,list.h + 15)).intersects(strechX) || (new Rectangle((int)list.x-7,(int)list.y-7,list.w + 15,list.h + 15)).intersects(strechY)) {
+			if ((new Rectangle((int)list.x - 7,(int)list.y - 7,list.w + 15,list.h + 15)).intersects(strechX) || (new Rectangle((int)list.x-7,(int)list.y-7,list.w + 15,list.h + 15)).intersects(strechY)) {
 				if ((antiMulti <= 0)) {
 					antiMulti = 6;
 					
