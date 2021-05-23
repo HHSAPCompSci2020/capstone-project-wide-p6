@@ -211,35 +211,30 @@ public class DrawingSurface extends PApplet implements MouseListener{
 	}
 	
 	public void pause() {
-		boolean onCheck = false;
-		for(int i = 0; i < map.getCheckpoints().size(); i++) {
-			if (map.getCheckpoints().get(i).intersects(new Rectangle2D.Double((int)player.x, (int)player.y , player.PLAYER_WIDTH, player.PLAYER_HEIGHT))) {
-				onCheck = true;
+		
+		double scale = (double)1.0/11;
+		for (Shape s : map.getObstacles()) {
+			if (s instanceof Rectangle) {
+				fill(100);
+				Rectangle r = (Rectangle)s;
+				rect((int)(r.x*scale),(int)(r.y * scale),(int)(r.width * scale),(int)(r.height* scale));
 			}
 		}
-		if (onCheck) {
-			double scale = 0.1;
-			for (Shape s : map.getObstacles()) {
-				if (s instanceof Rectangle) {
-					fill(100);
-					Rectangle r = (Rectangle)s;
-					rect((int)(r.x*scale),(int)(r.y * scale),(int)(r.width * scale),(int)(r.height* scale));
+		
+		
+		for (Rectangle s : map.getCheckpoints()) {
+			if (s instanceof Rectangle) {
+				Rectangle r = (Rectangle)s;
+				if (player.lastCheck == map.getCheckpoints().indexOf(s)) {
+					fill(250);
+				} else {
+					fill(50);
 				}
-			}
-			
-			
-			for (Rectangle s : map.getCheckpoints()) {
-				if (s instanceof Rectangle) {
-					Rectangle r = (Rectangle)s;
-					if (player.lastCheck == map.getCheckpoints().indexOf(s)) {
-						fill(250);
-					} else {
-						fill(50);
-					}
-					rect((int)(r.x*scale),(int)(r.y * scale),(int)(r.width * scale),(int)(r.height* scale));
-				}
+				rect((int)(r.x*scale),(int)(r.y * scale),(int)(r.width * scale),(int)(r.height* scale));
 			}
 		}
+		fill(0, 255, 0);
+		rect((int)(player.x*scale),(int)(player.y * scale),(int)(player.width * scale),(int)(player.height* scale));
 		noLoop();
     	keys.clear();
     	w.changePanel(2);
@@ -261,18 +256,26 @@ public class DrawingSurface extends PApplet implements MouseListener{
 	}
 	
 	public void mouseClicked(MouseEvent e) {
+		boolean onCheck = false;
 		for(int i = 0; i < map.getCheckpoints().size(); i++) {
-			if (new Rectangle((int)map.getCheckpoints().get(i).getX()/10 - 5, (int)map.getCheckpoints().get(i).getY()/10 - 5, (int)map.getCheckpoints().get(i).getWidth()/10 + 10, (int)map.getCheckpoints().get(i).getHeight()/10 + 10).contains(e.getX(), e.getY())) {
-				player.x = map.getCheckpoints().get(i).getX();
-				player.y = map.getCheckpoints().get(i).getY();
-				for (int j = 0; j < map.getEnemies().length; j++) {
-					ArrayList<Integer>list = map.getEnemyInfo().get(j);
-					map.spawnEnemy(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), j);
-					list.set(6,list.get(5));
+			if (map.getCheckpoints().get(i).intersects(new Rectangle2D.Double((int)player.x, (int)player.y , player.PLAYER_WIDTH, player.PLAYER_HEIGHT))) {
+				onCheck = true;
+			}
+		}
+		if (onCheck) {
+			for(int i = 0; i < map.getCheckpoints().size(); i++) {
+				if (new Rectangle((int)map.getCheckpoints().get(i).getX()/11 - 5, (int)map.getCheckpoints().get(i).getY()/11 - 5, (int)map.getCheckpoints().get(i).getWidth()/11 + 10, (int)map.getCheckpoints().get(i).getHeight()/11 + 10).contains(e.getX(), e.getY())) {
+					player.x = map.getCheckpoints().get(i).getX();
+					player.y = map.getCheckpoints().get(i).getY();
+					for (int j = 0; j < map.getEnemies().length; j++) {
+						ArrayList<Integer>list = map.getEnemyInfo().get(j);
+						map.spawnEnemy(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), j);
+						list.set(6,list.get(5));
+					}
+					w.changePanel(1);
+					draw();
+			    	
 				}
-				w.changePanel(1);
-				draw();
-		    	
 			}
 		}
 		

@@ -96,39 +96,39 @@ public class PauseMenu extends JPanel implements KeyListener,ActionListener{
 		setSize(w.getWidth(), w.getHeight());
 		
 		JLabel text = new JLabel("Press P to unpause");
-		text.setBounds(w.getWidth()/2 - 75, 0, 125, 50);
+		text.setBounds(600, 0, 125, 50);
         add(text);
         
         jumpt = new JLabel("W");
-  		jumpt.setBounds(w.getWidth()/2, 100, 60, 30);
+  		jumpt.setBounds(675, 100, 60, 30);
   		add(jumpt);
   		
   		leftt = new JLabel("A");
-  		leftt.setBounds(w.getWidth()/2, 150, 60, 30);
+  		leftt.setBounds(675, 150, 60, 30);
   		add(leftt);
   		
   		rightt = new JLabel("D");
-  		rightt.setBounds(w.getWidth()/2, 200, 60, 30);
+  		rightt.setBounds(675, 200, 60, 30);
   		add(rightt);
   		
   		divet = new JLabel("S");
-  		divet.setBounds(w.getWidth()/2, 250, 60, 30);
+  		divet.setBounds(675, 250, 60, 30);
   		add(divet);
   		
   		dasht = new JLabel("" + KeyEvent.getKeyText(KeyEvent.VK_SPACE));
-  		dasht.setBounds(w.getWidth()/2, 300, 60, 30);
+  		dasht.setBounds(675, 300, 60, 30);
   		add(dasht);
   		
   		lightt = new JLabel("Q");
-  		lightt.setBounds(w.getWidth()/2, 350, 60, 30);
+  		lightt.setBounds(675, 350, 60, 30);
   		add(lightt);
   		
   		heavyt = new JLabel("E");
-  		heavyt.setBounds(w.getWidth()/2, 400, 60, 30);
+  		heavyt.setBounds(675, 400, 60, 30);
   		add(heavyt);
               
         jump = new JButton("Jump");
-        jump.setBounds(w.getWidth()/2 - 100, 100, 75, 30);
+        jump.setBounds(575, 100, 75, 30);
         jump.setActionCommand("setJump");
         jump.addActionListener(this);
         add(jump);
@@ -136,40 +136,40 @@ public class PauseMenu extends JPanel implements KeyListener,ActionListener{
       
         
         left = new JButton("Left");
-        left.setBounds(w.getWidth()/2 - 100, 150, 75, 30);
+        left.setBounds(575, 150, 75, 30);
         left.setActionCommand("setLeft");
         left.addActionListener(this);
         add(left);
         
         
         right = new JButton("Right");
-        right.setBounds(w.getWidth()/2 - 100, 200, 75, 30);
+        right.setBounds(575, 200, 75, 30);
         right.setActionCommand("setRight");
         right.addActionListener(this);
         add(right);
         
         
         dive = new JButton("Dive");
-        dive.setBounds(w.getWidth()/2 - 100, 250, 75, 30);
+        dive.setBounds(575, 250, 75, 30);
         dive.setActionCommand("setDive");
         dive.addActionListener(this);
         add(dive);
         
         dash = new JButton("Dash");
-        dash.setBounds(w.getWidth()/2 - 100, 300, 75, 30);
+        dash.setBounds(575, 300, 75, 30);
         dash.setActionCommand("setDash");
         dash.addActionListener(this);
         add(dash);
         
         light = new JButton("Light Attack");
-        light.setBounds(w.getWidth()/2 - 150, 350, 125, 30);
+        light.setBounds(525, 350, 125, 30);
         light.setActionCommand("setLight");
         light.addActionListener(this);
         add(light);
         
         
         heavy = new JButton("Heavy Attack");
-        heavy.setBounds(w.getWidth()/2 - 150, 400, 125, 30);
+        heavy.setBounds(525, 400, 125, 30);
         heavy.setActionCommand("setHeavy");
         heavy.addActionListener(this);
         add(heavy);
