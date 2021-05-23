@@ -86,7 +86,6 @@ public class PauseMenu extends JPanel implements KeyListener,ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		action = e.getActionCommand();
-		System.out.println(action);
 		requestFocus();
 	} 
 	
