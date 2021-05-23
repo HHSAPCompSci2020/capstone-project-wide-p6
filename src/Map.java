@@ -39,22 +39,58 @@ public class Map {
 		
 		
 		
-		obstacles.add(new Rectangle(200,400,1000,50));
-		obstacles.add(new Rectangle(0,250,100,50));
-		obstacles.add(new Rectangle(700,250,100,50));
-		obstacles.add(new Rectangle(375,300,50,100));
-		obstacles.add(new Rectangle(300,250,200,50));
+		obstacles.add(new Rectangle(50,0,5400,50));
+		obstacles.add(new Rectangle(50,6100,5400,50));
+		obstacles.add(new Rectangle(0,0,50,6150));
+		obstacles.add(new Rectangle(5450,0,25,6150));
+		obstacles.add(new Rectangle(200,2650,200,50));
+		obstacles.add(new Rectangle(600,2600,350,50));
+		obstacles.add(new Rectangle(50,2800,3100,100));
+		obstacles.add(new Rectangle(700,2650,100,150));
+		obstacles.add(new Rectangle(2250,2650,200,50));
+		obstacles.add(new Rectangle(2500,2500,200,50));
+		obstacles.add(new Rectangle(3050,1450,100,1350));
+		obstacles.add(new Rectangle(2850,2350,200,50));
+		obstacles.add(new Rectangle(2250,2050,550,50));
+		obstacles.add(new Rectangle(1650,2050,500,50));
+		obstacles.add(new Rectangle(1100,2000,300,50));
+		obstacles.add(new Rectangle(1000,1900,100,50));
+		obstacles.add(new Rectangle(900,1800,100,50));
+		obstacles.add(new Rectangle(800,1700,100,50));
+		obstacles.add(new Rectangle(650,1600,150,50));
+		obstacles.add(new Rectangle(450,1300,100,350));
+		obstacles.add(new Rectangle(100,1600,150,50));
+		obstacles.add(new Rectangle(550,1200,300,100));
+		obstacles.add(new Rectangle(850,1100,250,100));
+		obstacles.add(new Rectangle(1100,1200,750,100));
+		obstacles.add(new Rectangle(1850,1050,100,150));
+		obstacles.add(new Rectangle(1200,950,1100,100));
+		obstacles.add(new Rectangle(2300,650,100,300));
+		obstacles.add(new Rectangle(2400,650,200,100));
+		obstacles.add(new Rectangle(2650,500,200,100));
+		obstacles.add(new Rectangle(2400,950,100,100));
+		obstacles.add(new Rectangle(2500,850,600,100));
+		obstacles.add(new Rectangle(3150,1550,1900,100));
+		obstacles.add(new Rectangle(3150,1350,200,100));
+		obstacles.add(new Rectangle(3450,250,100,1300));
+		obstacles.add(new Rectangle(600,150,2950,100));
+		obstacles.add(new Rectangle(350,350,150,50));
+		obstacles.add(new Rectangle(500,400,2050,100));
+		obstacles.add(new Rectangle(3550,750,50,50));
+		obstacles.add(new Rectangle(3550,1100,50,50));
+		obstacles.add(new Rectangle(500,400,50,50));
+		obstacles.add(new Rectangle(500,400,50,50));
+		obstacles.add(new Rectangle(500,400,50,50));
+
+
+
 		
+		checkpoints.add(new Rectangle(250,2600,50,50));
+//		checkpoints.add(new Rectangle(700,200,50,50));
 		
-		
-		
-		
-		checkpoints.add(new Rectangle(0,200,50,50));
-		checkpoints.add(new Rectangle(700,200,50,50));
-		
-		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 450, 350, 50, 50, 45000, 45000))); // enemy type, x, y, width, height, respawn time, respawn time left in thousandths of a second
-		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 750, 200, 50, 50, 45000, 45000)));
-		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 400, 150, 50, 50, 45000, 45000)));
+//		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 450, 350, 50, 50, 45000, 45000))); // enemy type, x, y, width, height, respawn time, respawn time left in thousandths of a second
+//		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 750, 200, 50, 50, 45000, 45000)));
+//		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 400, 150, 50, 50, 45000, 45000)));
 		
 		
 		
