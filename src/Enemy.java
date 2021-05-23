@@ -8,17 +8,12 @@ import processing.core.PImage;
 
 public class Enemy extends MovingImage{
 
-	private double xVelocity, yVelocity;
-	private double hp;
 	private int index;
 	private ArrayList<PImage> images;
 
 	public Enemy(ArrayList<PImage> img, int x, int y, int w, int h, int index) {
 		
 		super(img.get(0), x, y, w, h);
-		xVelocity = 0;
-		yVelocity = 0;
-		hp = 10000;
 		images = img;
 		this.index = index;
 		// TODO Auto-generated constructor stub
