@@ -3,6 +3,9 @@
  */
 
 import javax.swing.*;
+
+import jay.jaysound.JayLayer;
+
 import java.awt.*;
 /*
  * the Main class represents the class that will run the game.
@@ -12,6 +15,8 @@ import java.awt.event.KeyEvent;
 	
 public class Main extends JFrame {
 
+	public static JayLayer jay = new JayLayer(true);
+	
 	private JPanel cardPanel;
 	
 	private MainMenu panel1;    
