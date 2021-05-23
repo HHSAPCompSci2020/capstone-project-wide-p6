@@ -142,6 +142,9 @@ public class Map {
 		obstacles.add(new Rectangle(3150,2500,50,50));
 		obstacles.add(new Rectangle(3250,2250,50,50));
 
+		obstacles.add(new Rectangle(5100,4600,100,100));
+
+		
 
 
 		
@@ -154,6 +157,9 @@ public class Map {
 		checkpoints.add(new Rectangle(3600,3400,50,50));
 		checkpoints.add(new Rectangle(5150,5300,50,50));
 		checkpoints.add(new Rectangle(4000,5400,50,50));
+		checkpoints.add(new Rectangle(3900,3750,50,50));
+		checkpoints.add(new Rectangle(3950,3750,50,50));
+		checkpoints.add(new Rectangle(5150,4550,50,50));
 
 
 		lava.add(new Rectangle(50,6001,4350,50));
@@ -166,8 +172,63 @@ public class Map {
 //		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 450, 350, 50, 50, 45000, 45000))); // enemy type, x, y, width, height, respawn time, respawn time left in thousandths of a second
 //		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 750, 200, 50, 50, 45000, 45000)));
 		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4850, 3100, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 1300, 2700, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 1400, 2700, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 2450, 2000, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 1950, 2000, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 1600, 1150, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 1650, 1100, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 1750, 1100, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 1450, 1150, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 650, 100, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 750, 100, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 850, 100, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 950, 100, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 1050, 100, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 1150, 100, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 1250, 100, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 1350, 100, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 3900, 3300, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 3950, 3300, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4000, 3300, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4100, 3300, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4050, 3300, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4150, 3300, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4200, 3300, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4250, 3300, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4300, 3300, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4450, 3250, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4550, 3250, 50, 50, 0, 0)));
+
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 4350, 3600, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 4450, 3600, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 4550, 3600, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 4650, 3600, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 4750, 3600, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 4850, 3600, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4050, 3700, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4350, 4000, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4450, 4000, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4150, 3900, 150, 150, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4550, 4000, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4650, 4000, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4750, 4000, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4850, 4000, 500, 500, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4450, 4000, 100, 100, 0, 0)));
 		
 		
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 4450, 4200, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 4650, 4200, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4450, 4400, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4550, 4400, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4750, 4400, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4850, 4400, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4150, 4400, 100, 100, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4250, 4400, 100, 100, 0, 0)));
+
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4650, 4700, 150, 150, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4950, 4700, 150, 150, 0, 0)));
+
 		
 		enemies = new Enemy[enemyInfo.size()];
 		
