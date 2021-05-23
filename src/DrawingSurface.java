@@ -88,11 +88,13 @@ public class DrawingSurface extends PApplet implements MouseListener{
 
 		for (Shape s : map.getObstacles()) {
 			if (s instanceof Rectangle) {
+				noStroke();
 				fill(100);
 				Rectangle r = (Rectangle)s;
 				if(Math.sqrt((player.x - r.x)*(player.x - r.x) + (player.y - r.y)*(player.y - r.y)) < Math.sqrt((r.width)*(r.width) + (r.height)*(r.height)) +  Math.sqrt((w.getWidth())*(w.getWidth()) + (w.getHeight())*(w.getHeight())) + 1000) {
 					rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
 				}
+				stroke(0);
 			}
 		}
 		

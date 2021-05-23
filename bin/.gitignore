@@ -1,6 +1,8 @@
+/BallBoss.class
 /BasicEnemy.class
 /Copy of Final Project UML-2.png
 /DrawingSurface.class
+/Drone.class
 /Enemy.class
 /FlyingShooter.class
 /Hitbox.class
@@ -12,5 +14,3 @@
 /Player.class
 /Projectile.class
 /ShooterEnemy.class
-/BallBoss.class
-/Drone.class
