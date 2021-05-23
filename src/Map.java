@@ -27,8 +27,8 @@ public class Map {
 	/** Map constructor. No parameters because the map will be the same every time. Sets up the entire map.
 	 */
 	public Map() {
-		marioflip = (new PApplet()).loadImage("marioflip.png");
-		goomba = (new PApplet()).loadImage("goomba.png");
+		marioflip = (new PApplet()).loadImage("imgs/marioflip.png");
+		goomba = (new PApplet()).loadImage("imgs/goomba.png");
 		
 		checkpoints = new ArrayList<Rectangle>();
 		obstacles = new ArrayList<Shape>();
@@ -141,10 +141,12 @@ public class Map {
 		obstacles.add(new Rectangle(3250,2750,50,50));
 		obstacles.add(new Rectangle(3150,2500,50,50));
 		obstacles.add(new Rectangle(3250,2250,50,50));
-
 		obstacles.add(new Rectangle(5100,4600,100,100));
-
 		
+		obstacles.add(new Rectangle(0,7000,1600, 100));
+		obstacles.add(new Rectangle(1600,7000,100,1100));
+		obstacles.add(new Rectangle(100,8100,1600,100));
+		obstacles.add(new Rectangle(0,7100,100,1100));
 
 
 		

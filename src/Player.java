@@ -57,7 +57,7 @@ public class Player extends MovingImage {
 		hp = 100;
 		combo = 0;
 		
-		hitboxtemp = (new PApplet()).loadImage("hitboxtemp.png");
+		hitboxtemp = (new PApplet()).loadImage("imgs/hitboxtemp.png");
 	}
 
 	// METHODS
@@ -203,7 +203,7 @@ public class Player extends MovingImage {
 		if (invincible <= 0) {
 			invincible = 500000000;
 			hp -= damage;
-			stamina = 0;
+			//stamina = 0;
 		}
 	}
 	/*
