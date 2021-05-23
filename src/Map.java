@@ -40,7 +40,7 @@ public class Map {
 		
 		
 		obstacles.add(new Rectangle(50,0,5400,50));
-		obstacles.add(new Rectangle(50,6100,5400,50));
+		obstacles.add(new Rectangle(50,6050,5400,100));
 		obstacles.add(new Rectangle(0,0,50,6150));
 		obstacles.add(new Rectangle(5400,0,100,6150));
 		obstacles.add(new Rectangle(200,2650,200,50));
@@ -53,10 +53,7 @@ public class Map {
 		obstacles.add(new Rectangle(2850,2350,200,50));
 		obstacles.add(new Rectangle(2250,2050,550,50));
 		obstacles.add(new Rectangle(1650,2050,500,50));
-		obstacles.add(new Rectangle(1100,2000,300,50));
-		obstacles.add(new Rectangle(1000,1900,100,50));
-		obstacles.add(new Rectangle(900,1800,100,50));
-		obstacles.add(new Rectangle(800,1700,100,50));
+		obstacles.add(new Rectangle(1100,1900,300,50));
 		obstacles.add(new Rectangle(650,1600,150,50));
 		obstacles.add(new Rectangle(450,1300,100,350));
 		obstacles.add(new Rectangle(100,1600,150,50));
@@ -81,8 +78,6 @@ public class Map {
 		obstacles.add(new Rectangle(3550,1250,50,50));
 		obstacles.add(new Rectangle(3550,350,50,50));
 
-		obstacles.add(new Rectangle(3750,250,50,50));
-		obstacles.add(new Rectangle(4100,400,50,50));
 		obstacles.add(new Rectangle(4800,400,50,50));
 		obstacles.add(new Rectangle(4950,150,100,1400));
 		obstacles.add(new Rectangle(4700,3050,50,100));
@@ -94,7 +89,55 @@ public class Map {
 		obstacles.add(new Rectangle(3500,1950,100,3100));
 		obstacles.add(new Rectangle(3150,1950,250,100));
 		
-		obstacles.add(new Rectangle(3300,2550,100,3200));
+		obstacles.add(new Rectangle(3300,2050,100,3200));
+		obstacles.add(new Rectangle(3400,5150,1700,100));
+		obstacles.add(new Rectangle(3300,2050,100,3200));
+		obstacles.add(new Rectangle(3600,3450,100,100));
+		obstacles.add(new Rectangle(3700,3750,100,100));
+		obstacles.add(new Rectangle(3600,4050,100,100));
+		obstacles.add(new Rectangle(3700,4350,100,100));
+		obstacles.add(new Rectangle(3600,4650,100,100));
+		obstacles.add(new Rectangle(3700,4950,100,100));
+
+		obstacles.add(new Rectangle(3800,3350,100,1800));
+		obstacles.add(new Rectangle(3900,3350,1200,100));
+		obstacles.add(new Rectangle(4000,4050,1400,100));
+		obstacles.add(new Rectangle(4000,3750,100,300));
+		obstacles.add(new Rectangle(3900,4500,1200,100));
+		obstacles.add(new Rectangle(4000,4900,1400,100));
+		obstacles.add(new Rectangle(3900,5150,1200,100));
+		obstacles.add(new Rectangle(3900,5150,1200,100));
+
+		obstacles.add(new Rectangle(5100,5350,300,100));
+		obstacles.add(new Rectangle(5000,5450,100,100));
+		obstacles.add(new Rectangle(4900,5550,100,100));
+		obstacles.add(new Rectangle(4800,5650,100,100));
+		obstacles.add(new Rectangle(4700,5750,100,100));
+		obstacles.add(new Rectangle(4600,5850,100,100));
+		obstacles.add(new Rectangle(4400,5950,200,100));
+		obstacles.add(new Rectangle(4300,5750,100,200));
+		obstacles.add(new Rectangle(4200,5650,100,100));
+		obstacles.add(new Rectangle(4100,5550,100,100));
+		obstacles.add(new Rectangle(4000,5450,100,100));
+		obstacles.add(new Rectangle(3300,5450,100,100));
+		obstacles.add(new Rectangle(2900,5350,200,100));
+		obstacles.add(new Rectangle(2550,5150,300,100));
+		obstacles.add(new Rectangle(1200,4850,200,100));
+		obstacles.add(new Rectangle(1650,5000,200,100));
+		obstacles.add(new Rectangle(1700,4650,200,100));
+		obstacles.add(new Rectangle(2150,4600,200,100));
+		obstacles.add(new Rectangle(1400,4400,200,100));
+		obstacles.add(new Rectangle(1100,4200,100,100));
+		obstacles.add(new Rectangle(1300,3900,500,100));
+		obstacles.add(new Rectangle(850,4100,100,100));
+		obstacles.add(new Rectangle(2650,3400,100,100));
+		obstacles.add(new Rectangle(2100,3650,100,100));
+
+		obstacles.add(new Rectangle(3200,3150,100,100));
+		obstacles.add(new Rectangle(3050,3000,100,100));
+		obstacles.add(new Rectangle(3250,2750,50,50));
+		obstacles.add(new Rectangle(3150,2500,50,50));
+		obstacles.add(new Rectangle(3250,2250,50,50));
 
 
 
@@ -105,6 +148,10 @@ public class Map {
 		checkpoints.add(new Rectangle(3500,100,50,50));
 		checkpoints.add(new Rectangle(4950,100,50,50));
 		checkpoints.add(new Rectangle(3500,1900,50,50));
+		checkpoints.add(new Rectangle(3600,3400,50,50));
+		checkpoints.add(new Rectangle(5150,5300,50,50));
+		checkpoints.add(new Rectangle(4000,5400,50,50));
+		checkpoints.add(new Rectangle(4350,6000,50,50));
 
 
 
@@ -112,7 +159,7 @@ public class Map {
 
 //		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 450, 350, 50, 50, 45000, 45000))); // enemy type, x, y, width, height, respawn time, respawn time left in thousandths of a second
 //		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 750, 200, 50, 50, 45000, 45000)));
-		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4850, 3050, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4850, 3100, 50, 50, 0, 0)));
 		
 		
 		
