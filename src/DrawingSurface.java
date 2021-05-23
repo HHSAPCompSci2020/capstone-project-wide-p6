@@ -85,13 +85,10 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		
 		
 		
-		
-		
-		
-		fill(100);
 
 		for (Shape s : map.getObstacles()) {
 			if (s instanceof Rectangle) {
+				fill(100);
 				Rectangle r = (Rectangle)s;
 				rect((int)(r.x - camx),(int)(r.y - camy),r.width,r.height);
 			}
@@ -224,6 +221,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			double scale = 0.1;
 			for (Shape s : map.getObstacles()) {
 				if (s instanceof Rectangle) {
+					fill(100);
 					Rectangle r = (Rectangle)s;
 					rect((int)(r.x*scale),(int)(r.y * scale),(int)(r.width * scale),(int)(r.height* scale));
 				}
