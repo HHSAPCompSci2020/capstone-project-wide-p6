@@ -42,7 +42,7 @@ public class Map {
 		obstacles.add(new Rectangle(50,0,5400,50));
 		obstacles.add(new Rectangle(50,6100,5400,50));
 		obstacles.add(new Rectangle(0,0,50,6150));
-		obstacles.add(new Rectangle(5450,0,25,6150));
+		obstacles.add(new Rectangle(5400,0,100,6150));
 		obstacles.add(new Rectangle(200,2650,200,50));
 		obstacles.add(new Rectangle(600,2600,350,50));
 		obstacles.add(new Rectangle(50,2800,3100,100));
@@ -85,10 +85,16 @@ public class Map {
 		obstacles.add(new Rectangle(4100,400,50,50));
 		obstacles.add(new Rectangle(4800,400,50,50));
 		obstacles.add(new Rectangle(4950,150,100,1400));
-		obstacles.add(new Rectangle(4950,150,100,1400));
-		obstacles.add(new Rectangle(4950,150,100,1400));
-		obstacles.add(new Rectangle(4700,3050,50,50));
-		obstacles.add(new Rectangle(4950,3050,50,50));
+		obstacles.add(new Rectangle(4700,3050,50,100));
+		obstacles.add(new Rectangle(4950,3050,50,100));
+		obstacles.add(new Rectangle(3600,3150,1500,100));
+		obstacles.add(new Rectangle(5100,1750,300,1500));
+		obstacles.add(new Rectangle(4150,2250,100,100));
+		obstacles.add(new Rectangle(3700,1950,100,100));
+		obstacles.add(new Rectangle(3500,1950,100,3100));
+		obstacles.add(new Rectangle(3150,1950,250,100));
+		
+		obstacles.add(new Rectangle(3300,2550,100,3200));
 
 
 
@@ -97,16 +103,16 @@ public class Map {
 		checkpoints.add(new Rectangle(650,1550,50,50));
 		checkpoints.add(new Rectangle(350,300,50,50));
 		checkpoints.add(new Rectangle(3500,100,50,50));
-		checkpoints.add(new Rectangle(4900,100,50,50));
-		checkpoints.add(new Rectangle(4150,2250,50,50));
-		checkpoints.add(new Rectangle(3700,1950,50,50));
+		checkpoints.add(new Rectangle(4950,100,50,50));
+		checkpoints.add(new Rectangle(3500,1900,50,50));
+
 
 
 
 
 //		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 450, 350, 50, 50, 45000, 45000))); // enemy type, x, y, width, height, respawn time, respawn time left in thousandths of a second
 //		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 750, 200, 50, 50, 45000, 45000)));
-		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(2, 4850, 3050, 50, 50, 0, 0)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4850, 3050, 50, 50, 0, 0)));
 		
 		
 		
