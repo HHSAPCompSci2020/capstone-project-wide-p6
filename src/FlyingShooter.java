@@ -28,7 +28,7 @@ public class FlyingShooter extends Enemy{
 		xVelocity = 0;
 		yVelocity = 0;
 		onASurface = false;
-		hp = 150*w*h/50/50;
+		hp = 75*w*h/50/50;
 		damage = 10*w*h/50/50;
 		speed = 2;
 		stagger = 0;

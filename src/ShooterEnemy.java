@@ -28,7 +28,7 @@ public class ShooterEnemy extends Enemy{
 		yVelocity = 0;
 		onASurface = false;
 		gravity = 0.5;
-		hp = 150*w*h/50/50;
+		hp = 75*w*h/50/50;
 		damage = 10*w*h/50/50;
 		speed = 2;
 		stagger = 0;

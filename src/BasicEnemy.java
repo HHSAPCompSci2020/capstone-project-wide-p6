@@ -27,7 +27,7 @@ public class BasicEnemy extends Enemy{
 		yVelocity = 0;
 		onASurface = false;
 		gravity = 0.5;
-		hp = 200*w*h/50/50;
+		hp = 100*w*h/50/50;
 		damage = 10*w*h/50/50;
 		speed = 1.5;
 		stagger = 0;
