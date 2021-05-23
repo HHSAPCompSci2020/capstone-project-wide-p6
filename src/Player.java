@@ -57,7 +57,7 @@ public class Player extends MovingImage {
 		hp = 100;
 		combo = 0;
 		
-		hitboxtemp = (new PApplet()).loadImage("hitboxtemp.png");
+		hitboxtemp = (new PApplet()).loadImage("imgs/hitboxtemp.png");
 	}
 
 	// METHODS

@@ -33,6 +33,8 @@ public class DrawingSurface extends PApplet implements MouseListener{
 	private ArrayList<Integer> keys;
 	private Boolean[] checksPassed;
 	private boolean bossFight = false;
+	private BallBoss boss;
+	
 	
 	public DrawingSurface(Main w) {
 		super();
@@ -45,7 +47,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			checksPassed[i] = false;
 		}
 		checksPassed[0] = true;
-		player = new Player(new ArrayList<PImage>(Arrays.asList(loadImage("mario.png"), loadImage("marioflip.png"))), (int)(map.getCheckpoints().get(0).getCenterX() -Player.PLAYER_WIDTH/2) ,(int)(map.getCheckpoints().get(0).getCenterY() -Player.PLAYER_HEIGHT/2));
+		player = new Player(new ArrayList<PImage>(Arrays.asList(loadImage("imgs/mario.png"), loadImage("imgs/marioflip.png"))), (int)(map.getCheckpoints().get(0).getCenterX() -Player.PLAYER_WIDTH/2) ,(int)(map.getCheckpoints().get(0).getCenterY() -Player.PLAYER_HEIGHT/2));
 		camx = player.x;
 		camy = player.y;
 		lastUpdate = System.nanoTime();
@@ -149,6 +151,8 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		if (allCheck) {
 			rect((int)(3150 - camx)/2,(int)(2050 - camy)/2,150/2,150/2);
 			if ((new Rectangle(3150, 2050, 150, 150).intersects(player.x, player.y, player.width, player.height))) {
+				bossFight = true;
+				//boss = new BallBoss( , 850, 7600, 300, 300);
 				player.x = 600;
 				player.y = 7950;
 			}
@@ -182,6 +186,11 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			}
 		}
 
+		
+		if(bossFight) {
+			
+		}
+		
 		player.draw(this, camx, camy);
 		
 		if (player.hp > 100){
@@ -288,6 +297,9 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		if (allCheck) {
 			rect((int)(3150/11),(int)(2050/11),150/11,150/11);
 		}
+		
+		
+		
 		
 		fill(0, 255, 0);
 		rect((int)(player.x*scale),(int)(player.y * scale),(int)(player.width * scale),(int)(player.height* scale));

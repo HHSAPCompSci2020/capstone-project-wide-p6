@@ -22,8 +22,8 @@ public class BallBoss extends Enemy{
 	private int attackDelay = 2000000;
 	private ArrayList<PImage> images;
 
-	//private ArrayList<Drone> drones;
-	//private Drone[] mains ;
+	private ArrayList<Drone> drones;
+	private Drone[] mains ;
 	
 	public BallBoss(ArrayList<PImage> img, int x, int y, int w, int h, int index) {
 		
@@ -112,8 +112,13 @@ public class BallBoss extends Enemy{
 		}
 		
 	}
-		
 	
+	public ArrayList<Drone> getDrones(){
+		ArrayList<Drone> returner = new ArrayList<Drone>();
+		returner.addAll(drones);
+		returner.addAll(Arrays.asList(mains));
+		return returner;
+	}
 	
 	
 }
