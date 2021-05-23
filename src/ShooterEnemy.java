@@ -28,8 +28,8 @@ public class ShooterEnemy extends Enemy{
 		yVelocity = 0;
 		onASurface = false;
 		gravity = 0.5;
-		hp = 150;
-		damage = 10;
+		hp = 3*w;
+		damage = w/5;
 		speed = 2;
 		stagger = 0;
 		antiMulti = 5;
