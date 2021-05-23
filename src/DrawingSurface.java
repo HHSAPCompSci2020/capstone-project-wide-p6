@@ -131,6 +131,8 @@ public class DrawingSurface extends PApplet implements MouseListener{
 				if (player.lastCheck == map.getCheckpoints().indexOf(s)) {
 					checksPassed[map.getCheckpoints().indexOf(s)] = true;
 					fill(250);
+				} else if (checksPassed[map.getCheckpoints().indexOf(s)]){
+					fill(200);
 				} else {
 					fill(50);
 				}
@@ -257,7 +259,10 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			if (s instanceof Rectangle) {
 				Rectangle r = (Rectangle)s;
 				if (player.lastCheck == map.getCheckpoints().indexOf(s)) {
-					fill(255);
+					checksPassed[map.getCheckpoints().indexOf(s)] = true;
+					fill(250);
+				} else if (checksPassed[map.getCheckpoints().indexOf(s)]){
+					fill(200);
 				} else {
 					fill(50);
 				}

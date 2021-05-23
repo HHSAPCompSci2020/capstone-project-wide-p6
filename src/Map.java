@@ -160,6 +160,7 @@ public class Map {
 		checkpoints.add(new Rectangle(3900,3750,50,50));
 		checkpoints.add(new Rectangle(3950,3750,50,50));
 		checkpoints.add(new Rectangle(5150,4550,50,50));
+		checkpoints.add(new Rectangle(3250,3100,50,50));
 
 
 		lava.add(new Rectangle(50,6001,4350,50));
