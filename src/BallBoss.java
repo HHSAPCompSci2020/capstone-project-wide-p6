@@ -214,8 +214,31 @@ public class BallBoss extends MovingImage{
 			super.setImage(images.get((int)phase/9));
 			phase++;
 		} else {
+			// ------------MOVEMENT -------------
+			if ((Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y)) > 400)) {
+				if (p.x >= x) {
+					xVelocity = 1.5;
+				} else {
+					xVelocity = -1.5;
+				}
+				
+				if (p.y >= y) {
+					yVelocity = 1.5;
+				} else {
+					yVelocity = -1.5;
+				}
+			}
+			
+			xVelocity *= 0.95;
+			yVelocity *= 0.95;
+			if (Math.abs(xVelocity) < .5)
+				xVelocity = 0;
+			if (Math.abs(yVelocity) < .5)
+				yVelocity = 0;
+			moveToLocation(x+xVelocity,y + yVelocity);
 			
 			
+			// ------------Attacking ---------------
 			if (shootDelay <= 0) {
 				double locx = p.getCenterX();
 				double locy = p.getCenterY();

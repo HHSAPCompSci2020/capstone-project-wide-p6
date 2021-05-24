@@ -209,11 +209,21 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			for(int i = 0; i < lasers.size();i++) {
 				ArrayList<Integer> list = lasers.get(i);
 				noStroke();
+				fill(255,0,0);
 				rect(list.get(0), list.get(1), list.get(2), list.get(3));
 				if ((new Rectangle(list.get(0), list.get(1), list.get(2), list.get(3)).intersects(player.x, player.y, player.width, player.height))) {
 					player.hit(15);
 				}
 				
+				stroke(0);
+			}
+			
+			ArrayList<ArrayList<Integer>>  warnings= boss.getWarnings();
+			for(int i = 0; i < lasers.size();i++) {
+				ArrayList<Integer> list = warnings.get(i);
+				fill(255, 200, 200);
+				noStroke();
+				rect(list.get(0), list.get(1), list.get(2), list.get(3));
 				stroke(0);
 			}
 			
