@@ -12,7 +12,6 @@ public class Drone extends MovingImage{
 	public double yVelocity;
 	private int antiMulti;
 	private double stagger;
-	private boolean onASurface;
 	private int shootDelay;
 	public int hp;
 	public int type;
@@ -55,14 +54,12 @@ public class Drone extends MovingImage{
 
 			Rectangle2D.Double strechY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoord2),width,height+Math.abs(yVelocity*timeElapsed/17000000));
 			
-			onASurface = false;
 			
 			
 			if (yVelocity > 0) {
 				Shape standingSurface = null;
 				for (Shape s : obstacles) {
 					if (s.intersects(strechY)) {
-						onASurface = true;
 						standingSurface = s;
 						yVelocity = -3;
 					}
@@ -166,14 +163,11 @@ public class Drone extends MovingImage{
 
 			Rectangle2D.Double strechY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoord2),width,height+Math.abs(yVelocity*timeElapsed/17000000));
 			
-			onASurface = false;
-			
 			
 			if (yVelocity > 0) {
 				Shape standingSurface = null;
 				for (Shape s : obstacles) {
 					if (s.intersects(strechY)) {
-						onASurface = true;
 						standingSurface = s;
 						yVelocity = 0;
 					}
@@ -282,14 +276,12 @@ public class Drone extends MovingImage{
 
 			Rectangle2D.Double strechY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoord2),width,height+Math.abs(yVelocity*timeElapsed/17000000));
 			
-			onASurface = false;
 			
 			
 			if (yVelocity > 0) {
 				Shape standingSurface = null;
 				for (Shape s : obstacles) {
 					if (s.intersects(strechY)) {
-						onASurface = true;
 						standingSurface = s;
 						yVelocity = 0;
 					}

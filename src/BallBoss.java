@@ -121,7 +121,7 @@ public class BallBoss extends MovingImage{
 					attp ++;
 				}
 				for (int i = 0; i < mains.length; i++) {
-					drone.checkCollision(map, p);
+					mains[i].checkCollision(map, p);
 				}
 				attackDelay = 10000000;
 				if (attp>= 7) {
@@ -136,6 +136,9 @@ public class BallBoss extends MovingImage{
 				Drone drone = drones.get(i);
 				drone.act(map, p, timeElapsed);
 				drone.checkCollision(map, p);
+				if (drone.hp <= 0) {
+					drones.remove(drone);
+				}
 			}
 		
 			double width = getWidth();
@@ -200,6 +203,8 @@ public class BallBoss extends MovingImage{
 		returner.addAll(Arrays.asList(mains));
 		return returner;
 	}
+	
+	
 	public ArrayList<ArrayList<Integer>> getLasers(){
 		return lasers;
 	}
