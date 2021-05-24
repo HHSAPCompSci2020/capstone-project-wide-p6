@@ -9,10 +9,11 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import processing.core.PImage;
-
+import jay.jaysound.JayLayer;
+import jay.jaysound.JayLayerListener;
 import processing.core.PApplet;
 
-public class DrawingSurface extends PApplet implements MouseListener{
+public class DrawingSurface extends PApplet implements MouseListener, JayLayerListener{
 
 	/**
 	 * 
@@ -22,7 +23,9 @@ public class DrawingSurface extends PApplet implements MouseListener{
 
 	private Rectangle screenRect;
 	private Map map;
-	
+	private JayLayer sound;
+	private String[] songs;
+
 	private double camx, camy;
 	private long lastUpdate;
 	private long currTime;
@@ -57,6 +60,15 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		lastUpdate = System.nanoTime();
 		
 		this.w = w;
+		String[] songs = new String[]{"bgm.mp3"};
+
+		sound=new JayLayer("audio/","audio/",false);
+		sound.addPlayList();
+		sound.addSongs(0,songs);
+		sound.changePlayList(0);
+		sound.addJayLayerListener(this);
+		sound.nextSong();
+
 	}
 
 
@@ -395,6 +407,38 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			}
 		}
 		
+		
+	}
+
+
+
+	@Override
+	public void musicStarted() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void musicStopped() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void playlistEnded() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void songEnded() {
+		// TODO Auto-generated method stub
 		
 	}
 }
