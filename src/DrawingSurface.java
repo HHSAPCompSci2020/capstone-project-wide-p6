@@ -178,7 +178,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			if (e == null) {
 				ArrayList<Integer>list = map.getEnemyInfo().get(i);
 				list.set(6, (int) (list.get(6) - (currTime)/1000000));
-				if (list.get(6) <= 0 && (Math.sqrt((player.x - e.x)*(player.x - e.x) + (player.y - e.y)*(player.y - e.y)) > Math.sqrt((w.getWidth())*4*(w.getWidth()) + (w.getHeight())*4*(w.getHeight()) + 500))) {
+				if (list.get(6) <= 0 && (Math.sqrt((player.x - list.get(0))*(player.x - list.get(0)) + (player.y - list.get(1))*(player.y - list.get(1))) > Math.sqrt((w.getWidth())*4*(w.getWidth()) + (w.getHeight())*4*(w.getHeight()) + 500))) {
 					map.spawnEnemy(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), i);
 					list.set(6,list.get(5));
 				}
