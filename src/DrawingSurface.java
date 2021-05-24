@@ -51,7 +51,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			checksPassed[i] = false;
 		}
 		checksPassed[0] = true;
-		player = new Player(new ArrayList<PImage>(Arrays.asList(loadImage("imgs/mario.png"), loadImage("imgs/marioflip.png"))), (int)(map.getCheckpoints().get(0).getCenterX() -Player.PLAYER_WIDTH/2) ,(int)(map.getCheckpoints().get(0).getCenterY() -Player.PLAYER_HEIGHT/2));
+		player = new Player(new ArrayList<PImage>(Arrays.asList(loadImage("imgs/prinnystill.gif"), loadImage("imgs/prinnystillflip.png"), loadImage("imgs/prinnyrun.png"),loadImage("imgs/prinnyrunflip.png"), loadImage("imgs/prinnyjump.png"),loadImage("imgs/prinnyjumpflip.png"), loadImage("imgs/prinnydive.png"),loadImage("imgs/prinnydiveflip.png"))), (int)(map.getCheckpoints().get(0).getCenterX() -Player.PLAYER_WIDTH/2) ,(int)(map.getCheckpoints().get(0).getCenterY() -Player.PLAYER_HEIGHT/2));
 		camx = player.x;
 		camy = player.y;
 		lastUpdate = System.nanoTime();

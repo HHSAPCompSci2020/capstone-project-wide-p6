@@ -471,12 +471,36 @@ private String[] soundEffects;
 			stamina -= (double)timeElapsed/800000000;
 		}
 		
-		if (direction) {
-			super.setImage(images.get(1));
-		} else {
-			super.setImage(images.get(0));
-		}
 		
+		if(xVelocity>0&&yVelocity==0) {
+			super.setImage(images.get(2));
+		}
+		else if(xVelocity<0&&yVelocity==0) {
+			super.setImage(images.get(3));
+		}
+		else if(direction&&yVelocity>0) {
+			super.setImage(images.get(6));
+
+		}
+		else if(!direction&&yVelocity>0) {
+			super.setImage(images.get(7));
+
+		}
+		else if(direction&&yVelocity<0) {
+			super.setImage(images.get(4));
+
+		}
+		else if(!direction&&yVelocity<0) {
+			super.setImage(images.get(5));
+
+		}
+		else {
+			if (direction) {
+				super.setImage(images.get(0));
+			} else {
+				super.setImage(images.get(1));
+			}
+		}
 		for(int i = 0; i < map.getCheckpoints().size(); i++) {
 			if (map.getCheckpoints().get(i).intersects(strechX) || map.getCheckpoints().get(i).intersects(strechY)) {
 				hp = 100;

@@ -216,7 +216,7 @@ public class Map {
 		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4550, 4000, 100, 100, 45000, 45000)));
 		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4650, 4000, 100, 100, 45000, 45000)));
 		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4750, 4000, 50, 50, 45000, 45000)));
-		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4850, 4000, 500, 500, 45000, 45000)));
+		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(0, 4850, 4000, 200, 200, 45000, 45000)));
 		enemyInfo.add(new ArrayList<Integer>(Arrays.asList(1, 4450, 4000, 100, 100, 45000, 45000)));
 		
 		
