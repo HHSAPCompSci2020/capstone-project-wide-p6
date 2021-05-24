@@ -35,7 +35,7 @@ public class BallBoss extends MovingImage{
 		super(img.get(0), x - w/2, y - h/2, w, h);
 		xVelocity = 0;
 		yVelocity = 0;
-		hp = 1000;
+		hp = 0;
 		antiMulti = 5;
 		images = img;
 		attp = 0;
@@ -311,16 +311,16 @@ public class BallBoss extends MovingImage{
 				break;
 			case(2):
 				if (attp == 0) {
-					attackDelay = 1000000000;
-					if (time >= (mains.length + 8) * 1000000.0) {
+					attackDelay = 1000000000.0;
+					if (time >= (mains.length + 6) * 1000000.0) {
 						attp =1;
 						time = 0;
 					}
 					for (int i = 0; i < mains.length; i++) {
-						
+						drone = mains[i];
 						if (time >= i * 1000000.0 && time <= i + 2.5 * 1000000.0) {
-							drone = mains[i];
-							if (i %2 == 0) {
+							
+							if (i % 2 == 0) {
 								drone.setImage(redEye.get(1));
 								locx = 100;
 							} else {
@@ -330,23 +330,25 @@ public class BallBoss extends MovingImage{
 							locy =  7125 + i * 100;
 							movex = 10*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 							movey = 10*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+							
 							drone.x += movex;
 							drone.y += movey;
+					
 						}
-						if (time >= i +4.5 * 1000000.0 && time <= i + 5.5 * 1000000.0) {
-							drone = mains[i];
+						else if (time >= i +2.5 * 1000000.0 && time <= i + 3.5 * 1000000.0) {
+							
 							if (time/1000000.0 % 8 <= 4) {
 								warnings.add(new ArrayList<Integer>(Arrays.asList(100, (int)drone.y - 25, 1500, 100)));
 							}
 						}
-						if (time >= i +5.5 * 1000000.0 && time <= i + 6.5 * 1000000.0) {
-							drone = mains[i];
+						else if (time >= i +3.5 * 1000000.0 && time <= i + 4 * 1000000.0) {
+							
 							lasers.add(new ArrayList<Integer>(Arrays.asList(100, (int)drone.y - 25, 1500, 100)));
 						}
 						
 					} 
 				} else if (attp == 1) {
-					attackDelay = 1000000000;
+					attackDelay = 1000000000.0;
 					if (time >= (mains.length + 3) * 1000000.0) {
 						attp =2;
 						time = 0;
@@ -358,7 +360,7 @@ public class BallBoss extends MovingImage{
 								warnings.add(new ArrayList<Integer>(Arrays.asList(100, (int)drone.y - 25, 1500, 100)));
 							}
 						}
-						if (time <= (10 - i -1.5)  * 1000000.0 && time >= (10 - i  - 2.5) * 1000000.0) {
+						if (time <= (10 - i -1.5)  * 1000000.0 && time >= (10 - i  - 2) * 1000000.0) {
 							drone = mains[i];
 							lasers.add(new ArrayList<Integer>(Arrays.asList(100, (int)drone.y - 25, 1500, 100)));
 						}
@@ -368,7 +370,7 @@ public class BallBoss extends MovingImage{
 				if (attp>= 2) {
 					attp = 0; 
 					attack = 0;
-					attackDelay = 20000000;
+					attackDelay = 20000000.0;
 				}
 				break;
 			
