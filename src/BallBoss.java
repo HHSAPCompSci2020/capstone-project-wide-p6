@@ -120,6 +120,9 @@ public class BallBoss extends MovingImage{
 					time = 0;
 					attp ++;
 				}
+				for (int i = 0; i < mains.length; i++) {
+					drone.checkCollision(map, p);
+				}
 				attackDelay = 10000000;
 				if (attp>= 7) {
 					attp = 0; 
