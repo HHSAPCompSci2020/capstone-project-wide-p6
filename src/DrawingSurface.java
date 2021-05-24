@@ -51,7 +51,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 			list.set(6,list.get(5));
 		}
 		for (int i = 0; i < checksPassed.length; i++) {
-			checksPassed[i] = true;
+			checksPassed[i] = false;
 		}
 		checksPassed[0] = true;
 		player = new Player(new ArrayList<PImage>(Arrays.asList(loadImage("imgs/prinnystill.png"), loadImage("imgs/prinnystillflip.png"), loadImage("imgs/prinnyrun.png"),loadImage("imgs/prinnyrunflip.png"), loadImage("imgs/prinnyjump.png"),loadImage("imgs/prinnyjumpflip.png"), loadImage("imgs/prinnydive.png"),loadImage("imgs/prinnydiveflip.png"),loadImage("imgs/prinnydash.png"),loadImage("imgs/prinnydashflip.png"))), (int)(map.getCheckpoints().get(0).getCenterX() -Player.PLAYER_WIDTH/2) ,(int)(map.getCheckpoints().get(0).getCenterY() -Player.PLAYER_HEIGHT/2));
@@ -224,7 +224,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 				fill(255,0,0);
 				rect((int)(list.get(0) - camx)/2, (int)(list.get(1) - camy)/2, list.get(2)/2, list.get(3)/2);
 				if ((new Rectangle(list.get(0), list.get(1), list.get(2), list.get(3)).intersects(player.x, player.y, player.width, player.height))) {
-					player.hit(15);
+					player.hit(20);
 				}
 				
 				stroke(0);
