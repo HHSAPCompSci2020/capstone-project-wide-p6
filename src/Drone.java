@@ -68,7 +68,7 @@ public class Drone extends MovingImage{
 				for (Shape s : obstacles) {
 					if (s.intersects(strechY)) {
 						standingSurface = s;
-						yVelocity = -3;
+						yVelocity *= -1;
 					}
 				}
 				if (standingSurface != null) {
@@ -80,7 +80,7 @@ public class Drone extends MovingImage{
 				for (Shape s : obstacles) {
 					if (s.intersects(strechY)) {
 						headSurface = s;
-						yVelocity = 3;
+						yVelocity *= -1;
 					}
 				}
 				if (headSurface != null) {
@@ -106,7 +106,7 @@ public class Drone extends MovingImage{
 				for (Shape s : obstacles) {
 					if (s.intersects(strechX)) {
 						rightSurface = s;
-						xVelocity = -3;
+						xVelocity *= -1;
 					}
 				}
 				if (rightSurface != null) {
@@ -118,7 +118,7 @@ public class Drone extends MovingImage{
 				for (Shape s : obstacles) {
 					if (s.intersects(strechX)) {
 						leftSurface = s;
-						xVelocity = 3;
+						xVelocity *= -1;
 					}
 				}
 				if (leftSurface != null) {
@@ -375,6 +375,10 @@ public class Drone extends MovingImage{
 					p.hit(10);
 				}
 			}
+		} else if (type == 4 {
+			if ((new Rectangle((int)(x), (int)(y), (int)super.width, (int)super.height)).intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.PLAYER_WIDTH, (int)p.PLAYER_HEIGHT))) {
+				p.hit(10);
+			}
 		}
 		
 		
@@ -498,6 +502,24 @@ public class Drone extends MovingImage{
 					}
 				}
 			}
+			
+		} else if (type == 4) {
+			for(int i = 0; i < map.getHitboxes().size(); i++) {
+				Hitbox list =  map.getHitboxes().get(i);
+				if ((new Rectangle((int)list.x - 7,(int)list.y - 7,list.w + 15,list.h + 15)).intersects(x, y, width, height)) {
+					if ((antiMulti <= 0)) {
+						antiMulti = 6;
+						p.combo++;
+						if(p.getDive() == 1) {
+							p.diveHop();
+						}
+						if(p.getDash() >= 0) {
+							p.stamina += 20;
+						}
+					}
+				}
+			}
+			
 			
 		}
 		

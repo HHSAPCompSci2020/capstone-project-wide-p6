@@ -193,7 +193,8 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		
 		if(bossFight) {
 			
-			
+			boss.act(map, currTime, player);
+			boss.draw(this, camx, camy);
 			
 			
 			ArrayList<Drone> drones = boss.getDrones();
@@ -202,8 +203,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 				drone.draw(this, camx, camy);
 				
 			}
-			boss.act(map, currTime, player);
-			boss.draw(this, camx, camy);
+			
 			
 			ArrayList<ArrayList<Integer>>  lasers= boss.getLasers();
 			for(int i = 0; i < lasers.size();i++) {
