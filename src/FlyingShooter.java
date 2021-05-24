@@ -23,7 +23,7 @@ public class FlyingShooter extends Enemy implements JayLayerListener{
 	private double antiMulti;
 	private int index;
 	private ArrayList<PImage> images;
-	private JayLayer sound;
+//	private JayLayer sound;
 
 
 	public FlyingShooter(ArrayList<PImage> img, int x, int y, int w, int h, int index) {
@@ -41,11 +41,11 @@ public class FlyingShooter extends Enemy implements JayLayerListener{
 		shootDelay = 2000000;
 		this.index = index;
 		String[] soundEffects = new String[]{"Pew.mp3"};
-		sound=new JayLayer("audio/","audio/",false);
-		sound.addPlayList();
-		sound.addSoundEffects(soundEffects);
-		sound.changePlayList(0);
-		sound.addJayLayerListener(this);
+//		sound=new JayLayer("audio/","audio/",false);
+//		sound.addPlayList();
+//		sound.addSoundEffects(soundEffects);
+//		sound.changePlayList(0);
+//		sound.addJayLayerListener(this);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -57,7 +57,7 @@ public class FlyingShooter extends Enemy implements JayLayerListener{
 		
 		if (shootDelay <= 0) {
 			map.shoot(0, (int)x, (int)y, 10, 10, (p.x - x)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, (p.y - y)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, 400, 10);
-			sound.playSoundEffect(0);
+//			sound.playSoundEffect(0);
 			shootDelay = 1500000;
 		}
 		
