@@ -18,6 +18,7 @@ public class BallBoss extends MovingImage{
 	private int attack;
 	private double attackDelay = 5000000;
 	private double shootDelay = 5000000;
+	private double stagger = 0;
 	private ArrayList<PImage> images;
 
 	private ArrayList<PImage> redEye = new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("imgs/Boss5.png"), (new PApplet()).loadImage("imgs/droneright.png"), (new PApplet()).loadImage("imgs/droneup.png"), (new PApplet()).loadImage("imgs/droneleft.png"), (new PApplet()).loadImage("imgs/dronedown.png")));
@@ -197,7 +198,7 @@ public class BallBoss extends MovingImage{
 		} else if (phase <= 36){
 			hp = 1000;
 			drones.clear();
-			mains = new Drone[12];
+			mains = new Drone[10];
 			
 			mains[0] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			mains[1] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
@@ -209,23 +210,25 @@ public class BallBoss extends MovingImage{
 			mains[7] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			mains[8] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			mains[9] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
-			mains[10] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
-			mains[11] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			super.setImage(images.get((int)phase/9));
 			phase++;
 		} else {
 			// ------------MOVEMENT -------------
+			
+			stagger -=  timeElapsed;
 			if ((Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y)) > 400)) {
-				if (p.x >= x) {
-					xVelocity = 1.5;
-				} else {
-					xVelocity = -1.5;
-				}
-				
-				if (p.y >= y) {
-					yVelocity = 1.5;
-				} else {
-					yVelocity = -1.5;
+				if (stagger <= 0) {
+			if (p.x >= x) {
+				xVelocity = 1.5;
+			} else {
+				xVelocity = -1.5;
+			}
+			
+			if (p.y >= y) {
+				yVelocity = 1.5;
+			} else {
+				yVelocity = -1.5;
+			}
 				}
 			}
 			
@@ -270,8 +273,8 @@ public class BallBoss extends MovingImage{
 			case (0):
 				for (int i = 0; i < mains.length; i++) {
 					Drone drone = mains[i];
-					double locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/6) - 25;
-					double locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/6) - 25;
+					double locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/10) - 25;
+					double locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/10) - 25;
 					double movex = 4*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 					double movey = 4*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 					drone.x += movex;
@@ -280,8 +283,6 @@ public class BallBoss extends MovingImage{
 					attp = 0;
 					
 				}
-				
-				
 				break;
 			case(1):
 				Drone drone = mains[attp];
@@ -307,8 +308,42 @@ public class BallBoss extends MovingImage{
 					attackDelay = 5000000;
 				}
 				break;
+			case(2):
+				for (int i = 0; i < mains.length; i++) {
+					if (time >= i * 1000000000 && time >= i + 1.5 * 1000000000) {
+					drone = mains[attp];
+					if (i <= 7)
+						locx = 100;
+					} else {
+						locx = 1550;
+					}
+					locy = p.getCenterY();
+					movex = 5*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+					movey = 5*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+					drone.x += movex;
+					drone.y += movey;
+					}
+					
+				}
+				
+				if (time >= 1000000000) {
+					time = 0;
+					attp ++;
+				}
+				for (int i = 0; i < mains.length; i++) {
+					mains[i].checkCollision(map, p);
+				}
+				attackDelay = 10000000;
+				if (attp>= 15) {
+					attp = 0; 
+					attack = 0;
+					attackDelay = 5000000;
+				}
+				break;
 			
 			}
+			
+			
 			for (int i = 0; i < drones.size(); i++) {
 				Drone drone = drones.get(i);
 				drone.act(map, p, timeElapsed);
@@ -351,6 +386,9 @@ public class BallBoss extends MovingImage{
 						} else {
 							hp -= list.dam;
 						}
+						
+						xVelocity = list.kx;
+						yVelocity = list.ky;
 						
 						p.combo++;
 						if(p.getDive() == 1) {
