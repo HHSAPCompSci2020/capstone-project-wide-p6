@@ -34,7 +34,7 @@ public class Player extends MovingImage implements JayLayerListener {
 	private boolean direction; // true = right, false = left
 	private int dive;
 	private double dash;
-
+private String[] soundEffects;
 	private ArrayList<PImage> images;
 	/** The constructor of the player class, slightly modified
 	 * 
@@ -96,6 +96,7 @@ public class Player extends MovingImage implements JayLayerListener {
 				stamina -= 25;
 				delay = 200000000;
 				sound.playSoundEffect(0);
+				
 
 			}else if (stamina >= 25) {
 				yVelocity = -jumpStrength;
@@ -231,7 +232,7 @@ public class Player extends MovingImage implements JayLayerListener {
 			//stamina = 0;
 		}
 		sound.playSoundEffect(3);
-
+		
 	}
 	/*
 	 * @return the dive amount
@@ -269,6 +270,8 @@ public class Player extends MovingImage implements JayLayerListener {
 		dash -= timeElapsed;
 		gravIgnore -= timeElapsed;
 		invincible -= timeElapsed;
+		if(stamina>=100)
+			stamina = 100;
 		if(dive == 1) {
 			if (direction) {
 				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp)),
