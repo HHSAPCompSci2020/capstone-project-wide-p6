@@ -4,6 +4,7 @@
 
 import java.awt.*;
 
+
 import java.awt.geom.Rectangle2D;
 import java.util.*;
 import jay.jaysound.JayLayer;
@@ -22,7 +23,10 @@ public class Player extends MovingImage implements JayLayerListener {
 	private JayLayer sound;
 
 	private PImage hitboxtemp;
-	
+	private PImage hitboxtemp2;
+	private PImage hitboxtemp3;
+	private PImage hitboxtemp4;
+
 	private double xVelocity, yVelocity;
 	private boolean onASurface;
 	private double friction;
@@ -60,7 +64,11 @@ private String[] soundEffects;
 		hp = 100;
 		combo = 0;
 		
-		hitboxtemp = (new PApplet()).loadImage("imgs/hitboxtemp.png");
+		hitboxtemp = (new PApplet()).loadImage("imgs/trans.png");
+		hitboxtemp2 = (new PApplet()).loadImage("imgs/slash.png");
+		hitboxtemp3 = (new PApplet()).loadImage("imgs/slashflip.png");
+		hitboxtemp4 = (new PApplet()).loadImage("imgs/slashdown.png");
+
 		soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "slash.mp3","damage.mp3"};
 		sound=new JayLayer("audio/","audio/",false);
 		sound.addPlayList();
@@ -134,6 +142,8 @@ private String[] soundEffects;
 			}else*/ if (!(onASurface) && stamina >= 20) {
 				if (direction) {
 					dash = 100000000;
+					super.setImage(images.get(8));
+
 				sound.playSoundEffect(1);
 				soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "slash.mp3","damage.mp3"};
 				sound=new JayLayer("audio/","audio/",false);
@@ -141,6 +151,11 @@ private String[] soundEffects;
 				sound.addSoundEffects(soundEffects);
 				sound.changePlayList(0);
 				sound.addJayLayerListener(this);
+				
+				
+
+			
+
 				}
 				else {
 					dash = 100000000;
@@ -151,6 +166,8 @@ private String[] soundEffects;
 					sound.addSoundEffects(soundEffects);
 					sound.changePlayList(0);
 					sound.addJayLayerListener(this);
+					super.setImage(images.get(9));
+
 				}
 				stamina -= 20;
 				invincible = 200000000;
@@ -187,10 +204,10 @@ private String[] soundEffects;
 				xVelocity = 0;
 				delay = 300000000;
 				if (direction) {
-					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp)),
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp2)),
 							(int)(x+40- PLAYER_WIDTH/2), (int)y -5, 75, 75, 5, 5, 1, -1));
 				} else {
-					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp)),
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp3)),
 							(int)(x-35- PLAYER_WIDTH/2), (int)y -5, 75, 75, 5, 5, -1, -1));
 				}
 				sound.playSoundEffect(2);
@@ -206,10 +223,10 @@ private String[] soundEffects;
 				delay = 200000000;
 				gravIgnore = 220000000;
 				if (direction) {
-					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp)),
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp2)),
 							(int)(x+40- PLAYER_WIDTH/2), (int)y -5, 75, 75, 7, 5, 2, -2));
 				} else {
-					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp)),
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp3)),
 							(int)(x-35- PLAYER_WIDTH/2), (int)y -5, 75, 75, 7, 5, -2, -2));
 				}
 				sound.playSoundEffect(2);
@@ -236,10 +253,10 @@ private String[] soundEffects;
 				xVelocity = 0;
 				delay = 500000000;
 				if (direction) {
-					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp)),
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp2)),
 							(int)(x+40- PLAYER_WIDTH/2), (int)y -25, 100, 100, 10, 5, 10, -13));
 				} else {
-					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp)),
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp3)),
 							(int)(x-55- PLAYER_WIDTH/2), (int)y -25, 100, 100, 10, 5, -10, -13));
 				}
 				sound.playSoundEffect(2);
@@ -255,10 +272,10 @@ private String[] soundEffects;
 				delay = 300000000;
 				gravIgnore = 325000000;
 				if (direction) {
-					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp)),
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp2)),
 							(int)(x+40- PLAYER_WIDTH/2), (int)y -25, 100, 100, 20, 5, 15, -10));
 				} else {
-					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp)),
+					map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp, hitboxtemp3)),
 							(int)(x-55- PLAYER_WIDTH/2), (int)y -25, 100, 100, 20, 5, -15, -10));
 				}
 				sound.playSoundEffect(2);
@@ -334,20 +351,20 @@ private String[] soundEffects;
 			stamina = 100;
 		if(dive == 1) {
 			if (direction) {
-				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp)),
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp4)),
 						(int)(x), (int)y + 50, 50, 50, 10, 2, 7, -13));
 			} else {
-				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp)),
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp4)),
 						(int)(x), (int)y + 50, 50, 50, 10, 2, -7, -13));
 			}
 			
 			delay = 100000000;
 		} else if (dive == 2) {
 			if (direction) {
-				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp)),
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp4)),
 						(int)(x - 5), (int)y + 60, 60, 60, 25, 2, 20, -15));
 			} else {
-				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp)),
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp4)),
 						(int)(x - 5), (int)y + 60, 60, 60, 25, 2, -20, -15));
 			}
 			delay = 100000000;
@@ -422,11 +439,11 @@ private String[] soundEffects;
 			if (direction) {
 				
 				xVelocity = 30;
-				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp)),(int)(x - PLAYER_WIDTH/2 +  xVelocity*timeElapsed/14000000), (int)y, 75, 50, 10, 2, 10, -12));
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp2)),(int)(x - PLAYER_WIDTH/2 +  xVelocity*timeElapsed/14000000), (int)y, 75, 50, 10, 2, 10, -12));
 			} else {
 				
 				xVelocity = -30;
-				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp)),(int)(x - PLAYER_WIDTH/2 +  xVelocity*timeElapsed/14000000), (int)y, 75, 50, 10, 2, -10, -12));
+				map.addHitbox(new Hitbox(new ArrayList<PImage>(Arrays.asList(hitboxtemp, hitboxtemp3)),(int)(x - PLAYER_WIDTH/2 +  xVelocity*timeElapsed/14000000), (int)y, 75, 50, 10, 2, -10, -12));
 			}
 			
 		} 
