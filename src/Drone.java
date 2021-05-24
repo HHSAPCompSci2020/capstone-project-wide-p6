@@ -29,6 +29,13 @@ public class Drone extends MovingImage{
 		
 	}
 	
+	public Drone(ArrayList<PImage> img, int x, int y, int w, int h, boolean mode) {
+		super(img.get(0), x, y, w, h);
+		this.type = 4;
+		hp = Integer.MAX_VALUE;
+		
+	}
+	
 	public Drone(ArrayList<PImage> img, int x, int y, int w, int h,  double xv, double yv) {
 		super(img.get(0), x, y, w, h);
 		type = 1;
