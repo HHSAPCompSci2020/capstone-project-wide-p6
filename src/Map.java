@@ -19,15 +19,16 @@ public class Map  {
 	private Enemy[] enemies;
 	private ArrayList<Projectile> projectiles;
 
-	private PImage marioflip, goomba; 
+	private PImage mario, goomba,fly; 
 	
 	private ArrayList<ArrayList<Integer>> enemyInfo;
 	
 	/** Map constructor. No parameters because the map will be the same every time. Sets up the entire map.
 	 */
 	public Map() {
-		marioflip = (new PApplet()).loadImage("imgs/marioflip.png");
-		goomba = (new PApplet()).loadImage("imgs/goomba.png");
+		mario = (new PApplet()).loadImage("imgs/shooterenemy.png");
+		goomba = (new PApplet()).loadImage("imgs/enemy.png");
+		fly = (new PApplet()).loadImage("imgs/flyenemy.png");
 		
 		checkpoints = new ArrayList<Rectangle>();
 		obstacles = new ArrayList<Shape>();
@@ -245,10 +246,10 @@ public class Map  {
 			enemies[index] = (new BasicEnemy(new ArrayList<PImage>(Arrays.asList(goomba)), x, y, w, h, index));
 		}
 		if (type == 1) {
-			enemies[index] = (new ShooterEnemy(new ArrayList<PImage>(Arrays.asList(marioflip)), x, y, w, h, index));
+			enemies[index] = (new ShooterEnemy(new ArrayList<PImage>(Arrays.asList(mario)), x, y, w, h, index));
 		}
 		if (type == 2) {
-			enemies[index] = (new FlyingShooter(new ArrayList<PImage>(Arrays.asList(marioflip)), x, y, w, h, index));
+			enemies[index] = (new FlyingShooter(new ArrayList<PImage>(Arrays.asList(fly)), x, y, w, h, index));
 		}
 	}
 	/**
