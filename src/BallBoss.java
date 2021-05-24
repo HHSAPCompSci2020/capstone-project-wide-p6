@@ -64,7 +64,7 @@ public class BallBoss extends MovingImage{
 			}
 			for (int i = 0; i < drones.size(); i++) {
 				Drone drone = drones.get(i);
-				drone.move(map, p);
+				drone.act(map, p);
 				drone.checkCollision(map, p);
 			}
 		

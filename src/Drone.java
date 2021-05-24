@@ -1,18 +1,11 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 import java.awt.Rectangle;
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 import java.util.ArrayList;
 
 import processing.core.PImage;
 
 public class Drone extends MovingImage{
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 	public double xVel;
 	public double yVel;
 	private int antiMulti;
@@ -25,17 +18,7 @@ public class Drone extends MovingImage{
 		super(img.get(0), x, y, w, h);
 		type = 0;
 		hp = Integer.MAX_VALUE;
-		
-=======
-	public Drone(ArrayList<PImage> img, int x, int y, int w, int h) {
-		super(img.get(0), x, y, w, h);
->>>>>>> Stashed changes
-=======
-	public Drone(ArrayList<PImage> img, int x, int y, int w, int h) {
-		super(img.get(0), x, y, w, h);
->>>>>>> Stashed changes
 	}
-	
 
 	public Drone(ArrayList<PImage> img, int x, int y, int w, int h, int type) {
 		super(img.get(0), x, y, w, h);
