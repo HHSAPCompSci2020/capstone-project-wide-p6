@@ -19,7 +19,7 @@ public class Player extends MovingImage implements JayLayerListener {
 	public int hp;
 	public double stamina;
 	public int combo;
-//	private JayLayer sound;
+	private JayLayer sound;
 
 	private PImage hitboxtemp;
 	
@@ -61,12 +61,12 @@ public class Player extends MovingImage implements JayLayerListener {
 		combo = 0;
 		
 		hitboxtemp = (new PApplet()).loadImage("imgs/hitboxtemp.png");
-//		String[] soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
-//		sound=new JayLayer("audio/","audio/",false);
-//		sound.addPlayList();
-//		sound.addSoundEffects(soundEffects);
-//		sound.changePlayList(0);
-//		sound.addJayLayerListener(this);
+		String[] soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
+		sound=new JayLayer("audio/","audio/",false);
+		sound.addPlayList();
+		sound.addSoundEffects(soundEffects);
+		sound.changePlayList(0);
+		sound.addJayLayerListener(this);
 	}
 
 	// METHODS
@@ -95,13 +95,13 @@ public class Player extends MovingImage implements JayLayerListener {
 				yVelocity = -jumpStrength;
 				stamina -= 25;
 				delay = 200000000;
-//				sound.playSoundEffect(0);
+				sound.playSoundEffect(0);
 
 			}else if (stamina >= 25) {
 				yVelocity = -jumpStrength;
 				stamina -= 25;
 				delay = 200000000;
-//				sound.playSoundEffect(0);
+				sound.playSoundEffect(0);
 
 			}
 			
@@ -124,11 +124,11 @@ public class Player extends MovingImage implements JayLayerListener {
 			}else*/ if (!(onASurface) && stamina >= 20) {
 				if (direction) {
 					dash = 100000000;
-//				sound.playSoundEffect(1);
+				sound.playSoundEffect(1);
 				}
 				else {
 					dash = 100000000;
-//					sound.playSoundEffect(1);
+					sound.playSoundEffect(1);
 				}
 				stamina -= 20;
 				invincible = 200000000;
@@ -144,7 +144,7 @@ public class Player extends MovingImage implements JayLayerListener {
 		
 		if(!(onASurface) && (delay <= 0)) {
 			dive = 1;
-//			sound.playSoundEffect(1);
+			sound.playSoundEffect(1);
 
 		}
 	}
@@ -179,7 +179,7 @@ public class Player extends MovingImage implements JayLayerListener {
 				}
 			}
 		}
-//		sound.playSoundEffect(2);
+		sound.playSoundEffect(2);
 
 	}
 	
@@ -215,7 +215,7 @@ public class Player extends MovingImage implements JayLayerListener {
 				}
 			}
 		}
-//		sound.playSoundEffect(2);
+		sound.playSoundEffect(2);
 
 	}
 	
@@ -230,7 +230,7 @@ public class Player extends MovingImage implements JayLayerListener {
 			hp -= damage;
 			//stamina = 0;
 		}
-//		sound.playSoundEffect(3);
+		sound.playSoundEffect(3);
 
 	}
 	/*
