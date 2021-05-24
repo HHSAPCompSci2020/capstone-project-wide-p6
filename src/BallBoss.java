@@ -76,8 +76,8 @@ public class BallBoss extends MovingImage{
 			case (0):
 				for (int i = 0; i < mains.length; i++) {
 					Drone drone = mains[i];
-					double locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/4) - 25;
-					double locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/4) - 25;
+					double locx = getCenterX() + 300 * Math.cos(time/1000000000.0 + i*Math.PI/4) - 25;
+					double locy = getCenterY() + 300 * Math.sin(time/1000000000.0 + i*Math.PI/4) - 25;
 					double movex = 4*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 					double movey = 4*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 					drone.x += movex;
@@ -255,17 +255,18 @@ public class BallBoss extends MovingImage{
 			}
 			
 			if (attackDelay <= 0) {
-				attack = (int)(Math.random() * 2 + 1);
+				attack = (int)(Math.random() * 1 + 2);
 				attackDelay = 2000000000;
 				time = 0;
+				attp = 0;
 			}
 			switch(attack) {
 			case (0):
 				for (int i = 0; i < mains.length; i++) {
 					Drone drone = mains[i];
 					drone.setImage(redEye.get(0));
-					double locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/5) - 25;
-					double locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/5) - 25;
+					double locx = getCenterX() + 300 * Math.cos(time/1000000000.0 + i*Math.PI/5) - 25;
+					double locy = getCenterY() + 300 * Math.sin(time/1000000000.0 + i*Math.PI/5) - 25;
 					double movex = 4*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 					double movey = 4*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 					drone.x += movex;
@@ -285,15 +286,15 @@ public class BallBoss extends MovingImage{
 				drone.x += movex;
 				drone.y += movey;
 				drone.checkCollision(map, p);
-				if (time >= 1000000000) {
+				if (time >= 1000000000.0) {
 					time = 0;
 					attp ++;
 				}
 				for (int i = 0; i < mains.length; i++) {
 					if (i != attp) {
 						drone = mains[i];
-						locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/5) - 25;
-						locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/5) - 25;
+						locx = getCenterX() + 300 * Math.cos(time/1000000000.0 + i*Math.PI/5) - 25;
+						locy = getCenterY() + 300 * Math.sin(time/1000000000.0 + i*Math.PI/5) - 25;
 						movex = 4*(locx - mains[i].x)/(Math.sqrt((locx- mains[i].x)*(locx- mains[i].x) + (locy- mains[i].y)*(locy- mains[i].y)));
 						movey = 4*(locy - mains[i].y)/(Math.sqrt((locx- mains[i].x)*(locx- mains[i].x) + (locy- mains[i].y)*(locy- mains[i].y)));
 						mains[i].x += movex;
@@ -310,12 +311,14 @@ public class BallBoss extends MovingImage{
 				break;
 			case(2):
 				if (attp == 0) {
-					if (time >= (mains.length + 3) * 1000000000) {
+					attackDelay = 1000000000;
+					if (time >= (mains.length + 5) * 1000000000.0) {
 						attp =1;
 						time = 0;
 					}
 					for (int i = 0; i < mains.length; i++) {
-						if (time >= i * 1000000000 && time <= i + 1.5 * 1000000000) {
+						
+						if (time >= i * 1000000000.0 && time <= i + 2.5 * 1000000000.0) {
 							drone = mains[i];
 							if (i %2 == 0) {
 								drone.setImage(redEye.get(1));
@@ -324,37 +327,38 @@ public class BallBoss extends MovingImage{
 								drone.setImage(redEye.get(3));
 								locx = 1550;
 							}
-							locy =  7025 + i * 100;
-							movex = 5*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
-							movey = 5*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+							locy =  7125 + i * 100;
+							movex = 10*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+							movey = 10*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 							drone.x += movex;
 							drone.y += movey;
 						}
-						if (time >= i +1.5 * 1000000000 && time <= i + 2.5 * 1000000000) {
+						if (time >= i +2.5 * 1000000000.0 && time <= i + 3.5 * 1000000000.0) {
 							drone = mains[i];
-							if (time/1000000000 % 60 <= 30) {
+							if (time/1000000000.0 % 8 <= 4) {
 								warnings.add(new ArrayList<Integer>(Arrays.asList(100, (int)drone.y - 25, 1500, 100)));
 							}
 						}
-						if (time >= i +2.5 * 1000000000 && time <= i + 3.5 * 1000000000) {
+						if (time >= i +3.5 * 1000000000.0 && time <= i + 4.5 * 1000000000.0) {
 							drone = mains[i];
 							lasers.add(new ArrayList<Integer>(Arrays.asList(100, (int)drone.y - 25, 1500, 100)));
 						}
 						
 					} 
-				} else {
-					if (time >= (mains.length + 3) * 1000000000) {
+				} else if (attp == 1) {
+					attackDelay = 1000000000;
+					if (time >= (mains.length + 3) * 1000000000.0) {
 						attp =2;
 						time = 0;
 					}
 					for (int i = 0; i < mains.length; i++) {
-						if (time <= (10 - i)  * 1000000000 && time >= (10 - i - 1.5) * 1000000000) {
+						if (time <= (10 - i)  * 1000000000.0 && time >= (10 - i - 1.5) * 1000000000.0) {
 							drone = mains[i];
-							if (time/1000000000 % 60 <= 30) {
+							if (time/1000000000.0 % 8 <= 4) {
 								warnings.add(new ArrayList<Integer>(Arrays.asList(100, (int)drone.y - 25, 1500, 100)));
 							}
 						}
-						if (time <= (10 - i -1.5)  * 1000000000 && time >= (10 - i  - 2.5) * 1000000000) {
+						if (time <= (10 - i -1.5)  * 1000000000.0 && time >= (10 - i  - 2.5) * 1000000000.0) {
 							drone = mains[i];
 							lasers.add(new ArrayList<Integer>(Arrays.asList(100, (int)drone.y - 25, 1500, 100)));
 						}
@@ -404,14 +408,14 @@ public class BallBoss extends MovingImage{
 						antiMulti = 6;
 						
 						if(p.combo >= 30) {
-							hp -= list.dam * 2;
-							p.hp+= list.dam/5; 
+							hp -= list.dam*0.7;
+							p.hp+= list.dam/10; 
 						} else if (p.combo >= 20) {
-							hp -= list.dam * 1.5;
+							hp -= list.dam * 0.5;
 						} else if (p.combo >= 10) {
-							hp -= list.dam * 1.3;
+							hp -= list.dam * 0.4;
 						} else {
-							hp -= list.dam;
+							hp -= list.dam*0.3;
 						}
 						
 						p.combo++;
