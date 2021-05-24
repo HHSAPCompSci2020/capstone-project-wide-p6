@@ -61,7 +61,7 @@ public class Player extends MovingImage implements JayLayerListener {
 		combo = 0;
 		
 		hitboxtemp = (new PApplet()).loadImage("imgs/hitboxtemp.png");
-		String[] soundEffects = new String[]{"title1.mp3","title2.mp3","title3.mp3","title4.mp3","title5.mp3"};
+		String[] soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
 		sound=new JayLayer("audio/","audio/",false);
 		sound.addPlayList();
 		sound.addSoundEffects(soundEffects);
