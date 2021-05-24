@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -6,8 +7,9 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 import processing.core.PImage;
-
-public class FlyingShooter extends Enemy{
+import jay.jaysound.JayLayer;
+import jay.jaysound.JayLayerListener;
+public class FlyingShooter extends Enemy implements JayLayerListener{
 
 	private double xVelocity, yVelocity;
 	private boolean onASurface;
@@ -21,6 +23,8 @@ public class FlyingShooter extends Enemy{
 	private double antiMulti;
 	private int index;
 	private ArrayList<PImage> images;
+	private JayLayer sound;
+
 
 	public FlyingShooter(ArrayList<PImage> img, int x, int y, int w, int h, int index) {
 		
@@ -36,6 +40,12 @@ public class FlyingShooter extends Enemy{
 		images = img;
 		shootDelay = 2000000;
 		this.index = index;
+		String[] soundEffects = new String[]{"title1.mp3","title2.mp3","title3.mp3","title4.mp3","title5.mp3"};
+		sound=new JayLayer("audio/","audio/",false);
+		sound.addPlayList();
+		sound.addSoundEffects(soundEffects);
+		sound.changePlayList(0);
+		sound.addJayLayerListener(this);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -47,6 +57,7 @@ public class FlyingShooter extends Enemy{
 		
 		if (shootDelay <= 0) {
 			map.shoot(0, (int)x, (int)y, 10, 10, (p.x - x)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, (p.y - y)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, 400, 10);
+			sound.playSoundEffect(0);
 			shootDelay = 1500000;
 		}
 		
@@ -227,6 +238,30 @@ public class FlyingShooter extends Enemy{
 		if (Math.sqrt((stuff.get(1) - x)* (stuff.get(1) - x) + (stuff.get(2) -y) * (stuff.get(2) - y)) >= 3000) {
 			map.getEnemies()[index] = null;
 		}
+		
+	}
+
+	@Override
+	public void musicStarted() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void musicStopped() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playlistEnded() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void songEnded() {
+		// TODO Auto-generated method stub
 		
 	}
 	

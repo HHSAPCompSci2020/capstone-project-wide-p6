@@ -6,8 +6,9 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 import processing.core.PImage;
-
-public class BallBoss extends Enemy{
+import jay.jaysound.JayLayer;
+import jay.jaysound.JayLayerListener;
+public class BallBoss extends Enemy implements JayLayerListener{
 
 	private double xVelocity, yVelocity;
 	private boolean onASurface;
@@ -21,6 +22,7 @@ public class BallBoss extends Enemy{
 	private int shootDelay = 2000000;
 	private int attackDelay = 2000000;
 	private ArrayList<PImage> images;
+	private JayLayer sound;
 
 	private ArrayList<Drone> drones;
 	private Drone[] mains ;
@@ -36,6 +38,12 @@ public class BallBoss extends Enemy{
 		antiMulti = 5;
 		images = img;
 		this.index = index;
+		String[] soundEffects = new String[]{"title1.mp3","title2.mp3","title3.mp3","title4.mp3","title5.mp3"};
+		sound=new JayLayer("audio/","audio/",false);
+		sound.addPlayList();
+		sound.addSoundEffects(soundEffects);
+		sound.changePlayList(0);
+		sound.addJayLayerListener(this);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -48,6 +56,8 @@ public class BallBoss extends Enemy{
 			
 			if (shootDelay <= 0) {
 				map.shoot(0, (int)x, (int)y, 10, 10, (p.x - x)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, (p.y - y)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, 400, 10);
+				sound.playSoundEffect(0);
+
 				shootDelay = 1500000;
 			}
 			
@@ -118,6 +128,30 @@ public class BallBoss extends Enemy{
 		returner.addAll(drones);
 		returner.addAll(Arrays.asList(mains));
 		return returner;
+	}
+
+	@Override
+	public void musicStarted() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void musicStopped() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playlistEnded() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void songEnded() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
