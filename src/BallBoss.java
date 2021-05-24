@@ -6,72 +6,100 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 import processing.core.PImage;
-import jay.jaysound.JayLayer;
-import jay.jaysound.JayLayerListener;
-public class BallBoss extends Enemy implements JayLayerListener{
+
+public class BallBoss extends MovingImage{
 
 	private double xVelocity, yVelocity;
-	private boolean onASurface;
-	private double gravity;
 	private double hp;
-	private double speed;
-	private double senseRadius = 300;
 	private double antiMulti;
 	private int index;
 	private int phase = 1;
-	private int shootDelay = 2000000;
-	private int attackDelay = 2000000;
+	private double time = 0;
+	private int attack;
+	private double attackDelay = 50000000;
 	private ArrayList<PImage> images;
-	private JayLayer sound;
 
 	private ArrayList<Drone> drones;
 	private Drone[] mains ;
 	
-	public BallBoss(ArrayList<PImage> img, int x, int y, int w, int h, int index) {
+	private ArrayList<ArrayList<Integer>> lasers;
+	
+	private ArrayList<Rectangle> laserDraw;
+	
+	public BallBoss(ArrayList<PImage> img, int x, int y, int w, int h) {
 		
-		super(img, x, y, w, h, index);
+		super(img.get(0), x, y, w, h);
 		xVelocity = 0;
 		yVelocity = 0;
-		gravity = 0.5;
 		hp = 1000;
-		speed = 1.5;
 		antiMulti = 5;
 		images = img;
 		this.index = index;
-		String[] soundEffects = new String[]{"title1.mp3","title2.mp3","title3.mp3","title4.mp3","title5.mp3"};
-		sound=new JayLayer("audio/","audio/",false);
-		sound.addPlayList();
-		sound.addSoundEffects(soundEffects);
-		sound.changePlayList(0);
-		sound.addJayLayerListener(this);
+		mains = new Drone[8];
+		mains[0] = (new Drone(images, x, y, 50, 50));
+		mains[1] = (new Drone(images, x, y, 50, 50));
+		mains[2] = (new Drone(images, x, y, 50, 50));
+		mains[3] = (new Drone(images, x, y, 50, 50));
+		mains[4] = (new Drone(images, x, y, 50, 50));
+		mains[5] = (new Drone(images, x, y, 50, 50));
+		mains[6] = (new Drone(images, x, y, 50, 50));
+		mains[7] = (new Drone(images, x, y, 50, 50));
+		
 		// TODO Auto-generated constructor stub
 	}
 
 	public void act(Map map, long timeElapsed, Player p) {
 		ArrayList<Shape> obstacles = map.getObstacles();
-		
+		antiMulti -= 1;
+		attackDelay -= timeElapsed/1000;
+		time += timeElapsed;
 		if (phase == 0) {
-			shootDelay -= timeElapsed/1000;
-			antiMulti -= 1;
 			
-			if (shootDelay <= 0) {
-				map.shoot(0, (int)x, (int)y, 10, 10, (p.x - x)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, (p.y - y)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, 400, 10);
-				sound.playSoundEffect(0);
 
-				shootDelay = 1500000;
+			if (attackDelay <= 0) {
+				attack = (int)(Math.random() * 1 + 1);
+				attackDelay = 2000000000;
+				time = 0;
 			}
+			switch(attack) {
+			case (0):
+				for (int i = 0; i < mains.length; i++) {
+					Drone drone = mains[i];
+					double locx = getCenterX() + 200 * Math.cos(time/100000000 + i*Math.PI/4) - 25;
+					double locy = getCenterY() + 200 * Math.sin(time/100000000 + i*Math.PI/4) - 25;
+					double movex = 2*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+					double movey = 2*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+					drone.moveToLocation(drone.x + movex, drone.xVelocity + movey);
+					
+				}
+				
+				
+				break;
+			case(1):
+				drones.add(new Drone(images, (int)x+200, (int)y, 50, 50, 2));
+				drones.add(new Drone(images, (int)x-200, (int)y, 50, 50, 2));
+				drones.add(new Drone(images, (int)x+200, (int)y-50, 50, 50, 3));
+				drones.add(new Drone(images, (int)x-200, (int)y-50, 50, 50, 3));
+				drones.add(new Drone(images, (int)x, (int)y+50, 50, 50, 3));
+				attack = 0;
+				attackDelay = 150000000;
+				break;
+			case(2):
+
+				attack = 0;
+				attackDelay = 150000000;
+				break;
 			
-			
-			double xCoord = getX();
-			double yCoord = getY();
+			}
+			for (int i = 0; i < drones.size(); i++) {
+				Drone drone = drones.get(i);
+				drone.act(map, p, timeElapsed);
+				drone.checkCollision(map, p);
+			}
+		
 			double width = getWidth();
 			double height = getHeight();
 	
-			// *********** Movement ***********
-		
-			
-			//-------------------Physics---------------------
-			
 			
 			
 			// -------------------- collision checking ---------------------
@@ -129,29 +157,8 @@ public class BallBoss extends Enemy implements JayLayerListener{
 		returner.addAll(Arrays.asList(mains));
 		return returner;
 	}
-
-	@Override
-	public void musicStarted() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void musicStopped() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void playlistEnded() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void songEnded() {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<ArrayList<Integer>> getLasers(){
+		return lasers;
 	}
 	
 	
