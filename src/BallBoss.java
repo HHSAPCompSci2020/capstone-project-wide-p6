@@ -312,7 +312,7 @@ public class BallBoss extends MovingImage{
 				for (int i = 0; i < mains.length; i++) {
 					if (time >= i * 1000000000 && time >= i + 1.5 * 1000000000) {
 					drone = mains[attp];
-					if (i <= 7)
+					if (i <= 7) {
 						locx = 100;
 					} else {
 						locx = 1550;
