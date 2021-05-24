@@ -10,58 +10,67 @@ import processing.core.PImage;
 public class BallBoss extends MovingImage{
 
 	private double xVelocity, yVelocity;
-	private boolean onASurface;
-	private double gravity;
 	private double hp;
-	private double speed;
-	private double senseRadius = 300;
 	private double antiMulti;
 	private int index;
 	private int phase = 1;
-	private int shootDelay = 2000000;
-	private int attackDelay = 2000000;
+	private double time = 0;
+	private int attack;
+	private double attackDelay = 50000000;
 	private ArrayList<PImage> images;
 
 	private ArrayList<Drone> drones;
 	private Drone[] mains ;
+	
+	private ArrayList<ArrayList<Integer>> lasers;
+	
+	private ArrayList<Rectangle> laserDraw;
 	
 	public BallBoss(ArrayList<PImage> img, int x, int y, int w, int h) {
 		
 		super(img.get(0), x, y, w, h);
 		xVelocity = 0;
 		yVelocity = 0;
-		gravity = 0.5;
 		hp = 1000;
-		speed = 1.5;
 		antiMulti = 5;
 		images = img;
 		this.index = index;
+		
+		
 		// TODO Auto-generated constructor stub
 	}
 
 	public void act(Map map, long timeElapsed, Player p) {
 		ArrayList<Shape> obstacles = map.getObstacles();
-		
+		antiMulti -= 1;
+		attackDelay -= timeElapsed/1000;
+		time += timeElapsed;
 		if (phase == 0) {
-			shootDelay -= timeElapsed/1000;
-			antiMulti -= 1;
 			
-			if (shootDelay <= 0) {
-				map.shoot(0, (int)x, (int)y, 10, 10, (p.x - x)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, (p.y - y)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, 400, 10);
-				shootDelay = 1500000;
+
+			if (attackDelay <= 0) {
+				attack = (int)(Math.random() * 3);
+				attackDelay = 2000000000;
+				time = 0;
 			}
+			switch(attack) {
+			case (0):
+				
+				break;
+			case(1):
+				drones.add(new Drone(images, 0, 0, 50, 50, 2));
+				break;
 			
-			
-			double xCoord = getX();
-			double yCoord = getY();
+			}
+			for (int i = 0; i < drones.size(); i++) {
+				Drone drone = drones.get(i);
+				drone.move(map, p);
+				drone.checkCollision(map, p);
+			}
+		
 			double width = getWidth();
 			double height = getHeight();
 	
-			// *********** Movement ***********
-		
-			
-			//-------------------Physics---------------------
-			
 			
 			
 			// -------------------- collision checking ---------------------
@@ -118,6 +127,9 @@ public class BallBoss extends MovingImage{
 		returner.addAll(drones);
 		returner.addAll(Arrays.asList(mains));
 		return returner;
+	}
+	public ArrayList<ArrayList<Integer>> getLasers(){
+		return lasers;
 	}
 	
 	

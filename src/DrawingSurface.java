@@ -188,7 +188,29 @@ public class DrawingSurface extends PApplet implements MouseListener{
 
 		
 		if(bossFight) {
+			boss.act(map, currTime, player);
+			boss.draw(this, camx, camy);
+			ArrayList<Drone> drones = boss.getDrones();
+			for(int i = 0; i < drones.size();i++) {
+				Drone drone = drones.get(i);
+				drone.draw(this, camx, camy);
+				if (drone.hp <= 0) {
+					drones.remove(i);
+				}
+				
+			}
 			
+			ArrayList<ArrayList<Integer>>  lasers= boss.getLasers();
+			for(int i = 0; i < lasers.size();i++) {
+				ArrayList<Integer> list = lasers.get(i);
+				noStroke();
+				rect(list.get(0), list.get(1), list.get(2), list.get(3));
+				if ((new Rectangle(list.get(0), list.get(1), list.get(2), list.get(3)).intersects(player.x, player.y, player.width, player.height))) {
+					player.hit(15);
+				}
+				
+				stroke(0);
+			}
 		}
 		
 		player.draw(this, camx, camy);
