@@ -42,7 +42,11 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
 		map = new Map();
 		checksPassed = new Boolean[map.getCheckpoints().size()];
-		
+		for (int j = 0; j < map.getEnemies().length; j++) {
+			ArrayList<Integer>list = map.getEnemyInfo().get(j);
+			map.spawnEnemy(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), j);
+			list.set(6,list.get(5));
+		}
 		for (int i = 0; i < checksPassed.length; i++) {
 			checksPassed[i] = false;
 		}
@@ -52,6 +56,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		camy = player.y;
 		lastUpdate = System.nanoTime();
 		noLoop();
+		
 		this.w = w;
 	}
 
@@ -174,7 +179,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			if (e == null) {
 				ArrayList<Integer>list = map.getEnemyInfo().get(i);
 				list.set(6, (int) (list.get(6) - (currTime)/1000000));
-				if (list.get(6) <= 0 ) {
+				if (list.get(6) <= 0 && (Math.sqrt((player.x - e.x)*(player.x - e.x) + (player.y - e.y)*(player.y - e.y)) > Math.sqrt((w.getWidth())*4*(w.getWidth()) + (w.getHeight())*4*(w.getHeight()) + 500))) {
 					map.spawnEnemy(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), i);
 					list.set(6,list.get(5));
 				}
