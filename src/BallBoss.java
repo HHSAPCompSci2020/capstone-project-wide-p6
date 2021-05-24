@@ -5,6 +5,7 @@ import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
+import processing.core.PApplet;
 import processing.core.PImage;
 
 public class BallBoss extends MovingImage{
@@ -189,7 +190,23 @@ public class BallBoss extends MovingImage{
 			hp = 1000;
 			drones.clear();
 			mains = new Drone[16];
-			
+			ArrayList<PImage> redEye = new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("imgs/Boss5.png"), (new PApplet()).loadImage("imgs/droneright.png"), (new PApplet()).loadImage("imgs/droneup.png"), (new PApplet()).loadImage("imgs/droneleft.png"), (new PApplet()).loadImage("imgs/dronedown.png")));
+			mains[0] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[1] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[2] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[3] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[4] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[5] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[6] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[7] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[8] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[9] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[10] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[11] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[12] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[13] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[14] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
+			mains[15] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			super.setImage(images.get((int)phase/4));
 			phase++;
 		} else {
