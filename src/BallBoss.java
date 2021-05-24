@@ -200,7 +200,8 @@ public class BallBoss extends MovingImage{
 			hp = 1000;
 			drones.clear();
 			mains = new Drone[10];
-			
+			attp = 0;
+			attack = 0;
 			if (phase% 8 == 0) {
 				warnings.add(new ArrayList<Integer>(Arrays.asList(100, 8050, 1500, 50)));
 			} else if (phase % 4 == 0) {
@@ -228,30 +229,6 @@ public class BallBoss extends MovingImage{
 			// ------------MOVEMENT -------------
 			
 			
-			
-			if ((Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y)) > 400)) {
-				if (stagger <= 0) {
-			if (p.x >= x) {
-				xVelocity = 1.5;
-			} else {
-				xVelocity = -1.5;
-			}
-			
-			if (p.y >= y) {
-				yVelocity = 1.5;
-			} else {
-				yVelocity = -1.5;
-			}
-				}
-			}
-			
-			xVelocity *= 0.95;
-			yVelocity *= 0.95;
-			if (Math.abs(xVelocity) < .5)
-				xVelocity = 0;
-			if (Math.abs(yVelocity) < .5)
-				yVelocity = 0;
-			moveToLocation(x+xVelocity,y + yVelocity);
 			
 			
 			// ------------Attacking ---------------
@@ -435,9 +412,6 @@ public class BallBoss extends MovingImage{
 						} else {
 							hp -= list.dam;
 						}
-						
-						xVelocity = list.kx;
-						yVelocity = list.ky;
 						
 						p.combo++;
 						if(p.getDive() == 1) {
