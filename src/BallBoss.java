@@ -17,12 +17,15 @@ public class BallBoss extends MovingImage{
 	private double time = 0;
 	private int attack;
 	private double attackDelay = 5000000;
+	private double shootDelay = 5000000;
 	private ArrayList<PImage> images;
 
+	private ArrayList<PImage> redEye = new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("imgs/Boss5.png"), (new PApplet()).loadImage("imgs/droneright.png"), (new PApplet()).loadImage("imgs/droneup.png"), (new PApplet()).loadImage("imgs/droneleft.png"), (new PApplet()).loadImage("imgs/dronedown.png")));
 	private ArrayList<Drone> drones;
 	private Drone[] mains ;
 	
 	private ArrayList<ArrayList<Integer>> lasers;
+	private ArrayList<ArrayList<Integer>> warnings;
 	private int attp;
 	
 	
@@ -57,6 +60,7 @@ public class BallBoss extends MovingImage{
 	public void act(Map map, long timeElapsed, Player p) {
 		antiMulti -= 1;
 		attackDelay -= timeElapsed/1000;
+		shootDelay -= timeElapsed/1000;
 		time += timeElapsed;
 		if (phase == 0) {
 			
@@ -149,6 +153,10 @@ public class BallBoss extends MovingImage{
 			
 			// -------------------- collision checking ---------------------
 			
+			for (int i = 0; i < mains.length; i++) {
+				Drone drone = mains[i];
+				drone.checkCollision(map, p);
+			}
 			
 			
 			
@@ -186,11 +194,11 @@ public class BallBoss extends MovingImage{
 			}
 			
 		
-		} else if (phase <= 16){
+		} else if (phase <= 36){
 			hp = 1000;
 			drones.clear();
-			mains = new Drone[16];
-			ArrayList<PImage> redEye = new ArrayList<PImage>(Arrays.asList((new PApplet()).loadImage("imgs/Boss5.png"), (new PApplet()).loadImage("imgs/droneright.png"), (new PApplet()).loadImage("imgs/droneup.png"), (new PApplet()).loadImage("imgs/droneleft.png"), (new PApplet()).loadImage("imgs/dronedown.png")));
+			mains = new Drone[12];
+			
 			mains[0] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			mains[1] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			mains[2] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
@@ -203,13 +211,157 @@ public class BallBoss extends MovingImage{
 			mains[9] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			mains[10] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			mains[11] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
-			mains[12] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
-			mains[13] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
-			mains[14] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
-			mains[15] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
-			super.setImage(images.get((int)phase/4));
+			super.setImage(images.get((int)phase/9));
 			phase++;
 		} else {
+			// ------------MOVEMENT -------------
+			if ((Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y)) > 400)) {
+				if (p.x >= x) {
+					xVelocity = 1.5;
+				} else {
+					xVelocity = -1.5;
+				}
+				
+				if (p.y >= y) {
+					yVelocity = 1.5;
+				} else {
+					yVelocity = -1.5;
+				}
+			}
+			
+			xVelocity *= 0.95;
+			yVelocity *= 0.95;
+			if (Math.abs(xVelocity) < .5)
+				xVelocity = 0;
+			if (Math.abs(yVelocity) < .5)
+				yVelocity = 0;
+			moveToLocation(x+xVelocity,y + yVelocity);
+			
+			
+			// ------------Attacking ---------------
+			if (shootDelay <= 0) {
+				double locx = p.getCenterX();
+				double locy = p.getCenterY();
+				double movex = 2*(locx - getCenterX())/(Math.sqrt((locx- getCenterX())*(locx- getCenterX()) + (locy- getCenterY())*(locy- getCenterY())));
+				double movey = 2*(locy - getCenterY())/(Math.sqrt((locx- getCenterX())*(locx- getCenterX()) + (locy- getCenterY())*(locy- getCenterY())));
+				drones.add(new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, movex, movey));
+				locx = p.getCenterX();
+				locy = p.getCenterY();
+				movex = 2*Math.cos(Math.PI/4 + Math.acos((locx - getCenterX())/(Math.sqrt((locx- getCenterX())*(locx- getCenterX()) + (locy- getCenterY())*(locy- getCenterY())))));
+				movey = 2*Math.sin(Math.PI/4 + Math.asin((locx - getCenterX())/(Math.sqrt((locx- getCenterX())*(locx- getCenterX()) + (locy- getCenterY())*(locy- getCenterY())))));
+				drones.add(new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, movex, movey));
+				
+				locx = p.getCenterX();
+				locy = p.getCenterY();
+				movex = 2*Math.cos(-Math.PI/4 + Math.acos((locx - getCenterX())/(Math.sqrt((locx- getCenterX())*(locx- getCenterX()) + (locy- getCenterY())*(locy- getCenterY())))));
+				movey = 2*Math.sin(-Math.PI/4 + Math.asin((locx - getCenterX())/(Math.sqrt((locx- getCenterX())*(locx- getCenterX()) + (locy- getCenterY())*(locy- getCenterY())))));
+				drones.add(new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, movex, movey));
+				
+				shootDelay = 5000000;
+				
+			}
+			
+			if (attackDelay <= 0) {
+				attack = (int)(Math.random() * 1 + 1);
+				attackDelay = 2000000000;
+				time = 0;
+			}
+			switch(attack) {
+			case (0):
+				for (int i = 0; i < mains.length; i++) {
+					Drone drone = mains[i];
+					double locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/6) - 25;
+					double locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/6) - 25;
+					double movex = 4*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+					double movey = 4*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+					drone.x += movex;
+					drone.y += movey;
+					drone.checkCollision(map, p);
+					attp = 0;
+					
+				}
+				
+				
+				break;
+			case(1):
+				Drone drone = mains[attp];
+				double locx = p.getCenterX();
+				double locy = p.getCenterY();
+				double movex = 5*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+				double movey = 5*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+				
+				drone.x += movex;
+				drone.y += movey;
+				drone.checkCollision(map, p);
+				if (time >= 1000000000) {
+					time = 0;
+					attp ++;
+				}
+				for (int i = 0; i < mains.length; i++) {
+					mains[i].checkCollision(map, p);
+				}
+				attackDelay = 10000000;
+				if (attp>= 15) {
+					attp = 0; 
+					attack = 0;
+					attackDelay = 5000000;
+				}
+				break;
+			
+			}
+			for (int i = 0; i < drones.size(); i++) {
+				Drone drone = drones.get(i);
+				drone.act(map, p, timeElapsed);
+				drone.checkCollision(map, p);
+				if (drone.hp <= 0) {
+					drones.remove(drone);
+				}
+			}
+		
+			double width = getWidth();
+			double height = getHeight();
+	
+			
+			
+			// -------------------- collision checking ---------------------
+			
+			
+			for (int i = 0; i < drones.size(); i++) {
+				Drone drone = drones.get(i);
+				drone.act(map, p, timeElapsed);
+				drone.checkCollision(map, p);
+				if (drone.hp <= 0) {
+					drones.remove(drone);
+				}
+			}
+			
+			for(int i = 0; i < map.getHitboxes().size(); i++) {
+				Hitbox list =  map.getHitboxes().get(i);
+				if (new Ellipse2D.Double(x, y, width, height).intersects((int)list.x - 7,(int)list.y - 7,list.w + 15,list.h + 15)) {
+					if ((antiMulti <= 0)) {
+						antiMulti = 6;
+						
+						if(p.combo >= 30) {
+							hp -= list.dam * 2;
+							p.hp+= list.dam/5; 
+						} else if (p.combo >= 20) {
+							hp -= list.dam * 1.5;
+						} else if (p.combo >= 10) {
+							hp -= list.dam * 1.3;
+						} else {
+							hp -= list.dam;
+						}
+						
+						p.combo++;
+						if(p.getDive() == 1) {
+							p.diveHop();
+						}
+						if(p.getDash() >= 0) {
+							p.stamina += 60;
+						}
+					}
+				}
+			}
 			
 		}
 		
@@ -225,6 +377,9 @@ public class BallBoss extends MovingImage{
 	
 	public ArrayList<ArrayList<Integer>> getLasers(){
 		return lasers;
+	}
+	public ArrayList<ArrayList<Integer>> getWarnings(){
+		return warnings;
 	}
 	
 	
