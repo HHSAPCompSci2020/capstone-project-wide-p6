@@ -186,9 +186,10 @@ public class BallBoss extends MovingImage{
 			
 		
 		} else if (phase <= 16){
-			hp = 1500;
+			hp = 1000;
 			drones.clear();
 			mains = new Drone[16];
+			
 			super.setImage(images.get((int)phase/4));
 			phase++;
 		} else {
