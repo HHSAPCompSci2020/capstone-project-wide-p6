@@ -222,9 +222,9 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 				ArrayList<Integer> list = lasers.get(i);
 				noStroke();
 				fill(255,0,0);
-				rect(list.get(0), list.get(1), list.get(2), list.get(3));
+				rect((int)(list.get(0) - camx)/2, (int)(list.get(1) - camy)/2, list.get(2)/2, list.get(3)/2);
 				if ((new Rectangle(list.get(0), list.get(1), list.get(2), list.get(3)).intersects(player.x, player.y, player.width, player.height))) {
-					player.hit(15);
+					player.hit(20);
 				}
 				
 				stroke(0);
@@ -235,7 +235,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 				ArrayList<Integer> list = warnings.get(i);
 				fill(255, 200, 200);
 				noStroke();
-				rect(list.get(0), list.get(1), list.get(2), list.get(3));
+				rect((int)(list.get(0) - camx)/2, (int)(list.get(1) - camy)/2, list.get(2)/2, list.get(3)/2);
 				stroke(0);
 			}
 			
