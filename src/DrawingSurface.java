@@ -152,7 +152,7 @@ public class DrawingSurface extends PApplet implements MouseListener{
 			rect((int)(3150 - camx)/2,(int)(2050 - camy)/2,150/2,150/2);
 			if ((new Rectangle(3150, 2050, 150, 150).intersects(player.x, player.y, player.width, player.height))) {
 				bossFight = true;
-				boss = new BallBoss(new ArrayList<PImage> (Arrays.asList(loadImage("imgs/Boss1.png"), loadImage("imgs/Boss2.png"), loadImage("imgs/Boss3.png"), loadImage("imgs/Boss4.png"), loadImage("imgs/Boss5.png"))), 850, 7600, 300, 300);
+				boss = new BallBoss(new ArrayList<PImage> (Arrays.asList(loadImage("imgs/Boss1.png"), loadImage("imgs/Boss2.png"), loadImage("imgs/Boss3.png"), loadImage("imgs/Boss4.png"), loadImage("imgs/Boss5.png"))), 850, 7800, 300, 300);
 				player.x = 600;
 				player.y = 7950;
 			}

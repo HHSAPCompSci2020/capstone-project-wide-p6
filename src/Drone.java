@@ -26,7 +26,7 @@ public class Drone extends MovingImage{
 	public Drone(ArrayList<PImage> img, int x, int y, int w, int h, int type) {
 		super(img.get(0), x, y, w, h);
 		this.type = type;
-		hp = 100;
+		hp = 50;
 		
 	}
 	
@@ -40,8 +40,90 @@ public class Drone extends MovingImage{
 	
 	public void act(Map map, Player p, long timeElapsed) {
 		if (type == 1) {
+			
+			ArrayList<Shape> obstacles = map.getObstacles();
+			
 			x += xVelocity;
 			y += yVelocity;
+			
+			double xCoord = getX();
+			double yCoord = getY();
+			double width = getWidth();
+			double height = getHeight();
+			
+			double yCoord2 = yCoord + yVelocity*timeElapsed/17000000;
+
+			Rectangle2D.Double strechY = new Rectangle2D.Double(xCoord,Math.min(yCoord,yCoord2),width,height+Math.abs(yVelocity*timeElapsed/17000000));
+			
+			onASurface = false;
+			
+			
+			if (yVelocity > 0) {
+				Shape standingSurface = null;
+				for (Shape s : obstacles) {
+					if (s.intersects(strechY)) {
+						onASurface = true;
+						standingSurface = s;
+						yVelocity = -3;
+					}
+				}
+				if (standingSurface != null) {
+					Rectangle r = standingSurface.getBounds();
+					yCoord2 = r.getY()-height;
+				}
+			} else if (yVelocity < 0) {
+				Shape headSurface = null;
+				for (Shape s : obstacles) {
+					if (s.intersects(strechY)) {
+						headSurface = s;
+						yVelocity = 3;
+					}
+				}
+				if (headSurface != null) {
+					Rectangle r = headSurface.getBounds();
+					yCoord2 = r.getY()+r.getHeight();
+				}
+			}
+
+			if (Math.abs(yVelocity) < .5)
+				yVelocity = 0;
+
+			// ***********X AXIS***********
+
+			
+
+			
+			double xCoord2 = xCoord + xVelocity*timeElapsed/17000000;
+
+			Rectangle2D.Double strechX = new Rectangle2D.Double(Math.min(xCoord,xCoord2),yCoord2,width+Math.abs(xVelocity*timeElapsed/17000000),height);
+
+			if (xVelocity > 0) {
+				Shape rightSurface = null;
+				for (Shape s : obstacles) {
+					if (s.intersects(strechX)) {
+						rightSurface = s;
+						xVelocity = -3;
+					}
+				}
+				if (rightSurface != null) {
+					Rectangle r = rightSurface.getBounds();
+					xCoord2 = r.getX()-width;
+				}
+			} else if (xVelocity < 0) {
+				Shape leftSurface = null;
+				for (Shape s : obstacles) {
+					if (s.intersects(strechX)) {
+						leftSurface = s;
+						xVelocity = 3;
+					}
+				}
+				if (leftSurface != null) {
+					Rectangle r = leftSurface.getBounds();
+					xCoord2 = r.getX()+r.getWidth();
+				}
+			}
+			
+			
 		} else if (type == 2) {
 			ArrayList<Shape> obstacles = map.getObstacles();
 			stagger -= timeElapsed;
@@ -179,16 +261,18 @@ public class Drone extends MovingImage{
 
 			// *********** Movement ***********
 
-			if (p.x >= x) {
-				xVelocity = 2;
-			} else {
-				xVelocity = -2;
-			}
-			
-			if (p.y >= y) {
-				yVelocity = 2;
-			} else {
-				yVelocity = -2;
+			if (stagger <= 0) {
+				if (p.x >= x) {
+					xVelocity = 2;
+				} else {
+					xVelocity = -2;
+				}
+				
+				if (p.y >= y) {
+					yVelocity = 2;
+				} else {
+					yVelocity = -2;
+				}
 			}
 			
 			//-------------------Physics---------------------
