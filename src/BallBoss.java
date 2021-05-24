@@ -25,6 +25,7 @@ public class BallBoss extends MovingImage{
 	private Drone[] mains ;
 	
 	private ArrayList<ArrayList<Integer>> lasers;
+	private ArrayList<ArrayList<Integer>> warnings;
 	private int attp;
 	
 	
@@ -196,7 +197,7 @@ public class BallBoss extends MovingImage{
 		} else if (phase <= 36){
 			hp = 1000;
 			drones.clear();
-			mains = new Drone[16];
+			mains = new Drone[12];
 			
 			mains[0] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			mains[1] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
@@ -210,10 +211,6 @@ public class BallBoss extends MovingImage{
 			mains[9] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			mains[10] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			mains[11] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
-			mains[12] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
-			mains[13] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
-			mains[14] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
-			mains[15] = (new Drone(redEye, (int)getCenterX(), (int)getCenterY(), 50, 50, true));
 			super.setImage(images.get((int)phase/9));
 			phase++;
 		} else {
@@ -250,8 +247,8 @@ public class BallBoss extends MovingImage{
 			case (0):
 				for (int i = 0; i < mains.length; i++) {
 					Drone drone = mains[i];
-					double locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/8) - 25;
-					double locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/8) - 25;
+					double locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/6) - 25;
+					double locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/6) - 25;
 					double movex = 4*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 					double movey = 4*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 					drone.x += movex;
@@ -357,6 +354,9 @@ public class BallBoss extends MovingImage{
 	
 	public ArrayList<ArrayList<Integer>> getLasers(){
 		return lasers;
+	}
+	public ArrayList<ArrayList<Integer>> getWarnings(){
+		return warnings;
 	}
 	
 	
