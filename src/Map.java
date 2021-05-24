@@ -6,11 +6,10 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Map {
+public class Map  {
 
 	private ArrayList<Shape> obstacles;
 	private ArrayList<Rectangle> checkpoints;
@@ -19,7 +18,7 @@ public class Map {
 	//hitboxes are formatted as: x, y, width, height, damage, frames on-screen, launch xvel, launch yvel
 	private Enemy[] enemies;
 	private ArrayList<Projectile> projectiles;
-	
+
 	private PImage marioflip, goomba; 
 	
 	private ArrayList<ArrayList<Integer>> enemyInfo;
@@ -36,7 +35,6 @@ public class Map {
 		enemyInfo = new ArrayList<ArrayList<Integer>>();
 		hitboxes = new ArrayList<Hitbox>();
 		lava = new ArrayList<Rectangle>();
-		
 		
 		
 		
@@ -304,5 +302,6 @@ public class Map {
 	public ArrayList<Rectangle> getLava(){
 		return lava;
 	}
-	
 }
+
+	
