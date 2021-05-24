@@ -255,7 +255,7 @@ public class BallBoss extends MovingImage{
 			}
 			
 			if (attackDelay <= 0) {
-				attack = (int)(Math.random() * 1 + 1);
+				attack = (int)(Math.random() * 2 + 1);
 				attackDelay = 2000000000;
 				time = 0;
 			}
@@ -264,8 +264,8 @@ public class BallBoss extends MovingImage{
 				for (int i = 0; i < mains.length; i++) {
 					Drone drone = mains[i];
 					drone.setImage(redEye.get(0));
-					double locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/10) - 25;
-					double locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/10) - 25;
+					double locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/5) - 25;
+					double locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/5) - 25;
 					double movex = 4*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 					double movey = 4*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
 					drone.x += movex;
@@ -291,8 +291,9 @@ public class BallBoss extends MovingImage{
 				}
 				for (int i = 0; i < mains.length; i++) {
 					if (i != attp) {
-						locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/10) - 25;
-						locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/10) - 25;
+						drone = mains[i];
+						locx = getCenterX() + 300 * Math.cos(time/1000000000 + i*Math.PI/5) - 25;
+						locy = getCenterY() + 300 * Math.sin(time/1000000000 + i*Math.PI/5) - 25;
 						movex = 4*(locx - mains[i].x)/(Math.sqrt((locx- mains[i].x)*(locx- mains[i].x) + (locy- mains[i].y)*(locy- mains[i].y)));
 						movey = 4*(locy - mains[i].y)/(Math.sqrt((locx- mains[i].x)*(locx- mains[i].x) + (locy- mains[i].y)*(locy- mains[i].y)));
 						mains[i].x += movex;
@@ -301,7 +302,7 @@ public class BallBoss extends MovingImage{
 					mains[i].checkCollision(map, p);
 				}
 				attackDelay = 10000000;
-				if (attp>= 11) {
+				if (attp>= 9) {
 					attp = 0; 
 					attack = 0;
 					attackDelay = 5000000;
