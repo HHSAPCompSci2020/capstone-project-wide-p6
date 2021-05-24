@@ -48,6 +48,10 @@ public class BallBoss extends MovingImage{
 		
 		// TODO Auto-generated constructor stub
 	}
+	
+	public double gethp() {
+		return hp;
+	}
 
 	public void act(Map map, long timeElapsed, Player p) {
 		antiMulti -= 1;
@@ -106,8 +110,9 @@ public class BallBoss extends MovingImage{
 				Drone drone = mains[attp];
 				double locx = p.getCenterX();
 				double locy = p.getCenterY();
-				double movex = 2*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
-				double movey = 2*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+				double movex = 3*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+				double movey = 3*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+				
 				drone.x += movex;
 				drone.y += movey;
 				drone.checkCollision(map, p);

@@ -128,7 +128,6 @@ public class Drone extends MovingImage{
 			ArrayList<Shape> obstacles = map.getObstacles();
 			stagger -= timeElapsed;
 			shootDelay -= timeElapsed/1000;
-			antiMulti -= 1;
 			
 			if (shootDelay <= 0) {
 				map.shoot(0, (int)x, (int)y, 10, 10, (p.x - x)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, (p.y - y)/Math.sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y))*5, 400, 10);
@@ -251,7 +250,7 @@ public class Drone extends MovingImage{
 		}else if (type == 3) {
 			ArrayList<Shape> obstacles = map.getObstacles();
 			stagger -= timeElapsed;
-			antiMulti -= 1;
+			
 			
 			
 			double xCoord = getX();
@@ -362,7 +361,7 @@ public class Drone extends MovingImage{
 	}
 	
 	public void checkCollision(Map map, Player p) {
-		
+		antiMulti -= 1;
 		if (type == 0) {
 			if ((new Rectangle((int)(x), (int)(y), (int)super.width, (int)super.height)).intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.PLAYER_WIDTH, (int)p.PLAYER_HEIGHT))) {
 				p.hit(10);
@@ -393,7 +392,7 @@ public class Drone extends MovingImage{
 							p.diveHop();
 						}
 						if(p.getDash() >= 0) {
-							p.stamina += 60;
+							p.stamina += 20;
 						}
 					}
 				}
@@ -424,7 +423,7 @@ public class Drone extends MovingImage{
 							p.diveHop();
 						}
 						if(p.getDash() >= 0) {
-							p.stamina += 60;
+							p.stamina += 20;
 						}
 					}
 				}
@@ -460,7 +459,7 @@ public class Drone extends MovingImage{
 							p.diveHop();
 						}
 						if(p.getDash() >= 0) {
-							p.stamina += 60;
+							p.stamina += 20;
 						}
 					}
 				}
@@ -495,7 +494,7 @@ public class Drone extends MovingImage{
 							p.diveHop();
 						}
 						if(p.getDash() >= 0) {
-							p.stamina += 60;
+							p.stamina += 20;
 						}
 					}
 				}
