@@ -55,7 +55,6 @@ public class DrawingSurface extends PApplet implements MouseListener{
 		camx = player.x;
 		camy = player.y;
 		lastUpdate = System.nanoTime();
-		noLoop();
 		
 		this.w = w;
 	}
@@ -287,8 +286,9 @@ public class DrawingSurface extends PApplet implements MouseListener{
 	 * unpause the screen
 	 */
 	public void unpause() {
-		loop();
 		lastUpdate = System.nanoTime();
+		loop();
+		
 	}
 	
 	public void pause() {

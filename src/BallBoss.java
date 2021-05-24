@@ -15,7 +15,7 @@ public class BallBoss extends MovingImage{
 	private int phase = 0;
 	private double time = 0;
 	private int attack;
-	private double attackDelay = 10000000;
+	private double attackDelay = 5000000;
 	private ArrayList<PImage> images;
 
 	private ArrayList<Drone> drones;
@@ -89,7 +89,7 @@ public class BallBoss extends MovingImage{
 				drones.add(new Drone(images, (int)x-200, (int)y-50, 50, 50, 3));
 				drones.add(new Drone(images, (int)x, (int)y+50, 50, 50, 3));
 				attack = 0;
-				attackDelay = 20000000;
+				attackDelay = 10000000;
 				time = 0;
 				break;
 			case(2):
@@ -103,7 +103,7 @@ public class BallBoss extends MovingImage{
 				drones.add(new Drone(images, (int)getCenterX(), (int)getCenterY(), 50, 50, 3, 3));
 		
 				attack = 0;
-				attackDelay = 10000000;
+				attackDelay = 5000000;
 				time = 0;
 				break;
 			case(3):
