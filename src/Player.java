@@ -61,7 +61,7 @@ private String[] soundEffects;
 		combo = 0;
 		
 		hitboxtemp = (new PApplet()).loadImage("imgs/hitboxtemp.png");
-		String[] soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
+		soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
 		sound=new JayLayer("audio/","audio/",false);
 		sound.addPlayList();
 		sound.addSoundEffects(soundEffects);
@@ -96,14 +96,23 @@ private String[] soundEffects;
 				stamina -= 25;
 				delay = 200000000;
 				sound.playSoundEffect(0);
-				
-
+				soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
+				sound=new JayLayer("audio/","audio/",false);
+				sound.addPlayList();
+				sound.addSoundEffects(soundEffects);
+				sound.changePlayList(0);
+				sound.addJayLayerListener(this);
 			}else if (stamina >= 25) {
 				yVelocity = -jumpStrength;
 				stamina -= 25;
 				delay = 200000000;
 				sound.playSoundEffect(0);
-
+				soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
+				sound=new JayLayer("audio/","audio/",false);
+				sound.addPlayList();
+				sound.addSoundEffects(soundEffects);
+				sound.changePlayList(0);
+				sound.addJayLayerListener(this);
 			}
 			
 		}
@@ -126,10 +135,22 @@ private String[] soundEffects;
 				if (direction) {
 					dash = 100000000;
 				sound.playSoundEffect(1);
+				soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
+				sound=new JayLayer("audio/","audio/",false);
+				sound.addPlayList();
+				sound.addSoundEffects(soundEffects);
+				sound.changePlayList(0);
+				sound.addJayLayerListener(this);
 				}
 				else {
 					dash = 100000000;
 					sound.playSoundEffect(1);
+					soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
+					sound=new JayLayer("audio/","audio/",false);
+					sound.addPlayList();
+					sound.addSoundEffects(soundEffects);
+					sound.changePlayList(0);
+					sound.addJayLayerListener(this);
 				}
 				stamina -= 20;
 				invincible = 200000000;
@@ -146,7 +167,13 @@ private String[] soundEffects;
 		if(!(onASurface) && (delay <= 0)) {
 			dive = 1;
 			sound.playSoundEffect(1);
-
+			soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
+			sound=new JayLayer("audio/","audio/",false);
+			sound.addPlayList();
+			sound.addSoundEffects(soundEffects);
+			sound.changePlayList(0);
+			sound.addJayLayerListener(this);
+			
 		}
 	}
 	/**
@@ -181,6 +208,12 @@ private String[] soundEffects;
 			}
 		}
 		sound.playSoundEffect(2);
+		soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
+		sound=new JayLayer("audio/","audio/",false);
+		sound.addPlayList();
+		sound.addSoundEffects(soundEffects);
+		sound.changePlayList(0);
+		sound.addJayLayerListener(this);
 
 	}
 	
@@ -217,6 +250,12 @@ private String[] soundEffects;
 			}
 		}
 		sound.playSoundEffect(2);
+		soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
+		sound=new JayLayer("audio/","audio/",false);
+		sound.addPlayList();
+		sound.addSoundEffects(soundEffects);
+		sound.changePlayList(0);
+		sound.addJayLayerListener(this);
 
 	}
 	
@@ -232,6 +271,12 @@ private String[] soundEffects;
 			//stamina = 0;
 		}
 		sound.playSoundEffect(3);
+		soundEffects = new String[]{"Jump.mp3", "Dash.mp3", "Slash.mp3","damage.mp3"};
+		sound=new JayLayer("audio/","audio/",false);
+		sound.addPlayList();
+		sound.addSoundEffects(soundEffects);
+		sound.changePlayList(0);
+		sound.addJayLayerListener(this);
 		
 	}
 	/*
