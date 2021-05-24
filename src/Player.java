@@ -3,13 +3,15 @@
  */
 
 import java.awt.*;
+
 import java.awt.geom.Rectangle2D;
 import java.util.*;
-
+import jay.jaysound.JayLayer;
+import jay.jaysound.JayLayerListener;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Player extends MovingImage {
+public class Player extends MovingImage implements JayLayerListener {
 
 	public static final int PLAYER_WIDTH = 40;
 	public static final int PLAYER_HEIGHT = 60;
@@ -17,7 +19,8 @@ public class Player extends MovingImage {
 	public int hp;
 	public double stamina;
 	public int combo;
-	
+	private JayLayer sound;
+
 	private PImage hitboxtemp;
 	
 	private double xVelocity, yVelocity;
@@ -58,6 +61,12 @@ public class Player extends MovingImage {
 		combo = 0;
 		
 		hitboxtemp = (new PApplet()).loadImage("imgs/hitboxtemp.png");
+		String[] soundEffects = new String[]{"title1.mp3","title2.mp3","title3.mp3","title4.mp3","title5.mp3"};
+		sound=new JayLayer("audio/","audio/",false);
+		sound.addPlayList();
+		sound.addSoundEffects(soundEffects);
+		sound.changePlayList(0);
+		sound.addJayLayerListener(this);
 	}
 
 	// METHODS
@@ -69,8 +78,9 @@ public class Player extends MovingImage {
 	 */
 	public void walk(int dir) {
 		direction = dir > 0;
-		if (xVelocity <= 10 && xVelocity >= -10)
+		if (xVelocity <= 10 && xVelocity >= -10) {
 			xVelocity += dir;
+		}
 	}
 
 	/*
@@ -85,11 +95,16 @@ public class Player extends MovingImage {
 				yVelocity = -jumpStrength;
 				stamina -= 25;
 				delay = 200000000;
+				sound.playSoundEffect(0);
+
 			}else if (stamina >= 25) {
 				yVelocity = -jumpStrength;
 				stamina -= 25;
 				delay = 200000000;
+				sound.playSoundEffect(0);
+
 			}
+			
 		}
 	}
 	
@@ -107,10 +122,14 @@ public class Player extends MovingImage {
 				delay = 250000000;
 				gravIgnore = 250000000;
 			}else*/ if (!(onASurface) && stamina >= 20) {
-				if (direction)
+				if (direction) {
 					dash = 100000000;
-				else 
+				sound.playSoundEffect(1);
+				}
+				else {
 					dash = 100000000;
+					sound.playSoundEffect(1);
+				}
 				stamina -= 20;
 				invincible = 200000000;
 				delay = 200000000;
@@ -125,6 +144,8 @@ public class Player extends MovingImage {
 		
 		if(!(onASurface) && (delay <= 0)) {
 			dive = 1;
+			sound.playSoundEffect(1);
+
 		}
 	}
 	/**
@@ -158,6 +179,8 @@ public class Player extends MovingImage {
 				}
 			}
 		}
+		sound.playSoundEffect(2);
+
 	}
 	
 	/**
@@ -192,6 +215,8 @@ public class Player extends MovingImage {
 				}
 			}
 		}
+		sound.playSoundEffect(2);
+
 	}
 	
 	/**
@@ -205,6 +230,8 @@ public class Player extends MovingImage {
 			hp -= damage;
 			//stamina = 0;
 		}
+		sound.playSoundEffect(3);
+
 	}
 	/*
 	 * @return the dive amount
@@ -399,6 +426,30 @@ public class Player extends MovingImage {
 			}
 		}
 
+	}
+
+	@Override
+	public void musicStarted() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void musicStopped() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playlistEnded() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void songEnded() {
+		// TODO Auto-generated method stub
+		
 	}
 
 
