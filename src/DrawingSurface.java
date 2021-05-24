@@ -231,7 +231,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 			}
 			
 			ArrayList<ArrayList<Integer>>  warnings= boss.getWarnings();
-			for(int i = 0; i < lasers.size();i++) {
+			for(int i = 0; i < warnings.size();i++) {
 				ArrayList<Integer> list = warnings.get(i);
 				fill(255, 200, 200);
 				noStroke();
