@@ -35,7 +35,15 @@ public class BallBoss extends MovingImage{
 		antiMulti = 5;
 		images = img;
 		this.index = index;
-		
+		mains = new Drone[8];
+		mains[0] = (new Drone(images, x, y, 50, 50));
+		mains[1] = (new Drone(images, x, y, 50, 50));
+		mains[2] = (new Drone(images, x, y, 50, 50));
+		mains[3] = (new Drone(images, x, y, 50, 50));
+		mains[4] = (new Drone(images, x, y, 50, 50));
+		mains[5] = (new Drone(images, x, y, 50, 50));
+		mains[6] = (new Drone(images, x, y, 50, 50));
+		mains[7] = (new Drone(images, x, y, 50, 50));
 		
 		// TODO Auto-generated constructor stub
 	}
@@ -49,22 +57,43 @@ public class BallBoss extends MovingImage{
 			
 
 			if (attackDelay <= 0) {
-				attack = (int)(Math.random() * 3);
+				attack = (int)(Math.random() * 1 + 1);
 				attackDelay = 2000000000;
 				time = 0;
 			}
 			switch(attack) {
 			case (0):
+				for (int i = 0; i < mains.length; i++) {
+					Drone drone = mains[i];
+					double locx = getCenterX() + 200 * Math.cos(time/100000000 + i*Math.PI/4) - 25;
+					double locy = getCenterY() + 200 * Math.sin(time/100000000 + i*Math.PI/4) - 25;
+					double movex = 2*(locx - drone.x)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+					double movey = 2*(locy - drone.y)/(Math.sqrt((locx- drone.x)*(locx- drone.x) + (locy- drone.y)*(locy- drone.y)));
+					drone.moveToLocation(drone.x + movex, drone.xVelocity + movey);
+					
+				}
+				
 				
 				break;
 			case(1):
-				drones.add(new Drone(images, 0, 0, 50, 50, 2));
+				drones.add(new Drone(images, (int)x+200, (int)y, 50, 50, 2));
+				drones.add(new Drone(images, (int)x-200, (int)y, 50, 50, 2));
+				drones.add(new Drone(images, (int)x+200, (int)y-50, 50, 50, 3));
+				drones.add(new Drone(images, (int)x-200, (int)y-50, 50, 50, 3));
+				drones.add(new Drone(images, (int)x, (int)y+50, 50, 50, 3));
+				attack = 0;
+				attackDelay = 150000000;
+				break;
+			case(2):
+
+				attack = 0;
+				attackDelay = 150000000;
 				break;
 			
 			}
 			for (int i = 0; i < drones.size(); i++) {
 				Drone drone = drones.get(i);
-				drone.act(map, p);
+				drone.act(map, p, timeElapsed);
 				drone.checkCollision(map, p);
 			}
 		
