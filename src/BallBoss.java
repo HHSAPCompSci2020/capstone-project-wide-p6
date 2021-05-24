@@ -41,6 +41,7 @@ public class BallBoss extends MovingImage{
 		attp = 0;
 		drones = new ArrayList<Drone>();
 		lasers = new ArrayList<ArrayList<Integer>>();
+		warnings = new ArrayList<ArrayList<Integer>>();
 		mains = new Drone[8];
 		mains[0] = (new Drone(images, (int)getCenterX(), (int)getCenterY(), 50, 50));
 		mains[1] = (new Drone(images, (int)getCenterX(), (int)getCenterY(), 50, 50));
@@ -364,6 +365,10 @@ public class BallBoss extends MovingImage{
 						
 					} 
 				} else {
+					if (time >= (mains.length + 3) * 1000000000) {
+						attp =2;
+						time = 0;
+					}
 					for (int i = 0; i < mains.length; i++) {
 						if (time <= (10 - i)  * 1000000000 && time >= (10 - i - 1.5) * 1000000000) {
 							drone = mains[i];
