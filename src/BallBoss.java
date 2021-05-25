@@ -248,7 +248,7 @@ public class BallBoss extends MovingImage{
 			}
 			
 			if (attackDelay <= 0) {
-				attack = (int)(Math.random() * 1 + 6);
+				attack = (int)(Math.random() * 6 + 1);
 				attackDelay = 2000000000;
 				time = 0;
 				attp = 0;
