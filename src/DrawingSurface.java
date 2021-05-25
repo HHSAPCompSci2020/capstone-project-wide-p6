@@ -51,7 +51,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 			list.set(6,list.get(5));
 		}
 		for (int i = 0; i < checksPassed.length; i++) {
-			checksPassed[i] = true;
+			checksPassed[i] = false;
 		}
 		checksPassed[0] = true;
 		player = new Player(new ArrayList<PImage>(Arrays.asList(loadImage("imgs/prinnystill.png"), loadImage("imgs/prinnystillflip.png"), loadImage("imgs/prinnyrun.png"),loadImage("imgs/prinnyrunflip.png"), loadImage("imgs/prinnyjump.png"),loadImage("imgs/prinnyjumpflip.png"), loadImage("imgs/prinnydive.png"),loadImage("imgs/prinnydiveflip.png"),loadImage("imgs/prinnydash.png"),loadImage("imgs/prinnydashflip.png"))), (int)(map.getCheckpoints().get(0).getCenterX() -Player.PLAYER_WIDTH/2) ,(int)(map.getCheckpoints().get(0).getCenterY() -Player.PLAYER_HEIGHT/2));
@@ -224,7 +224,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 				fill(255,0,0);
 				rect((int)(list.get(0) - camx)/2, (int)(list.get(1) - camy)/2, list.get(2)/2, list.get(3)/2);
 				if ((new Rectangle(list.get(0), list.get(1), list.get(2), list.get(3)).intersects(player.x, player.y, player.width, player.height))) {
-					player.hit(20);
+					player.hit(15);
 				}
 				
 				stroke(0);
@@ -243,7 +243,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 			rect(100,25, 600, 25);
 			fill(255, 0, 0);
 			rect(100,25, (int)(Math.max(0, 600 * boss.gethp()/1000)), 25);
-			if (boss.gethp()<= 1000) {
+			if (boss.gethp()<= -1000) {
 				bossFight = false;
 				boss = null;
 				player.hp = 1000000000;
@@ -256,8 +256,18 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 		if (player.hp > 100){
 			player.hp = 100;
 		}
-		text("" + player.hp, 50, 50);
-		text("" + (int)player.stamina, 50, 100);
+		
+		fill(200);
+		rect(25, 25, 75, 25);
+		rect(25, 75, 75, 25);
+		fill(255, 0, 0);
+		rect(25, 25, 75*player.hp/100, 25);
+		fill(255, 255, 0);
+		rect(25, 75,75*Math.max((int)player.stamina, 0)/100, 25);
+		
+		fill(0);
+		text("" + player.hp, 115, 50);
+		text("" + (int)player.stamina, 115, 100);
 		text("" + (int)player.combo, 50, 150);
 		
 		popMatrix();

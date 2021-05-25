@@ -35,7 +35,7 @@ public class BallBoss extends MovingImage{
 		super(img.get(0), x - w/2, y - h/2, w, h);
 		xVelocity = 0;
 		yVelocity = 0;
-		hp = 0;
+		hp = 1000;
 		antiMulti = 5;
 		images = img;
 		attp = 0;
@@ -248,7 +248,7 @@ public class BallBoss extends MovingImage{
 			}
 			
 			if (attackDelay <= 0) {
-				attack = (int)(Math.random() * 1 + 5);
+				attack = (int)(Math.random() * 1 + 6);
 				attackDelay = 2000000000;
 				time = 0;
 				attp = 0;
@@ -260,7 +260,7 @@ public class BallBoss extends MovingImage{
 					drone.setImage(redEye.get(0));
 					double locx = getCenterX() + 300 * Math.cos(time/1000000.0 + i*Math.PI/5) - 25;
 					double locy = getCenterY() + 300 * Math.sin(time/1000000.0 + i*Math.PI/5) - 25;
-					drone.moveTo(4, locx, locy);
+					drone.moveTo(6, locx, locy);
 					drone.checkCollision(map, p);
 					attp = 0;
 					
@@ -625,14 +625,14 @@ public class BallBoss extends MovingImage{
 							
 							if (time >=0 && time <= (2) * 500000.0) {
 								drone = mains[i];
-								drone.setImage(redEye.get(2));
+								drone.setImage(redEye.get(1));
 								if (time/3000.0 % 8 < 4) {
 									warnings.add(new ArrayList<Integer>(Arrays.asList((int)drone.x +50, (int)drone.y -75, 1550, 150)));
 								}
 							}
 							else if (time >= (2)  * 500000.0 && time <= (3) * 500000.0) {
 								drone = mains[i];
-								drone.setImage(redEye.get(2));
+								drone.setImage(redEye.get(1));
 								lasers.add(new ArrayList<Integer>(Arrays.asList((int)drone.x + 50, (int)drone.y - 75, 1550, 150)));
 							}
 						}
@@ -649,15 +649,122 @@ public class BallBoss extends MovingImage{
 							
 							if (time >=0 && time <= (4) * 500000.0) {
 								drone = mains[i];
-								drone.setImage(redEye.get(4));
+								drone.setImage(redEye.get(3));
 								if (time/3000.0 % 8 < 4) {
 									warnings.add(new ArrayList<Integer>(Arrays.asList((int)drone.x-1550, (int)drone.y -75, 1550, 150)));
 								}
 							}
 							else if (time >= (4)  * 500000.0 && time <= (8) * 500000.0) {
 								drone = mains[i];
-								drone.setImage(redEye.get(4));
+								drone.setImage(redEye.get(3));
 								lasers.add(new ArrayList<Integer>(Arrays.asList((int)drone.x - 1550, (int)drone.y -75, 1550, 150)));
+							}
+						}
+					}
+				}
+				break;
+			case (6):
+				if (attp == 11) {
+					attp = 0; 
+					attack = 0;
+					attackDelay = 5000000.0;
+					time = 0;
+					break;
+				} else if (attp == 0) {
+					attackDelay = 1000000000.0;
+					if (time >= (mains.length + 5) * 300000.0) {
+						attp = (int)(Math.random() * 10)+1;
+						time = 0;
+					}
+					for (int i = 0; i < mains.length; i++) {
+						drone = mains[i];
+						if (time >= i * 300000.0 && time <= (i + 4.5) * 300000.0) {
+							if (i < 5) {
+								locx =  550 + 150 * i;
+								locy =  7400;
+								drone.moveTo(15, locx, locy);
+							} else {
+								locx =  1550;
+								locy =  8050 - (i-5)*100;
+								drone.moveTo(15, locx, locy);
+							}
+						}
+					} 
+				} else if (attp <= 5){
+					attackDelay = 1000000000.0;
+					if (time >= (11) * 500000.0) {
+						attp = 11;
+						time = 0;
+					}
+					
+					for (int i = 0; i < mains.length; i++) {
+						if (i >= 5) {
+							if (time >=0 && time <= (4) * 500000.0) {
+								drone = mains[i];
+								drone.setImage(redEye.get(3));
+								if (time/3000.0 % 8 < 4) {
+									warnings.add(new ArrayList<Integer>(Arrays.asList((int)drone.x-1550, (int)drone.y -75, 1550, 150)));
+								}
+							}
+							else if (time >= (4)  * 500000.0 && time <= (10) * 500000.0) {
+								drone = mains[i];
+								drone.setImage(redEye.get(3));
+								lasers.add(new ArrayList<Integer>(Arrays.asList((int)drone.x - 1550, (int)drone.y -75, 1550, 150)));
+							}
+						} else {
+							mains[i].x+= 1;
+							if (i != attp - 1) {
+								if (time >=0 && time <= (4) * 500000.0) {
+									drone = mains[i];
+									drone.setImage(redEye.get(2));
+									if (time/3000.0 % 8 < 4) {
+										warnings.add(new ArrayList<Integer>(Arrays.asList((int)drone.x-75, (int)drone.y- 300, 200, 300)));
+									}
+								}
+								else if (time >= (3)  * 500000.0 && time <= (20) * 500000.0) {
+									drone = mains[i];
+									drone.setImage(redEye.get(2));
+									lasers.add(new ArrayList<Integer>(Arrays.asList((int)drone.x - 75, (int)drone.y - 300, 200, 300)));
+								}
+							}
+						}
+					}
+				} else {
+					attackDelay = 1000000000.0;
+					if (time >= (11) * 500000.0) {
+						attp = 11;
+						time = 0;
+					}
+					
+					for (int i = 0; i < mains.length; i++) {
+						if (i >= 5) {
+							if (time >=0 && time <= (3) * 500000.0) {
+								drone = mains[i];
+								drone.setImage(redEye.get(3));
+								if (time/3000.0 % 8 < 4) {
+									warnings.add(new ArrayList<Integer>(Arrays.asList((int)drone.x-1550, (int)drone.y -75, 1550, 150)));
+								}
+							}
+							else if (time >= (3)  * 500000.0 && time <= (10) * 500000.0) {
+								drone = mains[i];
+								drone.setImage(redEye.get(3));
+								lasers.add(new ArrayList<Integer>(Arrays.asList((int)drone.x - 1550, (int)drone.y -75, 1550, 150)));
+							}
+						} else {
+							mains[i].x -= 1;
+							if (i != attp - 6) {
+								if (time >=0 && time <= (3) * 500000.0) {
+									drone = mains[i];
+									drone.setImage(redEye.get(2));
+									if (time/3000.0 % 8 < 4) {
+										warnings.add(new ArrayList<Integer>(Arrays.asList((int)drone.x-75, (int)drone.y- 300, 200, 300)));
+									}
+								}
+								else if (time >= (3)  * 500000.0 && time <= (20) * 500000.0) {
+									drone = mains[i];
+									drone.setImage(redEye.get(2));
+									lasers.add(new ArrayList<Integer>(Arrays.asList((int)drone.x - 75, (int)drone.y - 300, 200, 300)));
+								}
 							}
 						}
 					}
@@ -687,6 +794,10 @@ public class BallBoss extends MovingImage{
 					drones.remove(drone);
 				}
 			}
+			if(hp <=0) {
+				hp = -1000;
+			}
+			
 			
 			for(int i = 0; i < map.getHitboxes().size(); i++) {
 				Hitbox list =  map.getHitboxes().get(i);
@@ -715,10 +826,7 @@ public class BallBoss extends MovingImage{
 					}
 				}
 			}
-			if(hp <=0) {
-				hp = -1000;
-			}
-			
+
 			
 		}
 		

@@ -377,7 +377,7 @@ public class Drone extends MovingImage{
 			}
 		} else if (type == 4) {
 			if ((new Rectangle((int)(x), (int)(y), (int)super.width, (int)super.height)).intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.PLAYER_WIDTH, (int)p.PLAYER_HEIGHT))) {
-				p.hit(15);
+				p.hit(10);
 			}
 		}
 		
@@ -509,7 +509,11 @@ public class Drone extends MovingImage{
 				if ((new Rectangle((int)list.x - 7,(int)list.y - 7,list.w + 15,list.h + 15)).intersects(x, y, width, height)) {
 					if ((antiMulti <= 0)) {
 						antiMulti = 6;
+						if (p.combo >= 30) {
+							p.hp += 1;
+						}
 						p.combo++;
+						
 						if(p.getDive() == 1) {
 							p.diveHop();
 						}
