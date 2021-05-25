@@ -377,7 +377,7 @@ public class Drone extends MovingImage{
 			}
 		} else if (type == 4) {
 			if ((new Rectangle((int)(x), (int)(y), (int)super.width, (int)super.height)).intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.PLAYER_WIDTH, (int)p.PLAYER_HEIGHT))) {
-				p.hit(10);
+				p.hit(15);
 			}
 		}
 		

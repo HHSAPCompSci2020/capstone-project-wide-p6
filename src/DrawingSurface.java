@@ -40,7 +40,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 	private BallBoss boss;
 	
 	
-	public DrawingSurface(Main w) {
+	public DrawingSurface(Main w){
 		super();
 		keys = new ArrayList<Integer>();
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
@@ -225,7 +225,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 				fill(255,0,0);
 				rect((int)(list.get(0) - camx)/2, (int)(list.get(1) - camy)/2, list.get(2)/2, list.get(3)/2);
 				if ((new Rectangle(list.get(0), list.get(1), list.get(2), list.get(3)).intersects(player.x, player.y, player.width, player.height))) {
-					player.hit(15);
+					player.hit(20);
 				}
 				
 				stroke(0);
@@ -241,7 +241,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 			}
 			
 			fill(255);
-			rect(100,25, 600, 25);
+			rect(200,25, 400, 25);
 			fill(255, 0, 0);
 			rect(200,25, (int)(Math.max(0, 400 * boss.gethp()/1000)), 25);
 			if (boss.gethp()<= -1000) {
@@ -445,7 +445,8 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 	@Override
 	public void musicStopped() {
 		// TODO Auto-generated method stub
-		
+
+
 	}
 
 
