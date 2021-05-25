@@ -64,6 +64,7 @@ public class BallBoss extends MovingImage{
 		attackDelay -= timeElapsed/1000;
 		shootDelay -= timeElapsed/1000;
 		time += timeElapsed/1000;
+		double scale = timeElapsed/10000000;
 		if (phase == 0) {
 			
 
@@ -78,7 +79,7 @@ public class BallBoss extends MovingImage{
 					Drone drone = mains[i];
 					double locx = getCenterX() + 300 * Math.cos(time/1000000.0 + i*Math.PI/4) - 25;
 					double locy = getCenterY() + 300 * Math.sin(time/1000000.0 + i*Math.PI/4) - 25;
-					drone.moveTo(4, locx, locy);
+					drone.moveTo( scale * 4, locx, locy);
 					drone.checkCollision(map, p);
 					attp = 0;
 					
@@ -114,7 +115,7 @@ public class BallBoss extends MovingImage{
 				Drone drone = mains[attp];
 				double locx = p.getCenterX();
 				double locy = p.getCenterY();
-				drone.moveTo(3, locx, locy);
+				drone.moveTo( scale * 3, locx, locy);
 				drone.checkCollision(map, p);
 				if (time >= 1500000) {
 					time = 0;
@@ -260,7 +261,7 @@ public class BallBoss extends MovingImage{
 					drone.setImage(redEye.get(0));
 					double locx = getCenterX() + 300 * Math.cos(time/1000000.0 + i*Math.PI/5) - 25;
 					double locy = getCenterY() + 300 * Math.sin(time/1000000.0 + i*Math.PI/5) - 25;
-					drone.moveTo(6, locx, locy);
+					drone.moveTo( scale * 6, locx, locy);
 					drone.checkCollision(map, p);
 					attp = 0;
 					
@@ -271,7 +272,7 @@ public class BallBoss extends MovingImage{
 				double locx = p.getCenterX();
 				double locy = p.getCenterY();
 				
-				drone.moveTo(5, locx, locy);
+				drone.moveTo( scale * 5, locx, locy);
 				
 				drone.checkCollision(map, p);
 				if (time >= 1000000.0) {
@@ -283,7 +284,7 @@ public class BallBoss extends MovingImage{
 						drone = mains[i];
 						locx = getCenterX() + 300 * Math.cos(time/1000000.0 + i*Math.PI/5) - 25;
 						locy = getCenterY() + 300 * Math.sin(time/1000000.0 + i*Math.PI/5) - 25;
-						drone.moveTo(4, locx, locy);
+						drone.moveTo( scale * 4, locx, locy);
 					}
 					mains[i].checkCollision(map, p);
 				}
@@ -313,7 +314,7 @@ public class BallBoss extends MovingImage{
 								locx = 1550;
 							}
 							locy =  7125 + i * 100;
-							drone.moveTo(15, locx, locy);
+							drone.moveTo( scale * 15, locx, locy);
 					
 						}
 						else if (time >= (i +3.5) * 300000.0 && time <= (i + 4.5) * 300000.0) {
@@ -374,7 +375,7 @@ public class BallBoss extends MovingImage{
 							
 							locx =  125 + i * 150;
 							locy =  7950;
-							drone.moveTo(15, locx, locy);
+							drone.moveTo( scale * 15, locx, locy);
 						}
 					} 
 				} else if (attp % 2 == 0 && attp <= 4) {
@@ -471,7 +472,7 @@ public class BallBoss extends MovingImage{
 							
 							locx =  125 + i * 150;
 							locy =  7950;
-							drone.moveTo(15, locx, locy);
+							drone.moveTo( scale * 15, locx, locy);
 						}
 					} 
 				} else if (attp == 1) {
@@ -605,11 +606,11 @@ public class BallBoss extends MovingImage{
 							if (i < 5) {
 								locx =  100;
 								locy =  7100 + i*125;
-								drone.moveTo(15, locx, locy);
+								drone.moveTo( scale * 15, locx, locy);
 							} else {
 								locx =  1550;
 								locy =  8050 - (i-5)*100;
-								drone.moveTo(15, locx, locy);
+								drone.moveTo( scale * 15, locx, locy);
 							}
 						}
 					} 
@@ -682,11 +683,11 @@ public class BallBoss extends MovingImage{
 							if (i < 5) {
 								locx =  550 + 150 * i;
 								locy =  7400;
-								drone.moveTo(15, locx, locy);
+								drone.moveTo( scale * 15, locx, locy);
 							} else {
 								locx =  1550;
 								locy =  8050 - (i-5)*100;
-								drone.moveTo(15, locx, locy);
+								drone.moveTo( scale * 15, locx, locy);
 							}
 						}
 					} 

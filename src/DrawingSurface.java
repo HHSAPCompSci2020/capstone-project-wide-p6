@@ -52,7 +52,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 			list.set(6,list.get(5));
 		}
 		for (int i = 0; i < checksPassed.length; i++) {
-			checksPassed[i] = false;
+			checksPassed[i] = true;
 		}
 		checksPassed[0] = true;
 		player = new Player(new ArrayList<PImage>(Arrays.asList(loadImage("imgs/prinnystill.png"), loadImage("imgs/prinnystillflip.png"), loadImage("imgs/prinnyrun.png"),loadImage("imgs/prinnyrunflip.png"), loadImage("imgs/prinnyjump.png"),loadImage("imgs/prinnyjumpflip.png"), loadImage("imgs/prinnydive.png"),loadImage("imgs/prinnydiveflip.png"),loadImage("imgs/prinnydash.png"),loadImage("imgs/prinnydashflip.png"))), (int)(map.getCheckpoints().get(0).getCenterX() -Player.PLAYER_WIDTH/2) ,(int)(map.getCheckpoints().get(0).getCenterY() -Player.PLAYER_HEIGHT/2));
