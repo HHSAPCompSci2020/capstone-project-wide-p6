@@ -53,7 +53,7 @@ public class MainMenu extends JPanel implements ActionListener {
 		divet.setBounds(675, 250, 60, 30);
 		add(divet);
 
-		dasht = new JLabel("" + KeyEvent.getKeyText(KeyEvent.VK_SPACE));
+		dasht = new JLabel("spacebar");
 		dasht.setBounds(675, 300, 60, 30);
 		add(dasht);
 
