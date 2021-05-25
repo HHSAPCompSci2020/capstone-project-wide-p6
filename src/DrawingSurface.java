@@ -250,10 +250,7 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 				beatBoss = true;
 				player.hp = 1000000000;
 			}
-			if (beatBoss) {
-				fill(0);
-				text("Congratulations", 400, 300);
-			}
+			
 			
 		}
 		
@@ -276,6 +273,10 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 		text("" + (int)player.stamina, 115, 100);
 		text("" + (int)player.combo, 50, 150);
 		
+		if (beatBoss) {
+			fill(0);
+			text("Congratulations", 400, 300);
+		}
 		popMatrix();
 
 		
