@@ -5,7 +5,11 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import processing.core.PImage;
-
+/**
+ * 
+ * @author Ethan Wang
+ *A class representing the BallBoss' drones
+ */
 public class Drone extends MovingImage{
 
 	public double xVelocity;
@@ -16,26 +20,62 @@ public class Drone extends MovingImage{
 	public int hp;
 	public int type;
 	
+	
+	/**spawns a main drone of boss phase 1
+	 * 
+	 * @param img image of the drone
+	 * @param x x to be spawned at
+	 * @param y y to be spawned at
+	 * @param w width of the drone
+	 * @param h height of the drone
+	 */
 	public Drone(ArrayList<PImage> img, int x, int y, int w, int h) {
 		super(img.get(0), x, y, w, h);
 		type = 0;
 		hp = Integer.MAX_VALUE;
 	}
-
+	
+	/**Spawns either a flying shooting or a flying ramming drone
+	 * 
+	 * @param img image of the drone
+	 * @param x x to be spawned at
+	 * @param y y to be spawned at
+	 * @param w width of the drone
+	 * @param h height of the drone
+	 * @param type can be 1 or 2. 1 is a flying shooter, 2 is a flying rammer.
+	 */
 	public Drone(ArrayList<PImage> img, int x, int y, int w, int h, int type) {
 		super(img.get(0), x, y, w, h);
 		this.type = type;
 		hp = 50;
 		
 	}
-	
+	/** Spawns a main drone of boss phase 2
+	 * 
+	 * @param img image of the drone
+	 * @param x x to be spawned at
+	 * @param y y to be spawned at
+	 * @param w width of the drone
+	 * @param h height of the drone
+	 * @param mode does literally nothing but exists to differentiate itself from other constructors
+	 */
 	public Drone(ArrayList<PImage> img, int x, int y, int w, int h, boolean mode) {
 		super(img.get(0), x, y, w, h);
 		this.type = 4;
 		hp = Integer.MAX_VALUE;
 		
 	}
-	
+	/**Spawns a type of drone which essentially acts as a projectile.
+	 * 
+	 * @param img image of the drone
+	 * @param x x to be spawned at
+	 * @param y y to be spawned at
+	 * @param w width of the drone
+	 * @param h height of the drone
+	 * @param xv starting xvelocity
+	 * @param yv starting yvelocity
+	 * 
+	 */
 	public Drone(ArrayList<PImage> img, int x, int y, int w, int h,  double xv, double yv) {
 		super(img.get(0), x, y, w, h);
 		type = 1;
@@ -43,7 +83,12 @@ public class Drone extends MovingImage{
 		xVelocity = xv;
 		yVelocity = yv;
 	}
-	
+	/**  Causes the drone to act and do things within the specified time.
+	 * 
+	 * @param map	the map to be interacted with
+	 * @param timeElapsed 	the time that is to be emulated
+	 * @param p		the player character
+	 */
 	public void act(Map map, Player p, long timeElapsed) {
 		if (type == 1) {
 			
@@ -358,6 +403,11 @@ public class Drone extends MovingImage{
 			moveToLocation(xCoord2,yCoord2);
 		}
 	}
+	/** checks for collisions between things and applies damage accordingly
+	 * 
+	 * @param map the map to be interacted with
+	 * @param p player character
+	 */
 	
 	public void checkCollision(Map map, Player p) {
 		antiMulti -= 1;
@@ -528,6 +578,12 @@ public class Drone extends MovingImage{
 		}
 		
 	}
+	/** Moves towards the given location
+	 * 
+	 * @param dist distance to travel
+	 * @param locx destination
+	 * @param locy destination
+	 */
 	public void moveTo(double dist, double locx, double locy) {
 		double movex = 0;
 		double movey = 0;

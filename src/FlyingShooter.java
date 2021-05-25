@@ -9,6 +9,11 @@ import java.awt.geom.Rectangle2D;
 import processing.core.PImage;
 import jay.jaysound.JayLayer;
 import jay.jaysound.JayLayerListener;
+/**
+ * Flying shooter enemy
+ * @author Ethan Wang, Justin Zhu
+ *
+ */
 public class FlyingShooter extends Enemy implements JayLayerListener{
 
 	private double xVelocity, yVelocity;
@@ -25,7 +30,15 @@ public class FlyingShooter extends Enemy implements JayLayerListener{
 	private ArrayList<PImage> images;
 	private JayLayer sound;
 
-
+/**
+ * 
+ * @param img arraylist of images to be used, only uses 1
+ * @param x top left x
+ * @param y top left y
+ * @param w width
+ * @param h height
+ * @param index index in the array of enemies
+ */
 	public FlyingShooter(ArrayList<PImage> img, int x, int y, int w, int h, int index) {
 		
 		super(img, x, y, w, h, index);
@@ -48,7 +61,12 @@ public class FlyingShooter extends Enemy implements JayLayerListener{
 		sound.addJayLayerListener(this);
 		// TODO Auto-generated constructor stub
 	}
-
+	/**  Causes the enemy to act and do things within the specified time.
+	 * 
+	 * @param map	the map to be interacted with
+	 * @param timeElapsed 	the time that is to be emulated
+	 * @param p		the player character
+	 */
 	public void act(Map map, long timeElapsed, Player p) {
 		ArrayList<Shape> obstacles = map.getObstacles();
 		stagger -= timeElapsed;

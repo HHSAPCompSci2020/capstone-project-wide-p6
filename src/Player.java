@@ -338,7 +338,7 @@ private String[] soundEffects;
 	
 	/**
 	 * Modified act method. Uses time elapsed so that even on slower computers the game should run relatively the same.
-	 * @param obstacles The arraylist of all the obstacles on the map used for collisions.
+	 * @param map The arraylist of all the obstacles on the map used for collisions.
 	 * @param timeElapsed How much time has passed since the last time the draw method in DrawingSurface was run in nanoseconds
 	 */
 	public void act(Map map, long timeElapsed) {

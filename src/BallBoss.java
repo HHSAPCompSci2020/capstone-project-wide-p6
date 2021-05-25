@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.awt.Rectangle;
@@ -7,7 +9,9 @@ import java.awt.geom.Rectangle2D;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-
+/**@author Ethan Wang
+ * A class representing the ballboss
+ */
 public class BallBoss extends MovingImage{
 
 	private double xVelocity, yVelocity;
@@ -29,7 +33,14 @@ public class BallBoss extends MovingImage{
 	private ArrayList<ArrayList<Integer>> warnings;
 	private int attp;
 	
-	
+	/**
+	 * 
+	 * @param img images to be used
+	 * @param x top left x
+	 * @param y top left y
+	 * @param w width
+	 * @param h height
+	 */
 	public BallBoss(ArrayList<PImage> img, int x, int y, int w, int h) {
 		
 		super(img.get(0), x - w/2, y - h/2, w, h);
@@ -58,7 +69,12 @@ public class BallBoss extends MovingImage{
 	public double gethp() {
 		return hp;
 	}
-
+	/**  Causes the boss to act and do things within the specified time.
+	 * 
+	 * @param map	the map to be interacted with
+	 * @param timeElapsed 	the time that is to be emulated
+	 * @param p		the player character
+	 */
 	public void act(Map map, long timeElapsed, Player p) {
 		antiMulti -= 1;
 		attackDelay -= timeElapsed/1000;
@@ -832,7 +848,10 @@ public class BallBoss extends MovingImage{
 		}
 		
 	}
-	
+	/**
+	 * 
+	 * @return returns the drones that the Boss controls
+	 */
 	public ArrayList<Drone> getDrones(){
 		ArrayList<Drone> returner = new ArrayList<Drone>();
 		returner.addAll(drones);
@@ -840,10 +859,18 @@ public class BallBoss extends MovingImage{
 		return returner;
 	}
 	
-	
+	/**
+	 * 
+	 * @return returns the lasers that the boss or its drones shoot
+	 */
 	public ArrayList<ArrayList<Integer>> getLasers(){
 		return lasers;
 	}
+	
+	/**
+	 * 
+	 * @return returns the warnings that the boss or its drones have
+	 */
 	public ArrayList<ArrayList<Integer>> getWarnings(){
 		return warnings;
 	}

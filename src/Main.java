@@ -59,7 +59,10 @@ public class Main extends JFrame {
 	{
 		Main w = new Main("Slash Dash");
 	}
-
+/**
+ * 
+ * @param panel the scene to change it to 0 for main scree, 1 for game, 2 for pause menu
+ */
 	public void changePanel(int panel) {
 		switch(panel) {
 			case 0:

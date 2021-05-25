@@ -3,12 +3,27 @@ import java.awt.Shape;
 import java.awt.geom.Line2D;
 
 import processing.core.PImage;
-
+/**
+ * class representing projectiles
+ * @author Ethan Wang
+ *
+ */
 public class Projectile extends MovingImage{
 	private double xvel, yvel, distance;
 	private int damage;
 	
-	
+	/** 
+	 * 
+	 * @param img 
+	 * @param x top left x
+	 * @param y top left y
+	 * @param w width
+	 * @param h height
+	 * @param vx x velocity
+	 * @param vy y velocity
+	 * @param dist maximum distance to travel
+	 * @param dam damage
+	 */
 	public Projectile(PImage img, int x, int y, int w, int h, double vx, double vy, double dist, int dam) { // if i wanted an animation i could give this an arraylist but its kind of a pain for individual projectiles so i'll just make them all circles or something.
 		super(img, x, y, w, h);
 		xvel = vx;
@@ -16,7 +31,12 @@ public class Projectile extends MovingImage{
 		distance = dist;
 		damage = dam;
 	}
-	
+	/**  Causes the projectile to act and do things within the specified time.
+	 * 
+	 * @param map	the map to be interacted with
+	 * @param timeElapsed 	the time that is to be emulated
+	 * @param p		the player character
+	 */
 	public void act(Map map, long timeElapsed, Player p) {
 		
 		
@@ -30,7 +50,11 @@ public class Projectile extends MovingImage{
 		}
 			
 	}
-	
+	/** checks for if this projectile should be removed
+	 * 
+	 * @param map map to be interacted with
+	 * @return returns whether or not to delte this projectile
+	 */
 	public boolean die(Map map) {
 		for(int i = 0; i < map.getObstacles().size(); i++) {
 			Shape block =  map.getObstacles().get(i);

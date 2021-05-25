@@ -1,11 +1,14 @@
 
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
 import processing.core.PApplet;
-
+/**
+ * 
+ * @author Ethan Wang
+ *
+ */
 public class PauseMenu extends JPanel implements KeyListener,ActionListener{
 	
 	Main w;
@@ -13,6 +16,10 @@ public class PauseMenu extends JPanel implements KeyListener,ActionListener{
 
 	private JLabel jumpt, leftt, rightt, divet, dasht, lightt, heavyt;
 	private JButton jump, left, right, dive, dash, light, heavy;
+	/**
+	 * 
+	 * @param w the Main this is part of
+	 */
 	public PauseMenu(Main w) {
 		super();
 		this.w = w;
@@ -21,27 +28,10 @@ public class PauseMenu extends JPanel implements KeyListener,ActionListener{
 		
 		reset();
 	}
-	/*
-	 * paints the picture
-	 * @param g where the pic will be drawn 
-	 */
-	public void paintComponent(Graphics g) {
-    }
 
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-		/*if(e.getKeyCode() == KeyEvent.VK_P) {
-			w.changePanel(1);
-			
-		} */
-		
-		
-	}
 
-	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode() == KeyEvent.VK_P) {
@@ -77,10 +67,7 @@ public class PauseMenu extends JPanel implements KeyListener,ActionListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		/*if(e.getKeyCode() == KeyEvent.VK_P) {
-			w.changePanel(1);
-		}*/
+
 		
 	}
 	
@@ -89,7 +76,8 @@ public class PauseMenu extends JPanel implements KeyListener,ActionListener{
 		requestFocus();
 	} 
 	
-	public void reset() {
+	
+	private void reset() {
 		setLayout(null);
 		action = "";
 		setSize(w.getWidth(), w.getHeight());
@@ -175,5 +163,12 @@ public class PauseMenu extends JPanel implements KeyListener,ActionListener{
         
 		setOpaque(true);
 		addKeyListener(this);
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

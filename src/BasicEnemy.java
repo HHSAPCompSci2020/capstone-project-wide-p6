@@ -5,7 +5,11 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
 import processing.core.PImage;
-
+/**
+ * Basic enemy
+ * @author Ethan Wang
+ *
+ */
 public class BasicEnemy extends Enemy{
 
 	private double xVelocity, yVelocity;
@@ -19,7 +23,15 @@ public class BasicEnemy extends Enemy{
 	private double antiMulti;
 	private int index;
 	private ArrayList<PImage> images;
-
+/**
+ * 
+ * @param img arraylist of images to be used, only uses 1
+ * @param x top left x
+ * @param y top left y
+ * @param w width
+ * @param h height
+ * @param index index in array of enemies
+ */
 	public BasicEnemy(ArrayList<PImage> img, int x, int y, int w, int h, int index) {
 		
 		super(img, x, y, w, h, index);
@@ -36,7 +48,12 @@ public class BasicEnemy extends Enemy{
 		this.index = index;
 		// TODO Auto-generated constructor stub
 	}
-
+	/**  Causes the enemy to act and do things within the specified time.
+	 * 
+	 * @param map	the map to be interacted with
+	 * @param timeElapsed 	the time that is to be emulated
+	 * @param p		the player character
+	 */
 	public void act(Map map, long timeElapsed, Player p) {
 		ArrayList<Shape> obstacles = map.getObstacles();
 		

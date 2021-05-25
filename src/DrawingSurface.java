@@ -1,6 +1,4 @@
-/** Author: Shelby, Ethan Wang
- * The class used for essentially all the graphics of the game.
- */
+
 
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -12,7 +10,9 @@ import processing.core.PImage;
 import jay.jaysound.JayLayer;
 import jay.jaysound.JayLayerListener;
 import processing.core.PApplet;
-
+/** Author: Shelby, Ethan Wang, Justin Zhu
+ * The class used for essentially all the graphics of the game.
+ */
 public class DrawingSurface extends PApplet implements MouseListener, JayLayerListener{
 
 	/**
@@ -39,7 +39,10 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 	private boolean beatBoss = false;
 	private BallBoss boss;
 	
-	
+	/**
+	 * 
+	 * @param w the Main this is part of
+	 */
 	public DrawingSurface(Main w){
 		super();
 		keys = new ArrayList<Integer>();
@@ -331,12 +334,17 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 	/*
 	 * unpause the screen
 	 */
+	/**
+	 * unpauses the game
+	 */
 	public void unpause() {
 		lastUpdate = System.nanoTime();
 		loop();
 		
 	}
-	
+	/**
+	 * pauses the game
+	 */
 	public void pause() {
 		fill(237);
 		rect(-1, -1, w.getWidth()+1, w.getHeight()+1);

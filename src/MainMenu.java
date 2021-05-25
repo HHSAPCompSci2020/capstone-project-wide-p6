@@ -11,7 +11,10 @@ public class MainMenu extends JPanel implements ActionListener {
 
 	Main w;
 	private JLabel jumpt, leftt, rightt, divet, dasht, lightt, heavyt, jump, left, right, dive, dash, light, heavy,title, controls, control;
-
+/**
+ * 
+ * @param w the Main this is part of
+ */
 	public MainMenu(Main w) {
 		this.w = w;
 		setLayout(null);

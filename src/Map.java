@@ -1,6 +1,4 @@
-/** Author: Ethan Wang
- * The map class is meant to be a huge database of all the enemies and obstacles across the map
- */
+
 
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -8,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import processing.core.PApplet;
 import processing.core.PImage;
-
+/** Author: Ethan Wang, Justin Zhu
+ * The map class is meant to be a huge database of all the enemies and obstacles across the map
+ */
 public class Map  {
 
 	private ArrayList<Shape> obstacles;
@@ -289,17 +289,34 @@ public class Map  {
 	public ArrayList<ArrayList<Integer>> getEnemyInfo(){
 		return enemyInfo;
 	}
-
+	/** creates a new projectile
+	 * 
+	 * @param type  always 0, no other types of projectiles
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param vx x velocity
+	 * @param vy y velocity
+	 * @param dist maximum distance to travel
+	 * @param dam damage it deals
+	 */ 
 	public void shoot(int type, int x, int y, int w, int h, double vx, double vy, double dist, int dam) {
 		if (type == 0) { 
 			projectiles.add(new Projectile((new PApplet()).loadImage("imgs/hitboxtemp.png"), x, y, w, h, vx, vy, dist, dam));
 		}
 	}
-	
+	/**
+	 * 
+	 * @return returns an arraylist of projectiles
+	 */
 	public ArrayList<Projectile> getProjectiles(){
 		return projectiles;
 	}
-	
+	/**
+	 * 
+	 * @return returns an arraylist of lava
+	 */
 	public ArrayList<Rectangle> getLava(){
 		return lava;
 	}
