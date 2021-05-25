@@ -362,7 +362,7 @@ public class Drone extends MovingImage{
 	public void checkCollision(Map map, Player p) {
 		antiMulti -= 1;
 		if (type == 0) {
-			if ((new Rectangle((int)(x), (int)(y), (int)super.width, (int)super.height)).intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.PLAYER_WIDTH, (int)p.PLAYER_HEIGHT))) {
+			if ((new Rectangle((int)(x), (int)(y), (int)super.width, (int)super.height)).intersects(new Rectangle ((int)p.x, (int)p.y, 10, 10))) {
 				p.hit(10);
 			}
 		} else if (type == 1) {
@@ -377,7 +377,7 @@ public class Drone extends MovingImage{
 			}
 		} else if (type == 4) {
 			if ((new Rectangle((int)(x), (int)(y), (int)super.width, (int)super.height)).intersects(new Rectangle ((int)p.x, (int)p.y, (int)p.PLAYER_WIDTH, (int)p.PLAYER_HEIGHT))) {
-				p.hit(10);
+				p.hit(15);
 			}
 		}
 		
@@ -524,4 +524,21 @@ public class Drone extends MovingImage{
 		}
 		
 	}
+	public void moveTo(double dist, double locx, double locy) {
+		double movex = 0;
+		double movey = 0;
+		if (Math.sqrt((locx- x)*(locx- x) + (locy- y)*(locy- y)) != 0){
+			movex = dist*(locx - x)/(Math.sqrt((locx- x)*(locx- x) + (locy- y)*(locy- y)));
+			movey = dist*(locy - y)/(Math.sqrt((locx- x)*(locx- x) + (locy- y)*(locy- y)));
+		}
+		
+		x += movex;
+		y += movey;
+		if (Math.sqrt((locx- x)*(locx- x) + (locy- y)*(locy- y)) <= dist){
+			x = locx;
+			y = locy;
+		}
+		
+	}
+	
 }
