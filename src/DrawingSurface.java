@@ -242,7 +242,13 @@ public class DrawingSurface extends PApplet implements MouseListener, JayLayerLi
 			fill(255);
 			rect(100,25, 600, 25);
 			fill(255, 0, 0);
-			rect(100,25, (int)(600 * boss.gethp()/1000), 25);
+			rect(100,25, (int)(Math.max(0, 600 * boss.gethp()/1000)), 25);
+			if (boss.gethp()<= 1000) {
+				bossFight = false;
+				boss = null;
+				player.hp = 1000000000;
+			}
+			
 		}
 		
 		player.draw(this, camx, camy);

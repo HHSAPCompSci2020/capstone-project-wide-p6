@@ -715,6 +715,10 @@ public class BallBoss extends MovingImage{
 					}
 				}
 			}
+			if(hp <=0) {
+				hp = -1000;
+			}
+			
 			
 		}
 		
