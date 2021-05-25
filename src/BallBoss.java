@@ -248,7 +248,7 @@ public class BallBoss extends MovingImage{
 			}
 			
 			if (attackDelay <= 0) {
-				attack = (int)(Math.random() * 4 + 1);
+				attack = (int)(Math.random() * 1 + 5);
 				attackDelay = 2000000000;
 				time = 0;
 				attp = 0;
@@ -590,7 +590,7 @@ public class BallBoss extends MovingImage{
 				if (attp == 3) {
 					attp = 0; 
 					attack = 0;
-					attackDelay = 5000000.0;
+					attackDelay = 10000000.0;
 					time = 0;
 					break;
 				} else if (attp == 0) {
@@ -604,11 +604,11 @@ public class BallBoss extends MovingImage{
 						if (time >= i * 300000.0 && time <= (i + 4.5) * 300000.0) {
 							if (i < 5) {
 								locx =  100;
-								locy =  7100 + i*150;
+								locy =  7100 + i*125;
 								drone.moveTo(15, locx, locy);
 							} else {
-								locx =  1050;
-								locy =  7950 - (i-5)*150;
+								locx =  1550;
+								locy =  8050 - (i-5)*100;
 								drone.moveTo(15, locx, locy);
 							}
 						}
@@ -623,34 +623,46 @@ public class BallBoss extends MovingImage{
 					for (int i = 0; i < mains.length; i++) {
 						if (i < 5) {
 							
-							if (time >=0 && time <= (1) * 500000.0) {
+							if (time >=0 && time <= (2) * 500000.0) {
 								drone = mains[i];
 								drone.setImage(redEye.get(2));
 								if (time/3000.0 % 8 < 4) {
-									warnings.add(new ArrayList<Integer>(Arrays.asList((int)drone.x - 50, (int)drone.y - 850, 150, 850)));
+									warnings.add(new ArrayList<Integer>(Arrays.asList((int)drone.x +50, (int)drone.y -75, 1550, 150)));
 								}
 							}
-							else if (time >= (1)  * 500000.0 && time <= (2) * 500000.0) {
+							else if (time >= (2)  * 500000.0 && time <= (3) * 500000.0) {
 								drone = mains[i];
 								drone.setImage(redEye.get(2));
-								lasers.add(new ArrayList<Integer>(Arrays.asList((int)drone.x - 50, (int)drone.y - 850, 850, 150)));
+								lasers.add(new ArrayList<Integer>(Arrays.asList((int)drone.x + 50, (int)drone.y - 75, 1550, 150)));
 							}
-						} else {
-							if (time >=0 && time <= (1) * 500000.0) {
+						}
+					}
+				} else if (attp == 2) {
+					attackDelay = 1000000000.0;
+					if (time >= (9) * 500000.0) {
+						attp++;
+						time = 0;
+					}
+					
+					for (int i = 0; i < mains.length; i++) {
+						if (i >= 5) {
+							
+							if (time >=0 && time <= (4) * 500000.0) {
 								drone = mains[i];
 								drone.setImage(redEye.get(4));
 								if (time/3000.0 % 8 < 4) {
-									warnings.add(new ArrayList<Integer>(Arrays.asList((int)drone.x - 50, (int)drone.y +50, 150, 150)));
+									warnings.add(new ArrayList<Integer>(Arrays.asList((int)drone.x-1550, (int)drone.y -75, 1550, 150)));
 								}
 							}
-							else if (time >= (1)  * 500000.0 && time <= (2) * 500000.0) {
+							else if (time >= (4)  * 500000.0 && time <= (8) * 500000.0) {
 								drone = mains[i];
 								drone.setImage(redEye.get(4));
-								lasers.add(new ArrayList<Integer>(Arrays.asList((int)drone.x - 50, (int)drone.y + 50, 150, 150)));
+								lasers.add(new ArrayList<Integer>(Arrays.asList((int)drone.x - 1550, (int)drone.y -75, 1550, 150)));
 							}
 						}
 					}
 				}
+				break;
 			}
 			
 			
